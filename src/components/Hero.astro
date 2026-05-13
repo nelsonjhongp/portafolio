@@ -1,0 +1,37 @@
+---
+import type { Profile } from "../types";
+
+interface Props {
+  profile: Profile;
+}
+
+const { profile } = Astro.props;
+---
+
+<section class="hero" id="top">
+  <div class="hero-overlay"></div>
+  <div class="hero-copy">
+    <p class="hero-brand">{profile.name}</p>
+    <h1>{profile.title}</h1>
+    <p class="hero-subtitle">{profile.subtitle}</p>
+
+    <div class="hero-actions">
+      {profile.ctas.map((item, index) => (
+        <a
+          class:list={["button", index === 0 ? "button-primary" : "button-secondary"]}
+          href={item.href}
+          target={item.href.startsWith("http") ? "_blank" : undefined}
+          rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+        >
+          {item.label === "GitHub" ? (
+            <i class="devicon-github-original button-icon" aria-hidden="true"></i>
+          ) : null}
+          {item.label}
+        </a>
+      ))}
+      <a class="button button-secondary" href={profile.contact.cvEs} target="_blank" rel="noreferrer">
+        Descargar CV
+      </a>
+    </div>
+  </div>
+</section>

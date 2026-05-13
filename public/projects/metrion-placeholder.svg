@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750">
+  <rect width="1200" height="750" fill="#f4f6f8"/>
+  <rect x="280" y="60" width="640" height="630" rx="18" fill="#1f2226"/>
+  <rect x="320" y="110" width="560" height="490" fill="#ffffff"/>
+  <rect x="350" y="145" width="180" height="24" fill="#2b5f87"/>
+  <rect x="350" y="210" width="150" height="320" fill="#f7f8fa" stroke="#d9dde2"/>
+  <rect x="530" y="210" width="150" height="140" fill="#f7f8fa" stroke="#d9dde2"/>
+  <rect x="710" y="210" width="140" height="140" fill="#f7f8fa" stroke="#d9dde2"/>
+  <rect x="530" y="380" width="320" height="150" fill="#f7f8fa" stroke="#d9dde2"/>
+  <text x="350" y="650" fill="#171717" font-family="Arial, sans-serif" font-size="40">Metrion</text>
+</svg>
+

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#182529" />
+      <stop offset="100%" stop-color="#304c47" />
+    </linearGradient>
+  </defs>
+  <rect width="900" height="620" rx="34" fill="url(#bg)" />
+  <rect x="72" y="78" width="756" height="464" rx="26" fill="#edf1ec" opacity="0.98" />
+  <rect x="108" y="118" width="684" height="64" rx="18" fill="#dce6dc" />
+  <rect x="108" y="214" width="248" height="274" rx="20" fill="#d8e3da" />
+  <rect x="388" y="214" width="364" height="102" rx="20" fill="#c74b2a" />
+  <rect x="388" y="344" width="364" height="144" rx="20" fill="#1e2f32" />
+  <text x="142" y="160" font-family="Arial, sans-serif" font-size="28" fill="#314242">Nejigiku Transcriber</text>
+  <text x="418" y="272" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#fff5eb">Batch transcription</text>
+  <text x="418" y="402" font-family="Arial, sans-serif" font-size="24" fill="#d9ebe4">Local processing / Windows workflow / FFmpeg</text>
+</svg>
+

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7f1e7" />
+      <stop offset="70%" stop-color="#f0e1cc" />
+      <stop offset="100%" stop-color="#f8f4ec" />
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c74b2a" />
+      <stop offset="100%" stop-color="#efc47b" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="1035" cy="120" r="170" fill="#efc47b" opacity="0.35" />
+  <circle cx="180" cy="520" r="180" fill="#c74b2a" opacity="0.12" />
+  <rect x="72" y="78" width="1056" height="474" rx="40" fill="#fffaf2" stroke="#d3c2ae" />
+  <rect x="120" y="128" width="118" height="118" rx="28" fill="url(#card)" />
+  <path d="M156 217v-58h14l27 36v-36h14v58h-14l-27-35v35z" fill="#fff7ef" />
+  <text x="282" y="192" font-family="Arial, sans-serif" font-size="64" font-weight="700" fill="#171412">Nejigiku</text>
+  <text x="120" y="320" font-family="Arial, sans-serif" font-size="34" fill="#5f544b">Software developer portfolio for Nelson Jhon Gil Pari</text>
+  <text x="120" y="382" font-family="Arial, sans-serif" font-size="28" fill="#5f544b">Web apps, desktop tools and product-focused software for internships and junior roles.</text>
+  <rect x="120" y="444" width="320" height="54" rx="27" fill="#f5ebdf" stroke="#d3c2ae" />
+  <text x="154" y="478" font-family="Arial, sans-serif" font-size="24" fill="#7f2614">TypeScript / React / Next.js / Python</text>
+</svg>
+

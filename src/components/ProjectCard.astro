@@ -1,0 +1,80 @@
+---
+import type { Project } from "../types";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+type StackIcon = {
+  iconClass?: string;
+  iconImage?: string;
+  shortLabel?: string;
+  label: string;
+};
+
+const iconMap: Record<string, StackIcon> = {
+  TypeScript: { iconClass: "devicon-typescript-plain", label: "TypeScript" },
+  JavaScript: { iconClass: "devicon-javascript-plain", label: "JavaScript" },
+  React: { iconClass: "devicon-react-original", label: "React" },
+  Next: { iconImage: "icons/nextjs-original.svg", label: "Next.js" },
+  "Next.js": { iconImage: "icons/nextjs-original.svg", label: "Next.js" },
+  "Node.js": { iconClass: "devicon-nodejs-plain", label: "Node.js" },
+  PostgreSQL: { iconClass: "devicon-postgresql-plain", label: "PostgreSQL" },
+  Python: { iconClass: "devicon-python-plain", label: "Python" },
+  Electron: { iconClass: "devicon-electron-original", label: "Electron" },
+  SQLite: { iconClass: "devicon-sqlite-plain", label: "SQLite" },
+  Supabase: { iconClass: "devicon-supabase-plain", label: "Supabase" },
+  HTML: { iconClass: "devicon-html5-plain", label: "HTML" },
+  CSS: { iconClass: "devicon-css3-plain", label: "CSS" },
+  Figma: { iconClass: "devicon-figma-plain", label: "Figma" },
+  Zustand: { shortLabel: "Zu", label: "Zustand" },
+  Zod: { shortLabel: "Zd", label: "Zod" },
+  PySide6: { shortLabel: "Py", label: "PySide6" },
+  FFmpeg: { shortLabel: "FF", label: "FFmpeg" },
+  "faster-whisper": { shortLabel: "FW", label: "faster-whisper" },
+  CTranslate2: { shortLabel: "CT", label: "CTranslate2" },
+  "UI Design": { shortLabel: "UI", label: "UI Design" }
+};
+
+const visualHref = project.demoUrl ?? project.repoUrl;
+const stackItems = project.stack.map((item) => iconMap[item] ?? { shortLabel: item.slice(0, 2), label: item });
+---
+
+<article class="project-card" id={project.id}>
+  <div class="project-visual">
+    <img src={project.image} alt={`Vista previa de ${project.name}`} loading="lazy" />
+    <a class="project-overlay" href={visualHref} target="_blank" rel="noreferrer">
+      <span>{project.demoUrl ? "Ver demo" : "Ver repositorio"}</span>
+    </a>
+  </div>
+
+  <div class="project-body">
+    <div class="project-heading">
+      <div class="project-title-row">
+        <h3>{project.name}</h3>
+        <span class="project-status">{project.status}</span>
+      </div>
+      <p>{project.summary}</p>
+    </div>
+
+    <ul class="project-highlights">
+      {project.highlights.slice(0, 2).map((item) => <li>{item}</li>)}
+    </ul>
+
+    <div class="project-icon-row" aria-label={`Iconos de tecnologias de ${project.name}`}>
+      {stackItems.map((item) => (
+        <span class:list={["project-stack-icon", !item.iconClass && !item.iconImage && "project-stack-icon-fallback"]} title={item.label}>
+          {item.iconClass ? <i class:list={[item.iconClass, "colored"]} aria-hidden="true"></i> : null}
+          {item.iconImage ? <img src={item.iconImage} alt={item.label} /> : null}
+          {!item.iconClass && !item.iconImage ? <span>{item.shortLabel}</span> : null}
+        </span>
+      ))}
+    </div>
+
+    <div class="tag-row" aria-label={`Tecnologias usadas en ${project.name}`}>
+      {project.stack.map((item) => <span class="tag">{item}</span>)}
+    </div>
+  </div>
+</article>

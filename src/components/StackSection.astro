@@ -1,0 +1,34 @@
+---
+import type { Profile } from "../types";
+import SectionHeader from "./SectionHeader.astro";
+
+interface Props {
+  profile: Profile;
+}
+
+const { profile } = Astro.props;
+---
+
+<section class="stack-section" id="stack">
+  <SectionHeader
+    eyebrow="Stack"
+    title="Tecnologias que hoy representan mejor mi perfil"
+    text="Prefiero mostrar un stack claro y honesto antes que una lista larga sin jerarquia. Estas son las tecnologias con las que hoy trabajo con mayor comodidad."
+  />
+
+  <div class="stack-grid">
+    <article class="stack-card stack-card-primary">
+      <p class="stack-card-label">Principal</p>
+      <div class="tag-row">
+        {profile.coreStack.map((item) => <span class="tag">{item}</span>)}
+      </div>
+    </article>
+
+    <article class="stack-card">
+      <p class="stack-card-label">Tambien he trabajado con</p>
+      <div class="tag-row">
+        {profile.alsoWorkedWith.map((item) => <span class="tag">{item}</span>)}
+      </div>
+    </article>
+  </div>
+</section>

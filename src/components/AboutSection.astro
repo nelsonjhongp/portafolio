@@ -1,0 +1,35 @@
+---
+import type { Profile } from "../types";
+
+interface Props {
+  profile: Profile;
+}
+
+const { profile } = Astro.props;
+---
+
+<section class="section section-about section-light" id="about">
+  <div class="section-inner section-inner-narrow">
+    <h2>Sobre mi</h2>
+    <p class="section-lead">{profile.summary}</p>
+    <p class="about-copy">
+      Actualmente estoy cursando el decimo ciclo de Ingenieria de Software. Mi interes principal
+      esta en construir aplicaciones utiles, bien estructuradas y cercanas a necesidades reales,
+      especialmente en entornos web, herramientas locales y software orientado a producto.
+    </p>
+
+    <div class="about-actions">
+      <a class="mini-button" href={profile.contact.github} target="_blank" rel="noreferrer">
+        <i class="devicon-github-original mini-button-icon" aria-hidden="true"></i>
+        GitHub
+      </a>
+      <a class="mini-button" href={profile.contact.linkedin} target="_blank" rel="noreferrer">
+        <img class="mini-button-icon-image" src="icons/linkedin-original.svg" alt="" aria-hidden="true" />
+        LinkedIn
+      </a>
+      <a class="mini-button" href={profile.contact.cvEs} target="_blank" rel="noreferrer">
+        CV
+      </a>
+    </div>
+  </div>
+</section>

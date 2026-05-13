@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7ebda" />
+      <stop offset="100%" stop-color="#edd2b1" />
+    </linearGradient>
+  </defs>
+  <rect width="900" height="620" rx="34" fill="url(#bg)" />
+  <rect x="68" y="76" width="764" height="468" rx="28" fill="#fffaf4" stroke="#d9c6b1" />
+  <rect x="102" y="114" width="284" height="392" rx="24" fill="#1d1c28" />
+  <rect x="418" y="114" width="382" height="82" rx="20" fill="#c74b2a" />
+  <rect x="418" y="222" width="382" height="136" rx="22" fill="#f1e4d5" />
+  <rect x="418" y="382" width="182" height="86" rx="20" fill="#2d3a3b" />
+  <rect x="618" y="382" width="182" height="86" rx="20" fill="#56664d" />
+  <text x="444" y="166" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#fff6ed">ProgMentor AI Tutor</text>
+  <text x="444" y="284" font-family="Arial, sans-serif" font-size="24" fill="#584d41">Frontend-first educational product concept</text>
+</svg>
+

@@ -1,0 +1,62 @@
+---
+import AboutSection from "../components/AboutSection.astro";
+import BackToTop from "../components/BackToTop.astro";
+import ContactPanel from "../components/ContactPanel.astro";
+import EducationSection from "../components/EducationSection.astro";
+import Footer from "../components/Footer.astro";
+import Hero from "../components/Hero.astro";
+import KnowledgeSection from "../components/KnowledgeSection.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { profile } from "../data/profile";
+import { projects } from "../data/projects";
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout
+  title="Nejigiku | Nelson Jhon Gil Pari"
+  description="Portafolio de Nelson Jhon Gil Pari, enfocado en aplicaciones web, herramientas locales y experiencias de producto claras."
+>
+  <div class="page-shell">
+    <header class="site-nav">
+      <a class="site-brand" href="#top">
+        <img src="brand/nj-logo.png" alt="Logo de Nelson Nejigiku" />
+      </a>
+
+      <nav aria-label="Navegacion principal">
+        <a href="#about">Sobre mi</a>
+        <a href="#stack">Conocimientos</a>
+        <a href="#projects">Proyectos</a>
+        <a href="#education">Formacion</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+    </header>
+
+    <main>
+      <Hero profile={profile} />
+      <AboutSection profile={profile} />
+      <KnowledgeSection profile={profile} />
+
+      <section class="section section-projects section-muted" id="projects">
+        <div class="section-inner">
+          <div class="section-header section-header-left">
+            <h2>Mis Proyectos</h2>
+            <p class="section-copy">
+              Una seleccion de proyectos que representan mejor mi nivel actual y el tipo de
+              software que me interesa seguir construyendo.
+            </p>
+          </div>
+
+          <div class="projects-grid">
+            {projects.map((project) => <ProjectCard project={project} />)}
+          </div>
+        </div>
+      </section>
+
+      <EducationSection profile={profile} />
+      <ContactPanel profile={profile} />
+    </main>
+
+    <Footer name={profile.name} />
+    <BackToTop />
+  </div>
+</MainLayout>

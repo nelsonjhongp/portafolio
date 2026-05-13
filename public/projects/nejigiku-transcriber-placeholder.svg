@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750">
+  <rect width="1200" height="750" fill="#f4f6f8"/>
+  <rect x="120" y="90" width="960" height="560" fill="#ffffff" stroke="#d9dde2"/>
+  <rect x="160" y="130" width="320" height="34" fill="#2b5f87"/>
+  <rect x="160" y="210" width="260" height="380" fill="#f7f8fa" stroke="#d9dde2"/>
+  <rect x="460" y="210" width="580" height="120" fill="#f7f8fa" stroke="#d9dde2"/>
+  <rect x="460" y="360" width="580" height="230" fill="#f7f8fa" stroke="#d9dde2"/>
+  <text x="160" y="620" fill="#171717" font-family="Arial, sans-serif" font-size="38">Nejigiku Transcriber</text>
+</svg>
+

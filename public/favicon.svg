@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Nejigiku favicon</title>
+  <desc id="desc">Rounded monogram with the letter N for Nejigiku.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c74b2a" />
+      <stop offset="100%" stop-color="#efc47b" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="32" fill="url(#bg)" />
+  <path d="M34 96V32h15l30 39V32h15v64H79L49 57v39z" fill="#fff7ef" />
+</svg>
+

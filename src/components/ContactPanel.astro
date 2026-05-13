@@ -1,0 +1,81 @@
+---
+import type { Profile } from "../types";
+
+interface Props {
+  profile: Profile;
+}
+
+const { profile } = Astro.props;
+
+const contactItems = [
+  {
+    href: profile.contact.email,
+    label: "Correo",
+    value: "nelsonjhongp@gmail.com",
+    kind: "mail"
+  },
+  {
+    href: profile.contact.github,
+    label: "GitHub",
+    value: "github.com/nelsonjhongp",
+    kind: "github"
+  },
+  {
+    href: profile.contact.linkedin,
+    label: "LinkedIn",
+    value: "linkedin.com/in/nelsonjhongp",
+    kind: "linkedin"
+  },
+  {
+    href: profile.contact.cvEs,
+    label: "CV",
+    value: "Version en espanol",
+    kind: "cv"
+  }
+];
+---
+
+<section class="section section-contact section-muted" id="contact">
+  <div class="section-inner">
+    <div class="section-header section-header-left">
+      <h2>Contacto</h2>
+      <p class="section-copy">
+        Si quieres conversar sobre practicas, proyectos o una oportunidad junior, puedes
+        escribirme directamente.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+      {contactItems.map((item) => (
+        <a
+          class="contact-card"
+          href={item.href}
+          target={item.kind === "mail" ? undefined : "_blank"}
+          rel={item.kind === "mail" ? undefined : "noreferrer"}
+        >
+          <span class:list={["contact-icon-wrap", `contact-icon-wrap-${item.kind}`]}>
+            {item.kind === "mail" ? <span class="contact-icon">@</span> : null}
+            {item.kind === "github" ? (
+              <i class="devicon-github-original contact-icon contact-icon-github" aria-hidden="true"></i>
+            ) : null}
+            {item.kind === "linkedin" ? (
+              <img class="contact-icon-image" src="icons/linkedin-original.svg" alt="" aria-hidden="true" />
+            ) : null}
+            {item.kind === "cv" ? <span class="contact-icon contact-icon-cv">CV</span> : null}
+          </span>
+
+          <span class="contact-card-copy">
+            <span class="contact-label">{item.label}</span>
+            <strong>{item.value}</strong>
+          </span>
+        </a>
+      ))}
+    </div>
+
+    <div class="contact-note">
+      <a class="button button-contact" href={profile.contact.email}>
+        Escribirme por correo
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+---
+import type { Profile } from "../types";
+
+interface Props {
+  profile: Profile;
+}
+
+const { profile } = Astro.props;
+---
+
+<section class="section section-knowledge section-muted" id="stack">
+  <div class="section-inner">
+    <h2>Conocimientos</h2>
+
+    <div class="knowledge-layout">
+      <div class="knowledge-copy">
+        <p>
+          A lo largo de mis proyectos he trabajado con tecnologias de desarrollo web, escritorio,
+          bases de datos y diseno de interfaces. Hoy me siento mas comodo construyendo software con
+          TypeScript, React, Next.js, Node.js, PostgreSQL y Python.
+        </p>
+        <ul>
+          <li>Stack principal: TypeScript, React, Next.js, Node.js, PostgreSQL, Python.</li>
+          <li>Tambien he trabajado con SQLite, Electron, Supabase, Tailwind CSS, Figma, Java y MySQL.</li>
+          <li>Me interesa combinar criterio tecnico con presentacion clara y buena experiencia de uso.</li>
+        </ul>
+      </div>
+
+      <div class="knowledge-icons" aria-label="Tecnologias principales">
+        {profile.technologies.map((item) => (
+          <button class="tech-item" type="button" aria-label={`Tecnologia ${item.label}`}>
+            {item.iconClass ? (
+              <i class:list={[item.iconClass, "tech-icon", "colored"]} aria-hidden="true"></i>
+            ) : null}
+            {item.iconImage ? (
+              <img class="tech-icon-image" src={item.iconImage} alt={item.label} />
+            ) : null}
+            <span>{item.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const techItems = document.querySelectorAll(".tech-item");
+
+  techItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      item.classList.remove("is-spinning");
+      if (item instanceof HTMLElement) {
+        void item.offsetWidth;
+      }
+      item.classList.add("is-spinning");
+    });
+  });
+</script>
