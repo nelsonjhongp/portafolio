@@ -28,16 +28,18 @@ const hasGallery = screens.length > 1;
     ]}
     data-project-gallery
   >
-    {screens.map((screen, index) => (
-      <div
-        class:list={["project-screen", index === 0 && "is-active"]}
-        data-project-screen
-        data-screen-label={screen.label}
-        aria-hidden={index === 0 ? "false" : "true"}
-      >
-        <img src={screen.src} alt={screen.alt} loading="lazy" />
-      </div>
-    ))}
+    <div class="project-screen-track" data-project-track>
+      {screens.map((screen, index) => (
+        <div
+          class:list={["project-screen", index === 0 && "is-active"]}
+          data-project-screen
+          data-screen-label={screen.label}
+          aria-hidden={index === 0 ? "false" : "true"}
+        >
+          <img src={screen.src} alt={screen.alt} loading="lazy" />
+        </div>
+      ))}
+    </div>
 
     {hasGallery ? <span class="project-screen-tag" data-project-screen-tag>{screens[0].label}</span> : null}
 
@@ -72,8 +74,9 @@ const hasGallery = screens.length > 1;
       const slides = Array.from(gallery.querySelectorAll<HTMLElement>("[data-project-screen]"));
       const dots = Array.from(gallery.querySelectorAll<HTMLButtonElement>("[data-project-dot]"));
       const tag = gallery.querySelector<HTMLElement>("[data-project-screen-tag]");
+      const track = gallery.querySelector<HTMLElement>("[data-project-track]");
 
-      if (slides.length <= 1) {
+      if (!track || slides.length <= 1) {
         continue;
       }
 
@@ -87,6 +90,11 @@ const hasGallery = screens.length > 1;
       let tagTransitionTimeoutId: ReturnType<typeof setTimeout> | undefined;
       let autoplayTimeoutId: ReturnType<typeof setTimeout> | undefined;
       let isPointerInside = false;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchDeltaX = 0;
+      let touchDeltaY = 0;
+      let isTouchTracking = false;
 
       const clearHideTimeout = () => {
         if (hideTimeoutId) {
@@ -127,7 +135,7 @@ const hasGallery = screens.length > 1;
       const scheduleAutoplay = () => {
         clearAutoplayTimeout();
 
-        if (isPointerInside) {
+        if (isPointerInside || isTouchTracking) {
           return;
         }
 
@@ -139,6 +147,7 @@ const hasGallery = screens.length > 1;
 
       const sync = (nextIndex: number) => {
         currentIndex = (nextIndex + slides.length) % slides.length;
+        track.style.transform = `translate3d(${-100 * currentIndex}%, 0, 0)`;
 
         slides.forEach((slide, index) => {
           const isActive = index === currentIndex;
@@ -170,6 +179,12 @@ const hasGallery = screens.length > 1;
             tag.textContent = nextLabel;
           }
         }
+      };
+
+      const endTouchInteraction = () => {
+        isTouchTracking = false;
+        touchDeltaX = 0;
+        touchDeltaY = 0;
       };
 
       dots.forEach((dot, index) => {
@@ -212,6 +227,77 @@ const hasGallery = screens.length > 1;
       if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
         gallery.classList.add("is-dots-visible");
       }
+
+      gallery.addEventListener(
+        "touchstart",
+        (event) => {
+          const touch = event.touches[0];
+
+          if (!touch) {
+            return;
+          }
+
+          isTouchTracking = true;
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+          touchDeltaX = 0;
+          touchDeltaY = 0;
+          showDots();
+          clearAutoplayTimeout();
+        },
+        { passive: true }
+      );
+
+      gallery.addEventListener(
+        "touchmove",
+        (event) => {
+          if (!isTouchTracking) {
+            return;
+          }
+
+          const touch = event.touches[0];
+
+          if (!touch) {
+            return;
+          }
+
+          touchDeltaX = touch.clientX - touchStartX;
+          touchDeltaY = touch.clientY - touchStartY;
+        },
+        { passive: true }
+      );
+
+      gallery.addEventListener(
+        "touchend",
+        () => {
+          if (!isTouchTracking) {
+            return;
+          }
+
+          const absX = Math.abs(touchDeltaX);
+          const absY = Math.abs(touchDeltaY);
+          const swipeThreshold = 48;
+
+          if (absX >= swipeThreshold && absX > absY) {
+            sync(touchDeltaX < 0 ? currentIndex + 1 : currentIndex - 1);
+          }
+
+          endTouchInteraction();
+          scheduleHideDots();
+          scheduleAutoplay();
+        },
+        { passive: true }
+      );
+
+      gallery.addEventListener(
+        "touchcancel",
+        () => {
+          endTouchInteraction();
+          scheduleHideDots();
+          scheduleAutoplay();
+        },
+        { passive: true }
+      );
 
       sync(currentIndex);
       scheduleAutoplay();

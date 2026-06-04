@@ -190,12 +190,24 @@
     grid-template-columns: 1fr;
     gap: 0.72rem;
     padding: 1rem 0;
+    justify-items: center;
+    text-align: center;
   }
 
   .education-card-logo-wrap {
     width: auto;
     min-height: 0;
-    padding: 0 0 0 0.2rem;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .education-card-copy {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .education-card-meta {
+    justify-content: center;
   }
 
   .education-card img {

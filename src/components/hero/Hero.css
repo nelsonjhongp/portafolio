@@ -17,42 +17,41 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  display: grid;
-  gap: 0;
-  padding: 5.25rem 1rem 1rem;
-  perspective: 1200px;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 68px 68px;
+  background-position: center;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1) 22%, rgba(0, 0, 0, 0.9));
+  opacity: 0.42;
+}
+
+.hero-rain {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
   pointer-events: none;
   user-select: none;
   -webkit-user-select: none;
+  contain: layout paint;
 }
 
-.hero-grid-tile {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.02);
-  background: rgba(25, 31, 37, 0.03);
-  opacity: 0.42;
-  font-size: clamp(0.54rem, 0.68vw, 0.78rem);
+.hero-rain-glyph {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  color: rgba(214, 220, 227, var(--glyph-opacity));
+  font-size: clamp(0.66rem, 0.8vw, 0.84rem);
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   line-height: 1;
-  transform: none;
-}
-
-.hero-grid-symbol {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 100%;
-  min-height: 100%;
-  color: rgba(212, 217, 223, 0.14);
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.03);
-  will-change: transform, opacity, color, text-shadow;
-  animation: hero-symbol-fall var(--rain-duration) cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
-  animation-delay: var(--rain-delay);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.04);
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+  animation: hero-glyph-drift var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
 }
 
 .hero-overlay {
@@ -129,53 +128,29 @@ h1 {
   margin: 1.95rem 0 0;
 }
 
-@keyframes hero-symbol-fall {
+@keyframes hero-glyph-drift {
   0%,
   100% {
-    opacity: 0.28;
-    color: rgba(212, 217, 223, 0.14);
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.03);
-    transform: translate3d(0, -3px, 0);
+    opacity: calc(var(--glyph-opacity) * 0.72);
+    transform: translate3d(0, calc(var(--drift) * -0.35), 0);
   }
 
-  14% {
-    opacity: 0.42;
-    color: rgba(223, 227, 232, 0.3);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.06);
-    transform: translate3d(0, 2px, 0);
-  }
-
-  28% {
-    opacity: 0.68;
-    color: rgba(238, 241, 244, 0.52);
-    text-shadow:
-      0 0 12px rgba(255, 255, 255, 0.1),
-      0 0 22px rgba(255, 255, 255, 0.05);
-    transform: translate3d(0, 9px, 0);
-  }
-
-  42% {
-    opacity: 0.36;
-    color: rgba(221, 226, 231, 0.26);
-    text-shadow: 0 0 9px rgba(255, 255, 255, 0.05);
-    transform: translate3d(0, 16px, 0);
-  }
-
-  58% {
-    opacity: 0.16;
-    color: rgba(214, 219, 224, 0.2);
-    text-shadow: 0 0 7px rgba(255, 255, 255, 0.035);
-    transform: translate3d(0, 22px, 0);
+  50% {
+    opacity: var(--glyph-opacity);
+    transform: translate3d(0, var(--drift), 0);
   }
 }
 
 @media (max-width: 720px) {
   .hero {
-    min-height: 92svh;
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    padding: 5rem 1rem 2.4rem;
   }
 
   .hero-grid {
-    padding-inline: 0.75rem;
+    background-size: 52px 52px;
   }
 
   h1 {
@@ -196,5 +171,13 @@ h1 {
     max-width: 31rem;
     font-size: 1rem;
     line-height: 1.68;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rain-glyph {
+    animation: none;
+    opacity: calc(var(--glyph-opacity) * 0.88);
+    transform: none;
   }
 }

@@ -14,6 +14,7 @@ interface Props {
 }
 
 const { brandHref, brandImage, brandAlt, links } = Astro.props;
+const burgerMenuIcon = asset("/icons/burger-menu.svg");
 ---
 
 <header class="site-nav" data-site-nav data-nav-state="hero">
@@ -21,19 +22,61 @@ const { brandHref, brandImage, brandAlt, links } = Astro.props;
     <img src={asset(brandImage)} alt={brandAlt} />
   </a>
 
-  <nav aria-label="Navegación principal">
+  <button
+    class="site-nav-toggle"
+    type="button"
+    aria-label="Abrir menú de navegación"
+    aria-controls="mobile-navigation-drawer"
+    aria-expanded="false"
+    data-nav-toggle
+  >
+    <img class="site-nav-toggle__icon site-nav-toggle__icon-menu" src={burgerMenuIcon} alt="" aria-hidden="true" />
+  </button>
+
+  <nav class="site-nav-links" aria-label="Navegación principal">
     {links.map((link) => (
       <a href={link.href} data-nav-link>
         {link.label}
       </a>
     ))}
   </nav>
+
+  <div class="site-nav-drawer-shell" data-nav-drawer-shell hidden>
+    <button
+      class="site-nav-drawer-backdrop"
+      type="button"
+      aria-label="Cerrar menú de navegación"
+      data-nav-close
+    ></button>
+
+    <nav
+      class="site-nav-drawer"
+      id="mobile-navigation-drawer"
+      aria-label="Navegación móvil"
+      aria-hidden="true"
+      tabindex="-1"
+      data-nav-drawer
+    >
+      <p class="site-nav-drawer__eyebrow">Navegación</p>
+      <div class="site-nav-drawer__links">
+        {links.map((link) => (
+          <a href={link.href} data-nav-link data-nav-close>
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </nav>
+  </div>
 </header>
 
 <script>
   const siteNav = document.querySelector<HTMLElement>("[data-site-nav]");
   const heroSection = document.querySelector<HTMLElement>("#top");
   const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"));
+  const navToggle = document.querySelector<HTMLButtonElement>("[data-nav-toggle]");
+  const drawerShell = document.querySelector<HTMLElement>("[data-nav-drawer-shell]");
+  const drawer = document.querySelector<HTMLElement>("[data-nav-drawer]");
+  const navCloseTargets = Array.from(document.querySelectorAll<HTMLElement>("[data-nav-close]"));
   const sectionTargets = navLinks
     .map((link) => {
       const href = link.getAttribute("href");
@@ -55,8 +98,45 @@ const { brandHref, brandImage, brandAlt, links } = Astro.props;
   if (siteNav && heroSection) {
     let navState: "hero" | "scrolled" = "hero";
     let activeSectionId = "";
+    let isDrawerOpen = false;
+    let pendingCloseTimeout = 0;
     const heroEnterOffset = 28;
     const heroExitOffset = 88;
+    const mobileNavQuery = window.matchMedia("(max-width: 720px)");
+
+    const clearPendingClose = () => {
+      if (!pendingCloseTimeout) {
+        return;
+      }
+
+      window.clearTimeout(pendingCloseTimeout);
+      pendingCloseTimeout = 0;
+    };
+
+    const applyDrawerState = (nextOpen: boolean) => {
+      if (!navToggle || !drawerShell || !drawer || isDrawerOpen === nextOpen) {
+        return;
+      }
+
+      clearPendingClose();
+      isDrawerOpen = nextOpen;
+      siteNav.dataset.drawerState = nextOpen ? "open" : "closed";
+      navToggle.setAttribute("aria-expanded", String(nextOpen));
+      navToggle.setAttribute("aria-label", nextOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación");
+      drawer.setAttribute("aria-hidden", String(!nextOpen));
+
+      if (nextOpen) {
+        drawerShell.hidden = false;
+        document.body.style.overflow = "hidden";
+        window.requestAnimationFrame(() => {
+          drawer.focus();
+        });
+        return;
+      }
+
+      document.body.style.overflow = "";
+      drawerShell.hidden = true;
+    };
 
     const applyNavState = (nextState: "hero" | "scrolled") => {
       if (navState === nextState) {
@@ -131,9 +211,36 @@ const { brandHref, brandImage, brandAlt, links } = Astro.props;
       syncActiveSection();
     };
 
+    navToggle?.addEventListener("click", () => {
+      applyDrawerState(!isDrawerOpen);
+    });
+
+    for (const closeTarget of navCloseTargets) {
+      closeTarget.addEventListener("click", () => {
+        applyDrawerState(false);
+      });
+    }
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") {
+        return;
+      }
+
+      applyDrawerState(false);
+    });
+
+    const handleViewportChange = () => {
+      if (mobileNavQuery.matches) {
+        return;
+      }
+
+      applyDrawerState(false);
+    };
+
     syncNavUi();
     window.addEventListener("load", syncNavUi, { once: true });
     window.addEventListener("scroll", syncNavUi, { passive: true });
     window.addEventListener("resize", syncNavUi, { passive: true });
+    window.addEventListener("resize", handleViewportChange, { passive: true });
   }
 </script>
