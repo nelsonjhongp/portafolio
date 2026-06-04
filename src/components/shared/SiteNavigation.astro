@@ -1,0 +1,139 @@
+---
+import { asset } from "../../utils/assets";
+
+interface NavigationLink {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  brandHref: string;
+  brandImage: string;
+  brandAlt: string;
+  links: NavigationLink[];
+}
+
+const { brandHref, brandImage, brandAlt, links } = Astro.props;
+---
+
+<header class="site-nav" data-site-nav data-nav-state="hero">
+  <a class="site-brand" href={brandHref}>
+    <img src={asset(brandImage)} alt={brandAlt} />
+  </a>
+
+  <nav aria-label="Navegación principal">
+    {links.map((link) => (
+      <a href={link.href} data-nav-link>
+        {link.label}
+      </a>
+    ))}
+  </nav>
+</header>
+
+<script>
+  const siteNav = document.querySelector<HTMLElement>("[data-site-nav]");
+  const heroSection = document.querySelector<HTMLElement>("#top");
+  const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"));
+  const sectionTargets = navLinks
+    .map((link) => {
+      const href = link.getAttribute("href");
+
+      if (!href?.startsWith("#")) {
+        return null;
+      }
+
+      const section = document.querySelector<HTMLElement>(href);
+
+      if (!section) {
+        return null;
+      }
+
+      return { link, section };
+    })
+    .filter((item): item is { link: HTMLAnchorElement; section: HTMLElement } => item !== null);
+
+  if (siteNav && heroSection) {
+    let navState: "hero" | "scrolled" = "hero";
+    let activeSectionId = "";
+    const heroEnterOffset = 28;
+    const heroExitOffset = 88;
+
+    const applyNavState = (nextState: "hero" | "scrolled") => {
+      if (navState === nextState) {
+        return;
+      }
+
+      navState = nextState;
+      siteNav.dataset.navState = nextState;
+    };
+
+    const syncNavState = () => {
+      const heroBottom = heroSection.getBoundingClientRect().bottom;
+      const navHeight = siteNav.offsetHeight;
+      const heroThreshold = navHeight + heroEnterOffset;
+      const scrolledThreshold = navHeight + heroExitOffset;
+
+      if (navState === "hero") {
+        applyNavState(heroBottom > heroThreshold ? "hero" : "scrolled");
+        return;
+      }
+
+      applyNavState(heroBottom > scrolledThreshold ? "hero" : "scrolled");
+    };
+
+    const syncActiveSection = () => {
+      const navHeight = siteNav.offsetHeight;
+      const viewportAnchor = Math.max(navHeight + 96, window.innerHeight * 0.42);
+      let nextActiveId = sectionTargets[0]?.section.id ?? "";
+      let closestPastDistance = Number.POSITIVE_INFINITY;
+      let closestFutureDistance = Number.POSITIVE_INFINITY;
+      let closestFutureId = nextActiveId;
+
+      for (const { section } of sectionTargets) {
+        const rect = section.getBoundingClientRect();
+        const distanceToAnchor = rect.top - viewportAnchor;
+
+        if (distanceToAnchor <= 0 && Math.abs(distanceToAnchor) < closestPastDistance) {
+          closestPastDistance = Math.abs(distanceToAnchor);
+          nextActiveId = section.id;
+          continue;
+        }
+
+        if (distanceToAnchor > 0 && distanceToAnchor < closestFutureDistance) {
+          closestFutureDistance = distanceToAnchor;
+          closestFutureId = section.id;
+        }
+      }
+
+      if (closestPastDistance === Number.POSITIVE_INFINITY) {
+        nextActiveId = closestFutureId;
+      }
+
+      if (!nextActiveId || nextActiveId === activeSectionId) {
+        return;
+      }
+
+      activeSectionId = nextActiveId;
+
+      for (const { link, section } of sectionTargets) {
+        const isActive = section.id === activeSectionId;
+
+        if (isActive) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      }
+    };
+
+    const syncNavUi = () => {
+      syncNavState();
+      syncActiveSection();
+    };
+
+    syncNavUi();
+    window.addEventListener("load", syncNavUi, { once: true });
+    window.addEventListener("scroll", syncNavUi, { passive: true });
+    window.addEventListener("resize", syncNavUi, { passive: true });
+  }
+</script>

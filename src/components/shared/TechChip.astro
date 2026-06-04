@@ -1,0 +1,20 @@
+---
+import "./TechChip.css";
+import { getTechMeta } from "../../content/tech";
+
+interface Props {
+  item: string;
+  variant?: "main" | "knowledge" | "project";
+}
+
+const { item, variant = "knowledge" } = Astro.props;
+const meta = getTechMeta(item);
+---
+
+<span class:list={["tech-chip", `tech-chip-${variant}`]} title={meta.label}>
+  <span class:list={["tech-chip-icon", !meta.iconImage && "tech-chip-icon-fallback"]}>
+    {meta.iconImage ? <img src={meta.iconImage} alt="" aria-hidden="true" /> : null}
+    {!meta.iconImage ? <span>{meta.shortLabel}</span> : null}
+  </span>
+  <span class="tech-chip-label">{item}</span>
+</span>

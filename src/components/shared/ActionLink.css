@@ -1,0 +1,79 @@
+.button.action-link {
+  border: none;
+}
+
+.action-link__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-link__icon-image--arrow {
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+.action-link__icon i {
+  color: inherit;
+  font-size: 0.95rem;
+}
+
+.action-link__icon-image {
+  width: 0.95rem;
+  height: 0.95rem;
+  object-fit: contain;
+}
+
+.button-projects {
+  color: white;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.button-projects:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.button-github {
+  color: white;
+  background: #171515;
+  border-color: #171515;
+}
+
+.button-github:hover {
+  background: #0f0e0e;
+  border-color: #0f0e0e;
+}
+
+.button-linkedin {
+  color: white;
+  background: #0a66c2;
+  border-color: #0a66c2;
+}
+
+.button-linkedin:hover {
+  background: #0857a5;
+  border-color: #0857a5;
+}
+
+.button-cv {
+  color: white;
+  background: #d97706;
+  border-color: #d97706;
+}
+
+.button-cv:hover {
+  background: #b86508;
+  border-color: #b86508;
+}
+
+.button-contact {
+  color: white;
+  background: var(--icon-strong);
+  border-color: var(--icon-strong);
+}
+
+.button-contact:hover {
+  background: var(--text-strong);
+  border-color: var(--text-strong);
+}

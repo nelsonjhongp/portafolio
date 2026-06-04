@@ -1,0 +1,23 @@
+---
+import "./ProjectMeta.css";
+import type { Project } from "../../types/portfolio";
+import TechChip from "../shared/TechChip.astro";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<div class="project-heading">
+  {project.eyebrow ? <p class="project-eyebrow">{project.eyebrow}</p> : null}
+  <h3>{project.name}</h3>
+  <p>{project.summary}</p>
+</div>
+
+<p class="project-role">{project.role}</p>
+
+<div class="project-tech-row" aria-label={`Tecnologías usadas en ${project.name}`}>
+  {project.stack.map((item) => <TechChip item={item} variant="project" />)}
+</div>

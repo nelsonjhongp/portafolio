@@ -1,6 +1,6 @@
-# Nejigiku Portfolio
+# Portafolio — Nelson Jhon Gil Pari
 
-Portfolio personal reconstruido con Astro y salida estatica para GitHub Pages.
+Portafolio personal con Astro, salida estática y deploy automático a GitHub Pages.
 
 ## Stack
 
@@ -19,16 +19,11 @@ Portfolio personal reconstruido con Astro y salida estatica para GitHub Pages.
 
 ## GitHub Pages
 
-El proyecto asume publicacion final en `https://nelsonjhongp.github.io/`.
+Publicado en `https://nelsonjhongp.github.io/`. El deploy es automático al hacer push a `main`.
 
-Si temporalmente necesitas publicarlo como proyecto, puedes ajustar la base con:
-
-```bash
-PUBLIC_BASE_PATH=/nejigiku/ npm run build
-```
-
-En PowerShell:
+Para publicar en subcarpeta (ej. repositorio de proyecto):
 
 ```powershell
-$env:PUBLIC_BASE_PATH="/nejigiku/"; npm run build
+$env:PUBLIC_BASE_PATH="/portfolio/"; npm run build
+```
 ```

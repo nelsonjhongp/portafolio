@@ -1,0 +1,90 @@
+---
+import "./ContactPanel.css";
+import type { Profile } from "../../types/portfolio";
+import { asset } from "../../utils/assets";
+import ActionLink from "../shared/ActionLink.astro";
+import SectionHeader from "../shared/SectionHeader.astro";
+
+interface Props {
+  profile: Profile;
+}
+
+const { profile } = Astro.props;
+
+const contactItems = [
+  {
+    href: profile.contact.email,
+    label: "Correo",
+    value: "nelsonjhongp@gmail.com",
+    kind: "mail",
+    iconSrc: asset("/icons/gmail-icon.svg")
+  },
+  {
+    href: profile.contact.github,
+    label: "GitHub",
+    value: "github.com/nelsonjhongp",
+    kind: "github",
+    iconSrc: asset("/icons/github-icon.svg")
+  },
+  {
+    href: profile.contact.linkedin,
+    label: "LinkedIn",
+    value: "linkedin.com/in/nelsonjhongp",
+    kind: "linkedin",
+    iconSrc: asset("/icons/linkedin-original.svg")
+  },
+  {
+    href: profile.contact.cvEs,
+    label: "CV",
+    value: "Descargar CV",
+    kind: "cv",
+    iconSrc: asset("/icons/cv-icon.svg")
+  }
+];
+---
+
+<section class="section section-contact section-muted" id="contact">
+  <div class="section-inner">
+    <SectionHeader
+      className="contact-header"
+      fluid={true}
+      title="Contacto"
+      icon={asset("/icons/plane-contact.svg")}
+      variant="framed-left"
+      text="Si quieres conversar sobre proyectos, prácticas o una oportunidad junior, puedes escribirme directamente."
+    />
+
+    <div class="contact-grid">
+      {contactItems.map((item) => (
+        <a
+          class="contact-card"
+          href={item.href}
+          target={item.kind === "mail" ? undefined : "_blank"}
+          rel={item.kind === "mail" ? undefined : "noreferrer"}
+        >
+          <span class:list={["contact-icon-wrap", `contact-icon-wrap-${item.kind}`]}>
+            <img class="contact-icon-image" src={item.iconSrc} alt="" aria-hidden="true" />
+          </span>
+
+          <span class="contact-card-copy">
+            <span class="contact-label">{item.label}</span>
+            <strong>{item.value}</strong>
+          </span>
+
+          <span class="contact-card-arrow" aria-hidden="true">
+            <img class="contact-arrow-icon" src={asset("/icons/arrow-right.svg")} alt="" />
+          </span>
+        </a>
+      ))}
+    </div>
+
+    <div class="contact-cta">
+      <div class="contact-cta-copy">
+        <strong>¿Tienes un proyecto en mente?</strong>
+        <p>Estoy disponible para colaborar en proyectos desafiantes.</p>
+      </div>
+
+      <ActionLink className="contact-cta-button" href={profile.contact.email} label="Escríbeme por correo" kind="contact" />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,119 @@
+.project-visual-shell {
+  min-width: 0;
+  border-right: 1px solid rgba(17, 24, 39, 0.08);
+  background: var(--surface);
+}
+
+.project-visual {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: var(--surface);
+}
+
+.project-visual-gallery {
+  aspect-ratio: 8 / 5;
+}
+
+.project-screen {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms ease;
+}
+
+.project-screen.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.project-screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.project-screen-tag {
+  position: absolute;
+  bottom: 0.7rem;
+  left: 0.7rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  max-width: calc(100% - 5rem);
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.42);
+  color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: opacity 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.project-screen-tag.is-updating {
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+.project-carousel-dots {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.65rem;
+  left: 0.75rem;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 180ms ease;
+}
+
+.project-carousel-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.26);
+  cursor: pointer;
+}
+
+.project-carousel-dot.is-active,
+.project-carousel-dot:hover {
+  background: rgba(17, 24, 39, 0.52);
+}
+
+.project-visual-dots-light .project-carousel-dot {
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.project-visual-dots-light .project-carousel-dot.is-active,
+.project-visual-dots-light .project-carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+@media (max-width: 720px) {
+  .project-visual-shell {
+    border-right: 0;
+    border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+  }
+
+  .project-visual {
+    aspect-ratio: 8 / 5;
+  }
+
+  .project-screen-tag {
+    bottom: 0.65rem;
+    left: 0.65rem;
+    max-width: calc(100% - 4rem);
+    font-size: 0.68rem;
+  }
+}

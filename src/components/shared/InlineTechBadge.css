@@ -1,0 +1,32 @@
+.inline-tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.inline-tech-badge__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 1rem;
+}
+
+.inline-tech-badge__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.inline-tech-badge__icon span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.inline-tech-badge__label {
+  font-weight: 700;
+}

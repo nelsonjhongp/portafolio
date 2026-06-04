@@ -1,0 +1,226 @@
+---
+import "./ProjectGallery.css";
+import type { Project } from "../../types/portfolio";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const screens = project.screens?.length
+  ? project.screens
+  : [
+      {
+        src: project.image,
+        alt: `Vista previa de ${project.name}`,
+        label: "Vista general"
+      }
+    ];
+const hasGallery = screens.length > 1;
+---
+
+<div class="project-visual-shell" data-project-gallery-shell>
+  <div
+    class:list={[
+      "project-visual",
+      hasGallery && "project-visual-gallery",
+      hasGallery && `project-visual-dots-${project.dotTone ?? "dark"}`
+    ]}
+    data-project-gallery
+  >
+    {screens.map((screen, index) => (
+      <div
+        class:list={["project-screen", index === 0 && "is-active"]}
+        data-project-screen
+        data-screen-label={screen.label}
+        aria-hidden={index === 0 ? "false" : "true"}
+      >
+        <img src={screen.src} alt={screen.alt} loading="lazy" />
+      </div>
+    ))}
+
+    {hasGallery ? <span class="project-screen-tag" data-project-screen-tag>{screens[0].label}</span> : null}
+
+    {hasGallery ? (
+      <div class="project-carousel-dots" aria-label={`Pantallas disponibles en ${project.name}`}>
+        {screens.map((screen, index) => (
+          <button
+            class:list={["project-carousel-dot", index === 0 && "is-active"]}
+            type="button"
+            data-project-dot
+            data-project-dot-index={index}
+            aria-label={`Mostrar ${screen.label}`}
+            aria-pressed={index === 0 ? "true" : "false"}
+          />
+        ))}
+      </div>
+    ) : null}
+  </div>
+</div>
+
+<script>
+  const setupProjectGalleries = () => {
+    const galleries = document.querySelectorAll<HTMLElement>("[data-project-gallery]");
+
+    for (const gallery of galleries) {
+      if (gallery.dataset.ready === "true") {
+        continue;
+      }
+
+      gallery.dataset.ready = "true";
+
+      const slides = Array.from(gallery.querySelectorAll<HTMLElement>("[data-project-screen]"));
+      const dots = Array.from(gallery.querySelectorAll<HTMLButtonElement>("[data-project-dot]"));
+      const tag = gallery.querySelector<HTMLElement>("[data-project-screen-tag]");
+
+      if (slides.length <= 1) {
+        continue;
+      }
+
+      let currentIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
+
+      if (currentIndex < 0) {
+        currentIndex = 0;
+      }
+
+      let hideTimeoutId: ReturnType<typeof setTimeout> | undefined;
+      let tagTransitionTimeoutId: ReturnType<typeof setTimeout> | undefined;
+      let autoplayTimeoutId: ReturnType<typeof setTimeout> | undefined;
+      let isPointerInside = false;
+
+      const clearHideTimeout = () => {
+        if (hideTimeoutId) {
+          window.clearTimeout(hideTimeoutId);
+          hideTimeoutId = undefined;
+        }
+      };
+
+      const clearAutoplayTimeout = () => {
+        if (autoplayTimeoutId) {
+          window.clearTimeout(autoplayTimeoutId);
+          autoplayTimeoutId = undefined;
+        }
+      };
+
+      const showDots = () => {
+        gallery.classList.add("is-dots-visible");
+        clearHideTimeout();
+      };
+
+      const scheduleHideDots = () => {
+        if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+          gallery.classList.add("is-dots-visible");
+          return;
+        }
+
+        clearHideTimeout();
+
+        if (isPointerInside) {
+          return;
+        }
+
+        hideTimeoutId = window.setTimeout(() => {
+          gallery.classList.remove("is-dots-visible");
+        }, 1500);
+      };
+
+      const scheduleAutoplay = () => {
+        clearAutoplayTimeout();
+
+        if (isPointerInside) {
+          return;
+        }
+
+        autoplayTimeoutId = window.setTimeout(() => {
+          sync(currentIndex + 1);
+          scheduleAutoplay();
+        }, 3000);
+      };
+
+      const sync = (nextIndex: number) => {
+        currentIndex = (nextIndex + slides.length) % slides.length;
+
+        slides.forEach((slide, index) => {
+          const isActive = index === currentIndex;
+          slide.classList.toggle("is-active", isActive);
+          slide.setAttribute("aria-hidden", String(!isActive));
+        });
+
+        dots.forEach((dot, index) => {
+          const isActive = index === currentIndex;
+          dot.classList.toggle("is-active", isActive);
+          dot.setAttribute("aria-pressed", String(isActive));
+        });
+
+        if (tag) {
+          const nextLabel = slides[currentIndex]?.dataset.screenLabel ?? "";
+
+          if (tag.textContent !== nextLabel) {
+            if (tagTransitionTimeoutId) {
+              window.clearTimeout(tagTransitionTimeoutId);
+            }
+
+            tag.classList.add("is-updating");
+
+            tagTransitionTimeoutId = window.setTimeout(() => {
+              tag.textContent = nextLabel;
+              tag.classList.remove("is-updating");
+            }, 110);
+          } else {
+            tag.textContent = nextLabel;
+          }
+        }
+      };
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          sync(index);
+          showDots();
+          scheduleHideDots();
+          scheduleAutoplay();
+        });
+      });
+
+      gallery.addEventListener("mouseenter", () => {
+        isPointerInside = true;
+        showDots();
+        clearAutoplayTimeout();
+      });
+
+      gallery.addEventListener("mouseleave", () => {
+        isPointerInside = false;
+        scheduleHideDots();
+        scheduleAutoplay();
+      });
+
+      gallery.addEventListener("focusin", () => {
+        showDots();
+        clearAutoplayTimeout();
+      });
+
+      gallery.addEventListener("focusout", () => {
+        const activeElement = document.activeElement;
+
+        if (activeElement instanceof Node && gallery.contains(activeElement)) {
+          return;
+        }
+
+        scheduleHideDots();
+        scheduleAutoplay();
+      });
+
+      if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        gallery.classList.add("is-dots-visible");
+      }
+
+      sync(currentIndex);
+      scheduleAutoplay();
+    }
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupProjectGalleries, { once: true });
+  } else {
+    setupProjectGalleries();
+  }
+</script>

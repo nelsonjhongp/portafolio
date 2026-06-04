@@ -1,0 +1,66 @@
+---
+import "./EducationSection.css";
+import type { Profile } from "../../types/portfolio";
+import { asset } from "../../utils/assets";
+import SectionHeader from "../shared/SectionHeader.astro";
+
+interface Props {
+  profile: Profile;
+}
+
+const { profile } = Astro.props;
+---
+
+<section class="section section-education section-light" id="education">
+  <div class="section-inner">
+    <SectionHeader
+      className="education-header"
+      fluid={true}
+      title="Formación Académica"
+      icon={asset("/icons/study-icon.svg")}
+      variant="framed-left"
+      nowrap={true}
+    />
+
+    <div class="education-layout">
+      <div class="education-grid">
+        {profile.education.map((item) => (
+          <article class="education-card">
+            <div class="education-card-logo-wrap">
+              <img src={item.image} alt={item.institution} loading="lazy" />
+            </div>
+            <div class="education-card-copy">
+              <h3>{item.name}</h3>
+              <p>{item.institution}</p>
+              <div class="education-card-meta">
+                {item.period ? <span class="education-card-period">{item.period}</span> : null}
+                {item.status ? <span class="education-card-status">{item.status}</span> : null}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <aside class="education-side-panel" aria-label="Certificados y constancias">
+        <div class="education-side-header">
+          <strong>Certificados y constancias</strong>
+        </div>
+
+        <div class="education-certificate-list">
+          {profile.certificates.map((item) => (
+            <a class="education-certificate-item" href={item.href} target="_blank" rel="noreferrer">
+              <span class="education-certificate-copy">
+                <strong>{item.name}</strong>
+                {item.issuer ? <span>{item.issuer}</span> : null}
+              </span>
+              <span class="education-certificate-meta">
+                <span>{item.year}</span>
+                <span class="education-certificate-arrow" aria-hidden="true">↗</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

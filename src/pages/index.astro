@@ -1,35 +1,40 @@
 ---
-import AboutSection from "../components/AboutSection.astro";
-import BackToTop from "../components/BackToTop.astro";
-import ContactPanel from "../components/ContactPanel.astro";
-import EducationSection from "../components/EducationSection.astro";
-import Footer from "../components/Footer.astro";
-import Hero from "../components/Hero.astro";
-import KnowledgeSection from "../components/KnowledgeSection.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import { profile } from "../data/profile";
-import { projects } from "../data/projects";
+import "./home.css";
+import { asset } from "../utils/assets";
+import AboutSection from "../components/about/AboutSection.astro";
+import ContactPanel from "../components/contact/ContactPanel.astro";
+import EducationSection from "../components/education/EducationSection.astro";
+import Hero from "../components/hero/Hero.astro";
+import KnowledgeSection from "../components/knowledge/KnowledgeSection.astro";
+import ProjectCard from "../components/projects/ProjectCard.astro";
+import BackToTop from "../components/shared/BackToTop.astro";
+import Footer from "../components/shared/Footer.astro";
+import SiteNavigation from "../components/shared/SiteNavigation.astro";
+import SectionHeader from "../components/shared/SectionHeader.astro";
+import { profile } from "../content/profile";
+import { projects } from "../content/projects";
 import MainLayout from "../layouts/MainLayout.astro";
+
+const featuredProjects = projects.filter((project) => project.featured);
 ---
 
 <MainLayout
-  title="Nejigiku | Nelson Jhon Gil Pari"
-  description="Portafolio de Nelson Jhon Gil Pari, enfocado en aplicaciones web, herramientas locales y experiencias de producto claras."
+  title="Portafolio | Nelson Jhon Gil Pari"
+  description="Desarrollador de Software. Construyo aplicaciones web, backend y herramientas de escritorio con React, Next.js, Node.js y PostgreSQL. Estudiante de Ing. de Software."
 >
   <div class="page-shell">
-    <header class="site-nav">
-      <a class="site-brand" href="#top">
-        <img src="brand/nj-logo.png" alt="Logo de Nelson Nejigiku" />
-      </a>
-
-      <nav aria-label="Navegacion principal">
-        <a href="#about">Sobre mi</a>
-        <a href="#stack">Conocimientos</a>
-        <a href="#projects">Proyectos</a>
-        <a href="#education">Formacion</a>
-        <a href="#contact">Contacto</a>
-      </nav>
-    </header>
+    <SiteNavigation
+      brandHref="#top"
+      brandImage="/brand/nj-logo.png"
+      brandAlt="Logo de Nelson Nejigiku"
+      links={[
+        { href: "#about", label: "Sobre mí" },
+        { href: "#stack", label: "Conocimientos" },
+        { href: "#projects", label: "Proyectos" },
+        { href: "#education", label: "Formación académica" },
+        { href: "#contact", label: "Contacto" }
+      ]}
+    />
 
     <main>
       <Hero profile={profile} />
@@ -38,16 +43,16 @@ import MainLayout from "../layouts/MainLayout.astro";
 
       <section class="section section-projects section-muted" id="projects">
         <div class="section-inner">
-          <div class="section-header section-header-left">
-            <h2>Mis Proyectos</h2>
-            <p class="section-copy">
-              Una seleccion de proyectos que representan mejor mi nivel actual y el tipo de
-              software que me interesa seguir construyendo.
-            </p>
-          </div>
+          <SectionHeader
+            fluid={true}
+            title="Mis Proyectos"
+            icon={asset("/icons/code-icon.svg")}
+            variant="framed-left"
+            text="Una selección de proyectos que representa mejor mi nivel actual y el tipo de software que me interesa seguir construyendo."
+          />
 
           <div class="projects-grid">
-            {projects.map((project) => <ProjectCard project={project} />)}
+            {featuredProjects.map((project) => <ProjectCard project={project} />)}
           </div>
         </div>
       </section>

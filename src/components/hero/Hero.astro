@@ -1,0 +1,84 @@
+---
+import "./Hero.css";
+import type { Profile } from "../../types/portfolio";
+import ActionLink from "../shared/ActionLink.astro";
+
+interface Props {
+  profile: Profile;
+}
+
+const { profile } = Astro.props;
+---
+
+<section class="hero" id="top">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-copy">
+    <p class="hero-brand">
+      <span class="signal-dot hero-brand-dot" aria-hidden="true"></span>
+      {profile.name}
+    </p>
+    <h1>{profile.title}</h1>
+    <p class="hero-subtitle">{profile.subtitle}</p>
+
+    <div class="hero-actions">
+      <ActionLink href="#projects" label="Ver proyectos" kind="projects" icon="trailing" />
+      <ActionLink href={profile.contact.cvEs} label="Ver CV" kind="cv" icon="trailing" />
+      <ActionLink href={profile.contact.github} label="GitHub" kind="github" />
+      <ActionLink href={profile.contact.linkedin} label="LinkedIn" kind="linkedin" />
+    </div>
+  </div>
+</section>
+
+<script>
+  const hero = document.querySelector<HTMLElement>(".hero");
+  const grid = hero?.querySelector<HTMLElement>(".hero-grid");
+  const baseSymbols = ["</>", "{}", "[]", "()", "=>", "//", "::", "<>"];
+
+  if (hero && grid) {
+    const buildTiles = () => {
+      const heroRect = hero.getBoundingClientRect();
+      const targetSize = window.innerWidth <= 720 ? 38 : window.innerWidth <= 980 ? 42 : 46;
+      const columns = Math.max(10, Math.ceil(heroRect.width / targetSize));
+      const rows = Math.max(10, Math.ceil(heroRect.height / targetSize));
+
+      grid.style.gridTemplateColumns = `repeat(${columns}, minmax(0, 1fr))`;
+      grid.style.gridTemplateRows = `repeat(${rows}, minmax(0, 1fr))`;
+      grid.replaceChildren();
+
+      const fragment = document.createDocumentFragment();
+
+      for (let row = 0; row < rows; row += 1) {
+        for (let column = 0; column < columns; column += 1) {
+          const tile = document.createElement("span");
+          const symbolNode = document.createElement("span");
+          tile.className = "hero-grid-tile";
+          symbolNode.className = "hero-grid-symbol";
+          tile.dataset.tile = "true";
+          tile.dataset.column = String(column);
+          tile.dataset.row = String(row);
+          tile.style.setProperty("--rain-delay", `${(column * 0.38) + (row * 0.08)}s`);
+          tile.style.setProperty("--rain-duration", `${6.8 + (column % 4) * 0.5}s`);
+          const symbolIndex = (column * 3 + row * 5) % baseSymbols.length;
+          symbolNode.textContent = baseSymbols[symbolIndex];
+          tile.appendChild(symbolNode);
+          fragment.appendChild(tile);
+        }
+      }
+
+      grid.appendChild(fragment);
+    };
+
+    buildTiles();
+
+    const resizeObserver = new ResizeObserver(() => {
+      buildTiles();
+    });
+
+    resizeObserver.observe(hero);
+
+    window.addEventListener("pagehide", () => {
+      resizeObserver.disconnect();
+    }, { once: true });
+  }
+</script>

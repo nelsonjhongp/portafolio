@@ -1,0 +1,26 @@
+.project-card {
+  display: grid;
+  grid-template-columns: 11fr 9fr;
+  background: var(--surface);
+  border: 1px solid rgba(37, 99, 235, 0.08);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.project-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.4rem 1.4rem 1.35rem;
+}
+
+@media (max-width: 720px) {
+  .project-card {
+    grid-template-columns: 1fr;
+  }
+
+  .project-body {
+    padding: 1rem;
+  }
+}

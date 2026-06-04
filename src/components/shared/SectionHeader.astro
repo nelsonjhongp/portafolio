@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  icon: string;
+  iconAlt?: string;
+  text?: string;
+  variant?: "framed-left" | "badge-right";
+  nowrap?: boolean;
+  className?: string;
+  fluid?: boolean;
+}
+
+const {
+  title,
+  icon,
+  iconAlt = "",
+  text,
+  variant = "framed-left",
+  nowrap = false,
+  className = "",
+  fluid = false
+} = Astro.props;
+
+const isDecorative = iconAlt.trim().length === 0;
+---
+
+<div class:list={["section-header", "section-header-left", { "section-header-fluid": fluid }, className]}>
+  <div class:list={["section-title", `section-title-${variant}`]}>
+    <span class="section-title__icon" aria-hidden={isDecorative ? "true" : undefined}>
+      <img src={icon} alt={isDecorative ? "" : iconAlt} />
+    </span>
+    <h2 class:list={["section-title__text", { "section-title__text-nowrap": nowrap }]}>{title}</h2>
+  </div>
+  {text && <p class="section-copy">{text}</p>}
+</div>

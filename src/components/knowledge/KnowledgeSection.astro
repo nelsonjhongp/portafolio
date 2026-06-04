@@ -1,0 +1,77 @@
+---
+import "./KnowledgeSection.css";
+import type { Profile } from "../../types/portfolio";
+import { asset } from "../../utils/assets";
+import SectionHeader from "../shared/SectionHeader.astro";
+import TechChip from "../shared/TechChip.astro";
+
+interface Props {
+  profile: Profile;
+}
+
+const { profile } = Astro.props;
+
+const sectionIcons = {
+  title: asset("/icons/code-icon.svg"),
+  main: asset("/icons/star-icon.svg"),
+  areas: asset("/icons/menu-icon.svg")
+};
+
+const areaMeta: Record<string, { icon: string; tone: string }> = {
+  Frontend: { icon: asset("/icons/monitor-icon.svg"), tone: "frontend" },
+  Backend: { icon: asset("/icons/server-icon.svg"), tone: "backend" },
+  "Bases de datos": { icon: asset("/icons/database-icon.svg"), tone: "database" },
+  "Desktop / Local tools": { icon: asset("/icons/monitor-icon.svg"), tone: "desktop" },
+  Herramientas: { icon: asset("/icons/tools-icon.svg"), tone: "tools" }
+};
+---
+
+<section class="section section-knowledge section-muted" id="stack">
+  <div class="section-inner">
+    <SectionHeader
+      className="knowledge-header"
+      fluid={true}
+      title="Stack técnico"
+      icon={sectionIcons.title}
+      variant="framed-left"
+      text="Tecnologías que uso para construir aplicaciones web, backends, herramientas locales y sistemas orientados a procesos reales."
+    />
+
+    <div class="knowledge-main-stack" aria-label="Stack principal">
+      <p class="knowledge-main-stack-label knowledge-label-with-icon">
+        <span class="knowledge-inline-icon" aria-hidden="true">
+          <img src={sectionIcons.main} alt="" />
+        </span>
+        <span>Stack principal</span>
+      </p>
+      <div class="knowledge-main-stack-row">
+        {profile.mainStack.map((item) => <TechChip item={item} variant="main" />)}
+      </div>
+    </div>
+
+    <div class="knowledge-area-block">
+      <p class="knowledge-main-stack-label knowledge-area-label knowledge-label-with-icon">
+        <span class="knowledge-inline-icon" aria-hidden="true">
+          <img src={sectionIcons.areas} alt="" />
+        </span>
+        <span>Por área</span>
+      </p>
+    </div>
+
+    <div class="knowledge-groups" aria-label="Áreas de conocimiento">
+      {profile.knowledgeAreas.map((group) => (
+        <article class="knowledge-area-card">
+          <div class="knowledge-area-heading">
+            <span class:list={["knowledge-area-icon", `knowledge-area-icon-${areaMeta[group.area]?.tone ?? "default"}`]} aria-hidden="true">
+              <img src={areaMeta[group.area]?.icon ?? sectionIcons.areas} alt="" />
+            </span>
+            <h3 class="knowledge-row-title">{group.area}</h3>
+          </div>
+          <div class="knowledge-chip-row">
+            {group.items.map((item) => <TechChip item={item} variant="knowledge" />)}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+---
+import "./ProjectCard.css";
+import type { Project } from "../../types/portfolio";
+import ProjectGallery from "./ProjectGallery.astro";
+import ProjectLinks from "./ProjectLinks.astro";
+import ProjectMeta from "./ProjectMeta.astro";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="project-card" id={project.id}>
+  <ProjectGallery project={project} />
+
+  <div class="project-body">
+    <ProjectMeta project={project} />
+    <ProjectLinks projectName={project.name} links={project.links} />
+  </div>
+</article>

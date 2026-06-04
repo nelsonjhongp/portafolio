@@ -1,0 +1,200 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  padding: 5.5rem 1rem 3rem;
+  overflow: hidden;
+  text-align: center;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.06), transparent 28%),
+    linear-gradient(180deg, rgba(25, 31, 37, 0.72), rgba(20, 24, 31, 0.86)),
+    linear-gradient(135deg, #1a2026, #14181f);
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  gap: 0;
+  padding: 5.25rem 1rem 1rem;
+  perspective: 1200px;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.hero-grid-tile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  background: rgba(25, 31, 37, 0.03);
+  opacity: 0.42;
+  font-size: clamp(0.54rem, 0.68vw, 0.78rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  transform: none;
+}
+
+.hero-grid-symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100%;
+  min-height: 100%;
+  color: rgba(212, 217, 223, 0.14);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.03);
+  will-change: transform, opacity, color, text-shadow;
+  animation: hero-symbol-fall var(--rain-duration) cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  animation-delay: var(--rain-delay);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.18) 100%),
+    linear-gradient(180deg, rgba(9, 12, 17, 0.08), rgba(9, 12, 17, 0.22));
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 860px);
+  max-width: 860px;
+  margin-inline: auto;
+  padding: 0 1.25rem;
+}
+
+.hero-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 1.4rem;
+  margin: 0 0 1.15rem;
+  color: rgba(204, 239, 255, 0.94);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: 0.018em;
+  text-shadow:
+    0 0 14px rgba(66, 214, 255, 0.14),
+    0 0 28px rgba(71, 230, 190, 0.08);
+}
+
+.hero-brand-dot {
+  --signal-dot-size: 0.55rem;
+  --signal-dot-ring: 0.22rem;
+}
+
+h1 {
+  max-width: 11ch;
+  margin: 0 auto;
+  color: white;
+  font-size: clamp(3rem, 6.2vw, 5.4rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  text-shadow:
+    0 0 18px rgba(110, 175, 255, 0.16),
+    0 0 40px rgba(110, 175, 255, 0.08),
+    0 0 26px rgba(71, 230, 190, 0.06);
+}
+
+.hero-subtitle {
+  max-width: 39rem;
+  margin: 1.35rem auto 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.08rem;
+  line-height: 1.75;
+  text-wrap: balance;
+  text-shadow:
+    0 0 14px rgba(66, 214, 255, 0.08),
+    0 0 22px rgba(71, 230, 190, 0.04);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1.95rem 0 0;
+}
+
+@keyframes hero-symbol-fall {
+  0%,
+  100% {
+    opacity: 0.28;
+    color: rgba(212, 217, 223, 0.14);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.03);
+    transform: translate3d(0, -3px, 0);
+  }
+
+  14% {
+    opacity: 0.42;
+    color: rgba(223, 227, 232, 0.3);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.06);
+    transform: translate3d(0, 2px, 0);
+  }
+
+  28% {
+    opacity: 0.68;
+    color: rgba(238, 241, 244, 0.52);
+    text-shadow:
+      0 0 12px rgba(255, 255, 255, 0.1),
+      0 0 22px rgba(255, 255, 255, 0.05);
+    transform: translate3d(0, 9px, 0);
+  }
+
+  42% {
+    opacity: 0.36;
+    color: rgba(221, 226, 231, 0.26);
+    text-shadow: 0 0 9px rgba(255, 255, 255, 0.05);
+    transform: translate3d(0, 16px, 0);
+  }
+
+  58% {
+    opacity: 0.16;
+    color: rgba(214, 219, 224, 0.2);
+    text-shadow: 0 0 7px rgba(255, 255, 255, 0.035);
+    transform: translate3d(0, 22px, 0);
+  }
+}
+
+@media (max-width: 720px) {
+  .hero {
+    min-height: 92svh;
+  }
+
+  .hero-grid {
+    padding-inline: 0.75rem;
+  }
+
+  h1 {
+    max-width: 9.5ch;
+    font-size: clamp(2.7rem, 11vw, 4.1rem);
+  }
+
+  .hero-copy {
+    padding-inline: 0.35rem;
+  }
+
+  .hero-brand {
+    gap: 0.5rem;
+    font-size: 0.98rem;
+  }
+
+  .hero-subtitle {
+    max-width: 31rem;
+    font-size: 1rem;
+    line-height: 1.68;
+  }
+}

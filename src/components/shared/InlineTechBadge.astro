@@ -1,0 +1,18 @@
+---
+import "./InlineTechBadge.css";
+import { getTechMeta } from "../../content/tech";
+
+interface Props {
+  item: string;
+}
+
+const { item } = Astro.props;
+const meta = getTechMeta(item);
+---
+
+<span class="inline-tech-badge" title={meta.label}>
+  <span class="inline-tech-badge__icon" aria-hidden="true">
+    {meta.iconImage ? <img src={meta.iconImage} alt="" aria-hidden="true" /> : <span>{meta.shortLabel}</span>}
+  </span>
+  <span class="inline-tech-badge__label">{meta.label}</span>
+</span>

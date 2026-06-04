@@ -1,0 +1,137 @@
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-muted);
+}
+
+.tech-chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tech-chip-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.tech-chip-icon-fallback {
+  border-radius: 999px;
+  background: var(--surface-subtle);
+  color: var(--text-body);
+  font-weight: 700;
+}
+
+.tech-chip-label {
+  line-height: 1.2;
+}
+
+.tech-chip-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  min-height: 7rem;
+  padding: 1.05rem 0.8rem 0.95rem;
+  border: none;
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--text-body);
+  font-size: 0.94rem;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 12px 22px rgba(10, 18, 28, 0.04);
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.tech-chip-main .tech-chip-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 2.75rem;
+}
+
+.tech-chip-main .tech-chip-icon-fallback {
+  font-size: 0.72rem;
+}
+
+.tech-chip-main:hover,
+.tech-chip-main:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--line);
+  background: linear-gradient(180deg, var(--surface), var(--surface-soft));
+  box-shadow: 0 14px 24px rgba(10, 18, 28, 0.06);
+}
+
+.tech-chip-main:hover .tech-chip-icon img,
+.tech-chip-main:focus-visible .tech-chip-icon img {
+  transform: translateY(-1px) scale(1.04);
+  filter: none;
+}
+
+.tech-chip-knowledge,
+.tech-chip-project {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 1.9rem;
+  padding: 0.28rem 0.5rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  transition: color 160ms ease, background 160ms ease;
+}
+
+.tech-chip-knowledge .tech-chip-icon,
+.tech-chip-project .tech-chip-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: 0 0 1.2rem;
+}
+
+.tech-chip-knowledge .tech-chip-icon-fallback,
+.tech-chip-project .tech-chip-icon-fallback {
+  font-size: 0.58rem;
+}
+
+.tech-chip-project {
+  min-height: 2rem;
+  padding: 0.42rem 0.72rem;
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  background: linear-gradient(180deg, var(--surface), var(--surface-soft));
+  color: var(--text-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+}
+
+.tech-chip-knowledge:hover,
+.tech-chip-knowledge:focus-visible {
+  background: var(--surface);
+  color: var(--text-body);
+}
+
+.tech-chip-knowledge:hover .tech-chip-icon img,
+.tech-chip-knowledge:focus-visible .tech-chip-icon img {
+  transform: none;
+  filter: none;
+}
+
+@media (max-width: 720px) {
+  .tech-chip-main {
+    min-height: 6.4rem;
+    padding: 0.95rem 0.72rem 0.88rem;
+    font-size: 0.88rem;
+  }
+
+  .tech-chip-main .tech-chip-icon {
+    width: 2.2rem;
+    height: 2.2rem;
+    flex-basis: 2.2rem;
+  }
+}

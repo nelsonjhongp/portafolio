@@ -1,0 +1,23 @@
+.section-projects .section-header-left {
+  margin-bottom: 1.6rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.projects-subsection {
+  margin-top: 2.5rem;
+}
+
+.projects-subsection h3 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.projects-grid-compact {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}

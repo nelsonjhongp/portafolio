@@ -1,0 +1,38 @@
+.project-heading .project-eyebrow {
+  margin: 0 0 0.32rem;
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.project-heading h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.26rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.project-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+
+.project-role {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+
+.project-tech-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.35rem;
+  padding-top: 0.25rem;
+}

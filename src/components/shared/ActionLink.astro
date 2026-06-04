@@ -1,0 +1,49 @@
+---
+import "./ActionLink.css";
+import { asset } from "../../utils/assets";
+
+interface Props {
+  href: string;
+  label: string;
+  kind: "projects" | "github" | "linkedin" | "cv" | "contact";
+  icon?: "leading" | "trailing";
+  className?: string;
+}
+
+const { href, label, kind, icon, className = "" } = Astro.props;
+const isExternal = href.startsWith("http");
+const target = isExternal ? "_blank" : undefined;
+const rel = isExternal ? "noreferrer" : undefined;
+
+const iconPosition = icon ?? (kind === "contact" ? "trailing" : "leading");
+
+const iconSrc = kind !== "github" && kind !== "linkedin" ? asset("/icons/arrow-right.svg") : null;
+---
+
+<a class:list={["button", "action-link", `button-${kind}`, className]} href={href} target={target} rel={rel}>
+  {iconPosition === "leading" ? (
+    <span class="action-link__icon" aria-hidden="true">
+      {kind === "github" ? (
+        <i class="devicon-github-original" aria-hidden="true"></i>
+      ) : kind === "linkedin" ? (
+        <i class="devicon-linkedin-plain" aria-hidden="true"></i>
+      ) : (
+        <img class="action-link__icon-image action-link__icon-image--arrow" src={iconSrc} alt="" aria-hidden="true" />
+      )}
+    </span>
+  ) : null}
+
+  <span>{label}</span>
+
+  {iconPosition === "trailing" ? (
+    <span class="action-link__icon" aria-hidden="true">
+      {kind === "github" ? (
+        <i class="devicon-github-original" aria-hidden="true"></i>
+      ) : kind === "linkedin" ? (
+        <i class="devicon-linkedin-plain" aria-hidden="true"></i>
+      ) : (
+        <img class="action-link__icon-image action-link__icon-image--arrow" src={iconSrc} alt="" aria-hidden="true" />
+      )}
+    </span>
+  ) : null}
+</a>
