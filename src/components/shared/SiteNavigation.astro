@@ -40,34 +40,34 @@ const burgerMenuIcon = asset("/icons/burger-menu.svg");
       </a>
     ))}
   </nav>
-
-  <div class="site-nav-drawer-shell" data-nav-drawer-shell hidden>
-    <button
-      class="site-nav-drawer-backdrop"
-      type="button"
-      aria-label="Cerrar menú de navegación"
-      data-nav-close
-    ></button>
-
-    <nav
-      class="site-nav-drawer"
-      id="mobile-navigation-drawer"
-      aria-label="Navegación móvil"
-      aria-hidden="true"
-      tabindex="-1"
-      data-nav-drawer
-    >
-      <p class="site-nav-drawer__eyebrow">Navegación</p>
-      <div class="site-nav-drawer__links">
-        {links.map((link) => (
-          <a href={link.href} data-nav-link data-nav-close>
-            {link.label}
-          </a>
-        ))}
-      </div>
-    </nav>
-  </div>
 </header>
+
+<div class="site-nav-drawer-shell" data-nav-drawer-shell hidden>
+  <button
+    class="site-nav-drawer-backdrop"
+    type="button"
+    aria-label="Cerrar menú de navegación"
+    data-nav-close
+  ></button>
+
+  <nav
+    class="site-nav-drawer"
+    id="mobile-navigation-drawer"
+    aria-label="Navegación móvil"
+    aria-hidden="true"
+    tabindex="-1"
+    data-nav-drawer
+  >
+    <p class="site-nav-drawer__eyebrow">Navegación</p>
+    <div class="site-nav-drawer__links">
+      {links.map((link) => (
+        <a href={link.href} data-nav-link data-nav-close>
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</div>
 
 <script>
   const siteNav = document.querySelector<HTMLElement>("[data-site-nav]");

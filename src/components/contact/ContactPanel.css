@@ -172,14 +172,19 @@
 
 @media (max-width: 720px) {
   .contact-card {
-    grid-template-columns: auto 1fr;
-    gap: 0.75rem 0.85rem;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.75rem;
     padding: 0.95rem;
   }
 
   .contact-card-arrow {
-    grid-column: 2;
+    grid-column: 3;
     justify-self: end;
+    align-self: center;
+  }
+
+  .contact-card-copy {
+    min-width: 0;
   }
 
   .contact-icon-wrap {
