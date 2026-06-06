@@ -30,6 +30,17 @@
   background: var(--accent-soft);
 }
 
+:root:not([data-theme="light"]) .project-status {
+  background: rgba(122, 162, 255, 0.28);
+  border-color: rgba(122, 162, 255, 0.35);
+}
+
+[data-project-id="ripnel-platform"] .project-status {
+  background: rgba(0, 0, 0, 0.56);
+  border-color: rgba(255, 255, 255, 0.32);
+  color: white;
+}
+
 .project-heading h3 {
   margin: 0.42rem 0 0.4rem;
   font-size: 1.26rem;

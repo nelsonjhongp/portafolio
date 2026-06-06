@@ -45,7 +45,7 @@
 
 .knowledge-main-stack-row {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0.8rem;
 }
 
@@ -232,6 +232,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .knowledge-main-stack-row > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
   .knowledge-area-icon {
     width: 1.9rem;
     height: 1.9rem;
@@ -240,6 +244,12 @@
   }
 
   .knowledge-capacidades-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 440px) {
+  .knowledge-main-stack-row {
     grid-template-columns: 1fr;
   }
 }

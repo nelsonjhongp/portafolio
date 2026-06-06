@@ -130,10 +130,11 @@ const burgerMenuIcon = asset("/icons/lucide--menu.svg");
     const getThemeLabel = (theme: string) => (theme === "light" ? "Claro" : "Oscuro");
 
     const syncThemeUi = () => {
+      const base = import.meta.env.BASE_URL ?? "/";
       const currentTheme = root.dataset.theme === "light" ? "light" : "dark";
       const nextTheme = currentTheme === "dark" ? "light" : "dark";
       const themeColor = currentTheme === "light" ? "#f5f7fb" : "#1d2129";
-      const themeIcon = currentTheme === "light" ? "/icons/lucide--moon.svg" : "/icons/lucide--sun.svg";
+      const themeIcon = `${base}icons/lucide--${currentTheme === "light" ? "moon" : "sun"}.svg`;
 
       themeLabels.forEach((label) => {
         label.textContent = getThemeLabel(currentTheme);

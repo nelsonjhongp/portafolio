@@ -25,7 +25,7 @@
 }
 
 .section-header-left > .section-copy {
-  max-width: 42rem;
+  max-width: none;
   text-align: left;
 }
 
@@ -48,6 +48,7 @@
   font-size: 1.05rem;
   color: var(--text-body);
   line-height: 1.7;
+  white-space: pre-line;
 }
 
 .section-title {
@@ -122,6 +123,7 @@
 
   .section-header-left > h2,
   .section-header-left > .section-copy {
+    text-align: center;
     margin-inline: auto;
   }
 

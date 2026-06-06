@@ -3,30 +3,34 @@ import { asset } from "../utils/assets";
 
 export const profile: Profile = {
   name: "Nelson Jhon Gil Pari",
-  title: "Desarrollador de software orientado a datos y procesos reales",
+  title: "Desarrollador de software orientado a sistemas internos y datos",
   subtitle:
-    "Construyo aplicaciones web y herramientas locales para ordenar información, automatizar tareas y apoyar flujos administrativos con interfaces claras y bases de datos.",
+    "Construyo aplicaciones web y herramientas locales para ordenar información, automatizar tareas administrativas y apoyar operaciones con interfaces claras y bases de datos relacionales.",
   summary:
-    "Soy estudiante de décimo ciclo de Ingeniería de Software y me enfoco en construir soluciones para sistemas internos, backend, datos y herramientas administrativas.",
+    "Soy estudiante de décimo ciclo de Ingeniería de Software, con enfoque en aplicaciones web, bases de datos, interfaces administrativas y herramientas orientadas a operaciones reales.",
   aboutText:
-    "Me interesa trabajar cerca del problema: entender el flujo operativo, ordenar requerimientos, modelar información, validar reglas de negocio y construir interfaces claras para usuarios reales.",
-  mainStack: ["TypeScript", "JavaScript", "React", "Next.js", "Node.js", "PostgreSQL"],
+    "Me interesa construir software cerca del problema: entender el flujo operativo, ordenar requerimientos, modelar información y validar reglas de negocio antes de desarrollar.",
+  mainStack: ["TypeScript", "React", "Next.js", "Node.js", "PostgreSQL"],
   knowledgeAreas: [
     {
       area: "Frontend",
       items: ["HTML", "CSS3", "Tailwind CSS", "Figma"]
     },
     {
-      area: "Bases de datos",
-      items: ["MySQL", "SQLite", "SQL Server"]
-    },
-    {
       area: "Cloud y despliegue",
       items: ["Supabase", "Vercel", "Render"]
     },
     {
+      area: "Herramientas",
+      items: ["Git", "GitHub", "Jira", "Confluence", "Office"]
+    },
+    {
+      area: "Bases de datos",
+      items: ["MySQL", "SQLite", "SQL Server"]
+    },
+    {
       area: "Lenguajes y frameworks",
-      items: ["Python", "Java", "Electron"]
+      items: ["JavaScript", "Python", "Java", "Electron"]
     },
     {
       area: "Capacidades aplicadas",
@@ -129,24 +133,24 @@ export const profile: Profile = {
   sectionTexts: {
     projectsTitle: "Proyectos destacados",
     projectsCopy:
-      "Proyectos que demuestran mi capacidad para convertir procesos reales en sistemas internos, herramientas administrativas y aplicaciones orientadas a datos.",
+      "Proyectos que demuestran mi capacidad para convertir procesos reales en sistemas web, herramientas administrativas y aplicaciones orientadas a datos.",
     knowledgeTitle: "Habilidades y tecnologías",
     knowledgeCopy:
-      "Tecnologías y capacidades que aplico para construir sistemas internos, trabajar con datos y ordenar procesos administrativos reales.",
+      "Tecnologías y capacidades que aplico para construir aplicaciones web, trabajar con bases de datos y ordenar procesos administrativos reales.",
     aboutTitle: "Sobre mí",
     contactTitle: "Contacto",
     contactCopy:
-      "Disponible para prácticas y oportunidades junior en desarrollo backend/full-stack, sistemas internos y software orientado a procesos reales.",
+      "Disponible para prácticas preprofesionales y oportunidades junior en desarrollo web, bases de datos y sistemas administrativos.",
     educationCopy:
       "Base universitaria en Ingeniería de Software y formación complementaria enfocada en JavaScript y PostgreSQL."
   },
   aboutCallout:
-    "Actualmente busco prácticas profesionales o primeras oportunidades donde pueda aportar en lógica de negocio, bases de datos, interfaces administrativas y herramientas de soporte para operaciones reales.",
+    "Actualmente busco prácticas preprofesionales u oportunidades junior donde pueda aportar en desarrollo web, lógica de negocio, modelado de datos y soporte a procesos administrativos.",
   contactEmailLabel: "Escríbeme por correo",
   contactCvLabel: "Descargar CV",
   contactCtaHeading: "Disponible para prácticas y oportunidades junior",
   contactCtaText:
-    "Me interesa aportar en equipos que construyan producto, operación interna o software orientado a procesos reales.",
+    "Escríbeme para conversar sobre cómo puedo aportar a tu equipo.",
   workflowSteps: [
     {
       title: "Entiendo el proceso",

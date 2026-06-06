@@ -39,23 +39,24 @@
   justify-content: center;
   gap: 0.6rem;
   width: 100%;
-  min-height: 7rem;
-  padding: 1.05rem 0.8rem 0.95rem;
+  min-height: 7.8rem;
+  padding: 1.2rem 0.9rem 1.1rem;
   border: none;
   border-radius: 18px;
   background: var(--surface);
   color: var(--text-body);
-  font-size: 0.94rem;
+  font-size: 1rem;
   font-weight: 700;
   text-align: center;
+  overflow-wrap: break-word;
   box-shadow: 0 12px 22px rgba(10, 18, 28, 0.04);
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
 .tech-chip-main .tech-chip-icon {
-  width: 2.75rem;
-  height: 2.75rem;
-  flex: 0 0 2.75rem;
+  width: 3rem;
+  height: 3rem;
+  flex: 0 0 3rem;
 }
 
 .tech-chip-main .tech-chip-icon-fallback {
@@ -177,9 +178,9 @@
 }
 
 .tech-chip-hero .tech-chip-icon {
-  width: 1.15rem;
-  height: 1.15rem;
-  flex: 0 0 1.15rem;
+  width: 1.34rem;
+  height: 1.34rem;
+  flex: 0 0 1.34rem;
 }
 
 .tech-chip-hero .tech-chip-icon-fallback {
@@ -194,7 +195,7 @@
 
 .tech-chip-hero .tech-chip-label {
   color: var(--hero-heading);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
@@ -202,29 +203,29 @@
 
 @media (max-width: 720px) {
   .tech-chip-hero {
-    gap: 0.42rem;
+  gap: 0.56rem;
     padding: 0.12rem 0.14rem;
   }
 
   .tech-chip-hero .tech-chip-icon {
-    width: 1.02rem;
-    height: 1.02rem;
-    flex-basis: 1.02rem;
+    width: 1.16rem;
+    height: 1.16rem;
+    flex-basis: 1.16rem;
   }
 
   .tech-chip-hero .tech-chip-label {
-    font-size: 0.72rem;
+    font-size: 0.78rem;
   }
 
   .tech-chip-main {
-    min-height: 6.4rem;
+    min-height: 7rem;
     padding: 0.95rem 0.72rem 0.88rem;
-    font-size: 0.88rem;
+    font-size: 0.92rem;
   }
 
   .tech-chip-main .tech-chip-icon {
-    width: 2.2rem;
-    height: 2.2rem;
-    flex-basis: 2.2rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    flex-basis: 2.4rem;
   }
 }
