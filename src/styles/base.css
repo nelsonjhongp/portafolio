@@ -12,6 +12,7 @@ body {
   font-family: "Source Sans 3", sans-serif;
   color: var(--ink);
   background: var(--bg);
+  transition: background 220ms ease, color 220ms ease;
 }
 
 a {

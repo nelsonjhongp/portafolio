@@ -15,8 +15,11 @@ export interface Project {
   name: string;
   eyebrow?: string;
   summary: string;
+  problem: string;
+  solution: string;
+  responsibilities: string[];
   stack: string[];
-  role: string;
+  cardStack?: string[];
   image: string;
   screens?: ProjectScreen[];
   dotTone?: "dark" | "light";
@@ -27,8 +30,10 @@ export interface Project {
 
 export interface ActionLink {
   label: string;
-  href: string;
-  kind: "projects" | "github" | "linkedin" | "cv" | "contact";
+  href?: string;
+  kind: "projects" | "github" | "linkedin" | "cv" | "contact" | "secondary";
+  pending?: boolean;
+  title?: string;
 }
 
 export interface KnowledgeArea {
@@ -41,6 +46,8 @@ export interface EducationItem {
   institution: string;
   period: string;
   image: string;
+  imageDark?: string;
+  kind?: "degree" | "course";
   status?: string;
 }
 
@@ -49,6 +56,29 @@ export interface CertificateItem {
   issuer?: string;
   year: string;
   href: string;
+}
+
+export interface SectionTexts {
+  projectsTitle: string;
+  projectsCopy: string;
+  knowledgeTitle: string;
+  knowledgeCopy: string;
+  aboutTitle: string;
+  contactTitle: string;
+  contactCopy: string;
+  educationCopy: string;
+}
+
+export interface WorkflowStep {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+export interface EducationLabels {
+  mainCareer: string;
+  complementary: string;
+  certificates: string;
 }
 
 export interface Profile {
@@ -68,4 +98,13 @@ export interface Profile {
     cvEs: string;
   };
   ctas: ActionLink[];
+  projectCtas: ActionLink[];
+  sectionTexts: SectionTexts;
+  aboutCallout: string;
+  contactEmailLabel: string;
+  contactCvLabel: string;
+  contactCtaHeading: string;
+  contactCtaText: string;
+  workflowSteps: WorkflowStep[];
+  educationLabels: EducationLabels;
 }

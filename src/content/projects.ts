@@ -7,25 +7,30 @@ export const projects: Project[] = [
     name: "RIPNEL Platform",
     eyebrow: "Plataforma web",
     summary:
-      "ERP MVP comercial enfocado en inventario, ventas, precios y transferencias internas.",
-    stack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Supabase"],
-    role: "Frontend separado, backend con logica de negocio y PostgreSQL administrado en Supabase, pensado para crecer por modulos.",
+      "ERP MVP web para inventario, ventas, precios y transferencias internas entre sedes textiles, orientado a operación real y crecimiento modular.",
+    problem:
+      "Negocios con operaciones textiles necesitan controlar inventario, ventas, precios y transferencias internas entre sedes sin depender de procesos manuales dispersos.",
+    solution:
+      "Sistema web pensado para ordenar procesos administrativos, centralizar información operativa y crecer por módulos según las necesidades del negocio.",
+    responsibilities: [
+      "Levantamiento de requerimientos y prototipado funcional",
+      "Modelado de datos y revisión de reglas operativas",
+      "Desarrollo de módulos de inventario, ventas y transferencias",
+      "Interfaces administrativas y validación funcional"
+    ],
+    stack: ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL", "Supabase", "Render", "Vercel"],
+    cardStack: ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL"],
     image: asset("/projects/ripnel-3-dashboard.png"),
     screens: [
       {
-        src: asset("/projects/ripnel-1-login.png"),
-        alt: "Pantalla de acceso al sistema RIPNEL Platform.",
-        label: "Login"
+        src: asset("/projects/ripnel-3-dashboard.png"),
+        alt: "Vista principal del dashboard de RIPNEL Platform.",
+        label: "Dashboard"
       },
       {
         src: asset("/projects/ripnel-2-inicio.png"),
         alt: "Pantalla de inicio del ERP RIPNEL Platform.",
         label: "Inicio"
-      },
-      {
-        src: asset("/projects/ripnel-3-dashboard.png"),
-        alt: "Vista principal del dashboard de RIPNEL Platform.",
-        label: "Dashboard"
       },
       {
         src: asset("/projects/ripnel-4-venta.png"),
@@ -41,6 +46,11 @@ export const projects: Project[] = [
         src: asset("/projects/ripnel-6-trasnferencia.png"),
         alt: "Vista de transferencias internas en RIPNEL Platform.",
         label: "Transferencias"
+      },
+      {
+        src: asset("/projects/ripnel-1-login.png"),
+        alt: "Pantalla de acceso al sistema RIPNEL Platform.",
+        label: "Login"
       }
     ],
     dotTone: "dark",
@@ -55,9 +65,18 @@ export const projects: Project[] = [
     name: "Metrion",
     eyebrow: "Escritorio local",
     summary:
-      "Aplicación local de escritorio para el control mensual de compras, ventas, impuestos y cierres.",
+      "Aplicación de escritorio local para control mensual de compras, ventas, impuestos y cierres administrativos.",
+    problem:
+      "Pequeños flujos administrativos suelen depender de hojas sueltas y cierres manuales, lo que complica el control mensual de compras, ventas e impuestos.",
+    solution:
+      "Herramienta local con persistencia en SQLite, validación de formularios y enfoque en uso operativo sin depender de servicios en la nube.",
+    responsibilities: [
+      "Diseño de interfaz para registro y seguimiento mensual",
+      "Persistencia local y estructura de datos operativa",
+      "Validación de formularios y flujos administrativos",
+      "Organización del producto para uso cotidiano"
+    ],
     stack: ["Electron", "React", "TypeScript", "SQLite"],
-    role: "Control operativo mensual con persistencia local, sin depender de la nube y con una base lista para evolucionar como producto usable.",
     image: asset("/projects/metrion-3-dashboard.png"),
     screens: [
       {
@@ -104,9 +123,18 @@ export const projects: Project[] = [
     name: "Nejigiku Transcriber",
     eyebrow: "Escritorio local",
     summary:
-      "Aplicación de escritorio para Windows enfocada en transcripción local de audio y video con un flujo simple y usable.",
-    stack: ["Python", "PySide6", "FFmpeg"],
-    role: "Interfaz de escritorio, procesamiento local y configuración persistente, pensada para convertir archivos multimedia en texto sin depender de servicios externos.",
+      "Herramienta local para Windows enfocada en transcripción de audio y video mediante procesamiento local.",
+    problem:
+      "Transcribir audio y video localmente en Windows suele requerir herramientas separadas, configuraciones técnicas y flujos poco amigables para el usuario final.",
+    solution:
+      "Aplicación de escritorio con configuración persistente, estados visibles, guardado de resultados e integración con procesamiento multimedia local.",
+    responsibilities: [
+      "Interfaz de escritorio y flujo principal de uso",
+      "Configuración persistente y manejo de estados",
+      "Procesamiento por lotes y guardado de resultados",
+      "Integración con procesamiento multimedia local"
+    ],
+    stack: ["Python"],
     image: asset("/projects/01-njgktranscriber-inicio.png"),
     screens: [
       {
@@ -146,9 +174,13 @@ export const projects: Project[] = [
     id: "progmentor-ai-tutor",
     name: "ProgMentor AI Tutor",
     summary:
-      "Prototipo frontend-first de plataforma educativa con IA para organizar aprendizaje y visualizar una experiencia guiada.",
+      "Prototipo frontend-first de una experiencia educativa guiada con IA, centrado en estructura de producto e interfaz.",
+    problem:
+      "Explora cómo una plataforma educativa puede organizar contenido y guía de aprendizaje con una experiencia centrada en frontend.",
+    solution:
+      "Prototipo frontend-first de una plataforma educativa con IA para visualizar una experiencia guiada y estructura de producto.",
+    responsibilities: ["Conceptualización de producto y composición frontend"],
     stack: ["Next.js", "React", "TypeScript", "UI Design"],
-    role: "Conceptualización de producto y composición frontend.",
     image: asset("/projects/progmentor-ai-tutor.png"),
     status: "Prototipo frontend",
     featured: false,
@@ -160,9 +192,13 @@ export const projects: Project[] = [
     id: "nejigiku-tools",
     name: "Nejigiku Tools",
     summary:
+      "Suite web de utilidades ligeras para gestión e importación/exportación, pensada como software pequeño y práctico en navegador.",
+    problem:
+      "Flujos pequeños de gestión e importación/exportación suelen necesitar utilidades rápidas dentro del navegador.",
+    solution:
       "Suite web de herramientas prácticas para gestión e importación/exportación, pensada como software pequeño pero útil.",
+    responsibilities: ["Utilidades web ligeras para flujos pequeños en navegador"],
     stack: ["HTML", "CSS", "JavaScript"],
-    role: "Utilidades web ligeras para flujos pequeños en navegador.",
     image: asset("/projects/nejigiku-tools.png"),
     status: "Demo pública",
     featured: false,

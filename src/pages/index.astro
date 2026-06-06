@@ -7,6 +7,7 @@ import EducationSection from "../components/education/EducationSection.astro";
 import Hero from "../components/hero/Hero.astro";
 import KnowledgeSection from "../components/knowledge/KnowledgeSection.astro";
 import ProjectCard from "../components/projects/ProjectCard.astro";
+import ActionLink from "../components/shared/ActionLink.astro";
 import BackToTop from "../components/shared/BackToTop.astro";
 import Footer from "../components/shared/Footer.astro";
 import SiteNavigation from "../components/shared/SiteNavigation.astro";
@@ -19,8 +20,8 @@ const featuredProjects = projects.filter((project) => project.featured);
 ---
 
 <MainLayout
-  title="Portafolio | Nelson Jhon Gil Pari"
-  description="Desarrollador de Software. Construyo aplicaciones web, backend y herramientas de escritorio con React, Next.js, Node.js y PostgreSQL. Estudiante de Ing. de Software."
+  title="Nelson Jhon Gil Pari | Backend / Full-stack Junior"
+  description="Portfolio de Nelson Jhon Gil Pari, estudiante de Ingeniería de Software enfocado en backend, sistemas internos, datos, inventario y herramientas administrativas."
 >
   <div class="page-shell">
     <SiteNavigation
@@ -28,9 +29,9 @@ const featuredProjects = projects.filter((project) => project.featured);
       brandImage="/brand/nj-logo.png"
       brandAlt="Logo de Nelson Nejigiku"
       links={[
-        { href: "#about", label: "Sobre mí" },
-        { href: "#stack", label: "Conocimientos" },
         { href: "#projects", label: "Proyectos" },
+        { href: "#stack", label: "Habilidades" },
+        { href: "#about", label: "Sobre mí" },
         { href: "#education", label: "Formación académica" },
         { href: "#contact", label: "Contacto" }
       ]}
@@ -38,25 +39,39 @@ const featuredProjects = projects.filter((project) => project.featured);
 
     <main>
       <Hero profile={profile} />
-      <AboutSection profile={profile} />
-      <KnowledgeSection profile={profile} />
 
       <section class="section section-projects section-muted" id="projects">
         <div class="section-inner">
           <SectionHeader
             fluid={true}
-            title="Mis Proyectos"
-            icon={asset("/icons/code-icon.svg")}
+            title={profile.sectionTexts.projectsTitle}
+            icon={asset("/icons/lucide--code-xml.svg")}
             variant="framed-left"
-            text="Una selección de proyectos que representa mejor mi nivel actual y el tipo de software que me interesa seguir construyendo."
+            text={profile.sectionTexts.projectsCopy}
           />
 
           <div class="projects-grid">
             {featuredProjects.map((project) => <ProjectCard project={project} />)}
           </div>
+
+          <div class="projects-actions" aria-label="Más acciones de proyectos">
+            {profile.projectCtas.map((cta) => (
+              <ActionLink
+                className="projects-action-link"
+                href={cta.href}
+                label={cta.label}
+                kind={cta.kind}
+                pending={cta.pending}
+                title={cta.title}
+                hideIcon={true}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
+      <KnowledgeSection profile={profile} />
+      <AboutSection profile={profile} />
       <EducationSection profile={profile} />
       <ContactPanel profile={profile} />
     </main>

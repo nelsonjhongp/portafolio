@@ -1,0 +1,137 @@
+---
+import "./ProjectModal.css";
+import type { Project } from "../../types/portfolio";
+import TechChip from "../shared/TechChip.astro";
+import { asset } from "../../utils/assets";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const dialogId = `project-modal-${project.id}`;
+const closeIcon = asset("/icons/lucide--x.svg");
+---
+
+<>
+  <dialog class="project-modal" id={dialogId} aria-labelledby={`${dialogId}-title`} data-project-modal>
+    <div class="project-modal__panel">
+      <div class="project-modal__identity">
+        <button class="project-modal__close" type="button" data-project-modal-close aria-label={`Cerrar detalle de ${project.name}`}>
+          <span aria-hidden="true"><span class="project-modal__close-icon" style={`--icon-url: url('${closeIcon}')`}></span></span>
+        </button>
+        <h3 id={`${dialogId}-title`} class="project-modal__title">{project.name}</h3>
+        <div class="project-modal__meta-row">
+          {project.eyebrow ? <p class="project-modal__eyebrow">{project.eyebrow}</p> : <span></span>}
+          <span class="project-modal__status">{project.status}</span>
+        </div>
+      </div>
+
+      <div class="project-modal__body">
+        <section class="project-modal__section project-modal__section-summary">
+          <p class="project-modal__kicker">Resumen</p>
+          <p class="project-modal__copy">{project.summary}</p>
+        </section>
+
+        <section class="project-modal__section project-modal__section-problem">
+          <p class="project-modal__kicker">Problema</p>
+          <p class="project-modal__copy">{project.problem}</p>
+        </section>
+
+        <section class="project-modal__section project-modal__section-solution">
+          <p class="project-modal__kicker">Solución</p>
+          <p class="project-modal__copy">{project.solution}</p>
+        </section>
+
+        <section class="project-modal__section project-modal__section-responsibilities">
+          <p class="project-modal__kicker">Mi aporte</p>
+          <ul class="project-modal__list">
+            {project.responsibilities.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+
+        <section class="project-modal__section project-modal__section-stack">
+          <p class="project-modal__kicker">Tecnologías</p>
+          <div class="project-modal__stack" aria-label={`Tecnologías usadas en ${project.name}`}>
+            {project.stack.map((item) => <TechChip item={item} variant="project" />)}
+          </div>
+        </section>
+      </div>
+    </div>
+  </dialog>
+</>
+
+<script>
+  const setupProjectModals = () => {
+    const dialogs = Array.from(document.querySelectorAll<HTMLDialogElement>("[data-project-modal]"));
+
+    for (const dialog of dialogs) {
+      if (dialog.dataset.ready === "true") {
+        continue;
+      }
+
+      dialog.dataset.ready = "true";
+
+      const openerId = dialog.id;
+      const openers = Array.from(
+        document.querySelectorAll<HTMLButtonElement>(`[data-project-modal-open="${openerId}"]`)
+      );
+      const closers = Array.from(dialog.querySelectorAll<HTMLButtonElement>("[data-project-modal-close]"));
+      let lastTrigger: HTMLButtonElement | null = null;
+
+      const openDialog = (trigger?: HTMLButtonElement) => {
+        lastTrigger = trigger ?? null;
+
+        if (!dialog.open) {
+          dialog.showModal();
+          document.documentElement.classList.add("project-modal-lock");
+          document.body.classList.add("project-modal-lock");
+        }
+      };
+
+      const closeDialog = () => {
+        if (dialog.open) {
+          dialog.close();
+        }
+      };
+
+      openers.forEach((button) => {
+        button.addEventListener("click", () => {
+          openDialog(button);
+        });
+      });
+
+      closers.forEach((button) => {
+        button.addEventListener("click", closeDialog);
+      });
+
+      dialog.addEventListener("click", (event) => {
+        const bounds = dialog.getBoundingClientRect();
+        const clickedInside =
+          event.clientX >= bounds.left &&
+          event.clientX <= bounds.right &&
+          event.clientY >= bounds.top &&
+          event.clientY <= bounds.bottom;
+
+        if (!clickedInside) {
+          closeDialog();
+        }
+      });
+
+      dialog.addEventListener("close", () => {
+        document.documentElement.classList.remove("project-modal-lock");
+        document.body.classList.remove("project-modal-lock");
+
+        if (lastTrigger) {
+          lastTrigger.focus();
+        }
+      });
+    }
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupProjectModals, { once: true });
+  } else {
+    setupProjectModals();
+  }
+</script>

@@ -4,6 +4,7 @@ import type { Project } from "../../types/portfolio";
 import ProjectGallery from "./ProjectGallery.astro";
 import ProjectLinks from "./ProjectLinks.astro";
 import ProjectMeta from "./ProjectMeta.astro";
+import ProjectModal from "./ProjectModal.astro";
 
 interface Props {
   project: Project;
@@ -17,6 +18,7 @@ const { project } = Astro.props;
 
   <div class="project-body">
     <ProjectMeta project={project} />
-    <ProjectLinks projectName={project.name} links={project.links} />
+    <ProjectLinks projectName={project.name} links={project.links} modalDialogId={`project-modal-${project.id}`} />
+    <ProjectModal project={project} />
   </div>
 </article>

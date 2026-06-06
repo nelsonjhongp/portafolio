@@ -24,19 +24,19 @@ const contactItems = [
     label: "GitHub",
     value: "github.com/nelsonjhongp",
     kind: "github",
-    iconSrc: asset("/icons/github-icon.svg")
+    iconSrc: asset("/icons/tech/github-icon.svg")
   },
   {
     href: profile.contact.linkedin,
     label: "LinkedIn",
     value: "linkedin.com/in/nelsonjhongp",
     kind: "linkedin",
-    iconSrc: asset("/icons/linkedin-original.svg")
+    iconSrc: asset("/icons/tech/linkedin-original.svg")
   },
   {
     href: profile.contact.cvEs,
     label: "CV",
-    value: "Descargar CV",
+    value: profile.contactCvLabel,
     kind: "cv",
     iconSrc: asset("/icons/cv-icon.svg")
   }
@@ -48,10 +48,10 @@ const contactItems = [
     <SectionHeader
       className="contact-header"
       fluid={true}
-      title="Contacto"
-      icon={asset("/icons/plane-contact.svg")}
+      title={profile.sectionTexts.contactTitle}
+      icon={asset("/icons/lucide--message-circle-more.svg")}
       variant="framed-left"
-      text="Si quieres conversar sobre proyectos, prácticas o una oportunidad junior, puedes escribirme directamente."
+      text={profile.sectionTexts.contactCopy}
     />
 
     <div class="contact-grid">
@@ -72,7 +72,7 @@ const contactItems = [
           </span>
 
           <span class="contact-card-arrow" aria-hidden="true">
-            <img class="contact-arrow-icon" src={asset("/icons/arrow-right.svg")} alt="" />
+            <img class="contact-arrow-icon" src={asset("/icons/lucide--arrow-right.svg")} alt="" />
           </span>
         </a>
       ))}
@@ -80,11 +80,11 @@ const contactItems = [
 
     <div class="contact-cta">
       <div class="contact-cta-copy">
-        <strong>¿Tienes un proyecto en mente?</strong>
-        <p>Estoy disponible para colaborar en proyectos desafiantes.</p>
+        <strong>{profile.contactCtaHeading}</strong>
+        <p>{profile.contactCtaText}</p>
       </div>
 
-      <ActionLink className="contact-cta-button" href={profile.contact.email} label="Escríbeme por correo" kind="contact" />
+      <ActionLink className="contact-cta-button" href={profile.contact.email} label={profile.contactEmailLabel} kind="contact" />
     </div>
   </div>
 </section>
