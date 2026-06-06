@@ -4,17 +4,25 @@ import { getTechMeta } from "../../content/tech";
 
 interface Props {
   item: string;
-  variant?: "main" | "knowledge" | "project";
+  variant?: "main" | "knowledge" | "project" | "hero" | "language";
 }
 
-const { item, variant = "knowledge" } = Astro.props;
+const { item, variant: propVariant = "knowledge" } = Astro.props;
 const meta = getTechMeta(item);
+const variant = meta.variant ?? propVariant;
 ---
 
-<span class:list={["tech-chip", `tech-chip-${variant}`]} title={meta.label}>
-  <span class:list={["tech-chip-icon", !meta.iconImage && "tech-chip-icon-fallback"]}>
+<span class:list={["tech-chip", `tech-chip-${variant}`]} title={meta.label} style={meta.accent ? `--chip-accent: ${meta.accent}` : undefined}>
+  <span
+    class:list={[
+      "tech-chip-icon",
+      !meta.iconImage && !meta.iconImageDark && "tech-chip-icon-fallback",
+      meta.themeAwareIcon && "tech-chip-icon--theme-aware"
+    ]}
+  >
     {meta.iconImage ? <img src={meta.iconImage} alt="" aria-hidden="true" /> : null}
-    {!meta.iconImage ? <span>{meta.shortLabel}</span> : null}
+    {meta.iconImageDark ? <img class="tech-chip-icon--dark" src={meta.iconImageDark} alt="" aria-hidden="true" /> : null}
+    {!meta.iconImage && !meta.iconImageDark ? <span>{meta.shortLabel}</span> : null}
   </span>
   <span class="tech-chip-label">{item}</span>
 </span>

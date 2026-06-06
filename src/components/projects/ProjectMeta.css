@@ -1,5 +1,13 @@
+.project-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.55rem;
+}
+
 .project-heading .project-eyebrow {
-  margin: 0 0 0.32rem;
+  margin: 0;
   color: var(--text-muted);
   font-size: 9px;
   font-weight: 700;
@@ -8,31 +16,44 @@
   text-transform: uppercase;
 }
 
+.project-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.26rem 0.5rem;
+  border: 1px solid var(--accent-soft);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--accent-soft);
+}
+
 .project-heading h3 {
-  margin: 0 0 0.35rem;
+  margin: 0.42rem 0 0.4rem;
   font-size: 1.26rem;
   font-weight: 700;
   line-height: 1.2;
 }
 
-.project-heading p {
+.project-summary {
   margin: 0;
-  color: var(--muted);
-  font-size: 0.96rem;
-  line-height: 1.6;
-}
-
-.project-role {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.93rem;
-  line-height: 1.5;
+  color: var(--text-body);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  max-width: 34ch;
 }
 
 .project-tech-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
-  margin-top: 0.35rem;
-  padding-top: 0.25rem;
+  margin-top: 0.15rem;
+}
+
+@media (max-width: 720px) {
+  .project-status {
+    font-size: 0.62rem;
+  }
 }

@@ -3,47 +3,65 @@ import "./ActionLink.css";
 import { asset } from "../../utils/assets";
 
 interface Props {
-  href: string;
+  href?: string;
   label: string;
-  kind: "projects" | "github" | "linkedin" | "cv" | "contact";
+  kind: "projects" | "github" | "linkedin" | "cv" | "contact" | "secondary";
   icon?: "leading" | "trailing";
+  hideIcon?: boolean;
   className?: string;
+  pending?: boolean;
+  title?: string;
 }
 
-const { href, label, kind, icon, className = "" } = Astro.props;
+const { href = "#", label, kind, icon, hideIcon = false, className = "", pending = false, title } = Astro.props;
 const isExternal = href.startsWith("http");
 const target = isExternal ? "_blank" : undefined;
 const rel = isExternal ? "noreferrer" : undefined;
+const tooltip = title ?? (pending ? "Próximamente" : undefined);
 
 const iconPosition = icon ?? (kind === "contact" ? "trailing" : "leading");
 
-const iconSrc = kind !== "github" && kind !== "linkedin" ? asset("/icons/arrow-right.svg") : null;
+function iconSrc(kind: string): string {
+  if (kind === "github") return asset("/icons/tech/github-icon.svg");
+  if (kind === "linkedin") return asset("/icons/tech/linkedin-original.svg");
+  return asset("/icons/lucide--arrow-right.svg");
+}
 ---
 
-<a class:list={["button", "action-link", `button-${kind}`, className]} href={href} target={target} rel={rel}>
-  {iconPosition === "leading" ? (
-    <span class="action-link__icon" aria-hidden="true">
-      {kind === "github" ? (
-        <i class="devicon-github-original" aria-hidden="true"></i>
-      ) : kind === "linkedin" ? (
-        <i class="devicon-linkedin-plain" aria-hidden="true"></i>
-      ) : (
-        <img class="action-link__icon-image action-link__icon-image--arrow" src={iconSrc} alt="" aria-hidden="true" />
-      )}
-    </span>
-  ) : null}
+{pending ? (
+  <button
+    class:list={["button", "action-link", "action-link--pending", `button-${kind}`, className]}
+    type="button"
+    aria-disabled="true"
+  >
+    {!hideIcon && iconPosition === "leading" ? (
+      <span class="action-link__icon" aria-hidden="true">
+        <img class="action-link__icon-image" src={iconSrc(kind)} alt="" aria-hidden="true" />
+      </span>
+    ) : null}
 
-  <span>{label}</span>
+    <span>{label}</span>
 
-  {iconPosition === "trailing" ? (
-    <span class="action-link__icon" aria-hidden="true">
-      {kind === "github" ? (
-        <i class="devicon-github-original" aria-hidden="true"></i>
-      ) : kind === "linkedin" ? (
-        <i class="devicon-linkedin-plain" aria-hidden="true"></i>
-      ) : (
-        <img class="action-link__icon-image action-link__icon-image--arrow" src={iconSrc} alt="" aria-hidden="true" />
-      )}
-    </span>
-  ) : null}
-</a>
+    {!hideIcon && iconPosition === "trailing" ? (
+      <span class="action-link__icon" aria-hidden="true">
+        <img class="action-link__icon-image" src={iconSrc(kind)} alt="" aria-hidden="true" />
+      </span>
+    ) : null}
+  </button>
+) : (
+  <a class:list={["button", "action-link", `button-${kind}`, className]} href={href} target={target} rel={rel} title={tooltip}>
+    {!hideIcon && iconPosition === "leading" ? (
+      <span class="action-link__icon" aria-hidden="true">
+        <img class="action-link__icon-image" src={iconSrc(kind)} alt="" aria-hidden="true" />
+      </span>
+    ) : null}
+
+    <span>{label}</span>
+
+    {!hideIcon && iconPosition === "trailing" ? (
+      <span class="action-link__icon" aria-hidden="true">
+        <img class="action-link__icon-image" src={iconSrc(kind)} alt="" aria-hidden="true" />
+      </span>
+    ) : null}
+  </a>
+)}

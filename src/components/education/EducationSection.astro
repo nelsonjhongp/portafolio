@@ -9,6 +9,9 @@ interface Props {
 }
 
 const { profile } = Astro.props;
+const degreeItems = profile.education.filter((item) => item.kind === "degree");
+const courseItems = profile.education.filter((item) => item.kind !== "degree");
+const externalLinkIcon = asset("/icons/lucide--external-link.svg");
 ---
 
 <section class="section section-education section-light" id="education">
@@ -17,33 +20,65 @@ const { profile } = Astro.props;
       className="education-header"
       fluid={true}
       title="Formación Académica"
-      icon={asset("/icons/study-icon.svg")}
+      icon={asset("/icons/lucide--graduation-cap.svg")}
       variant="framed-left"
       nowrap={true}
+      text={profile.sectionTexts.educationCopy}
     />
 
     <div class="education-layout">
-      <div class="education-grid">
-        {profile.education.map((item) => (
-          <article class="education-card">
-            <div class="education-card-logo-wrap">
-              <img src={item.image} alt={item.institution} loading="lazy" />
-            </div>
-            <div class="education-card-copy">
+      <div class="education-main-column">
+        {degreeItems.map((item) => (
+          <article class="education-degree-card">
+            <div class="education-degree-copy">
+              <p class="education-eyebrow">{profile.educationLabels.mainCareer}</p>
               <h3>{item.name}</h3>
-              <p>{item.institution}</p>
+              <p class="education-degree-institution">{item.institution}</p>
               <div class="education-card-meta">
                 {item.period ? <span class="education-card-period">{item.period}</span> : null}
                 {item.status ? <span class="education-card-status">{item.status}</span> : null}
               </div>
             </div>
+
+            <div class="education-degree-logo-wrap">
+              <img class="education-logo-light" src={item.image} alt={item.institution} loading="lazy" />
+              {item.imageDark ? (
+                <img class="education-logo-dark" src={item.imageDark} alt="" aria-hidden="true" loading="lazy" />
+              ) : null}
+            </div>
           </article>
         ))}
+
+        <div class="education-course-panel">
+          <div class="education-side-header">
+            <strong>{profile.educationLabels.complementary}</strong>
+          </div>
+
+          <div class="education-grid">
+            {courseItems.map((item) => (
+              <article class="education-card">
+                <div class="education-card-logo-wrap">
+                  <img class="education-logo-light" src={item.image} alt={item.institution} loading="lazy" />
+                  {item.imageDark ? (
+                    <img class="education-logo-dark" src={item.imageDark} alt="" aria-hidden="true" loading="lazy" />
+                  ) : null}
+                </div>
+                <div class="education-card-copy">
+                  <h3>{item.name}</h3>
+                  <p>{item.institution}</p>
+                  <div class="education-card-meta">
+                    {item.period ? <span class="education-card-period">{item.period}</span> : null}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <aside class="education-side-panel" aria-label="Certificados y constancias">
+      <aside class="education-side-panel" aria-label={profile.educationLabels.certificates}>
         <div class="education-side-header">
-          <strong>Certificados y constancias</strong>
+          <strong>{profile.educationLabels.certificates}</strong>
         </div>
 
         <div class="education-certificate-list">
@@ -55,7 +90,7 @@ const { profile } = Astro.props;
               </span>
               <span class="education-certificate-meta">
                 <span>{item.year}</span>
-                <span class="education-certificate-arrow" aria-hidden="true">↗</span>
+                <span class="education-certificate-arrow" style={`--icon-url: url('${externalLinkIcon}')`} aria-hidden="true"></span>
               </span>
             </a>
           ))}

@@ -1,9 +1,10 @@
 ---
 import "./BackToTop.css";
+import { asset } from "../../utils/assets";
 ---
 
 <button class="back-to-top" type="button" aria-label="Volver arriba">
-  ↑
+  <img src={asset("/icons/lucide--arrow-up.svg")} alt="" class="back-to-top__icon" aria-hidden="true" />
 </button>
 
 <script>

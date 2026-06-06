@@ -2,6 +2,68 @@
   margin-bottom: 1.6rem;
 }
 
+.section.section-projects.section-muted {
+  background: var(--project-section-bg);
+}
+
+.section-projects .section-title-framed-left .section-title__icon {
+  background: var(--project-section-icon);
+}
+
+.section-projects .section-title-framed-left .section-title__icon img {
+  filter: var(--project-section-icon-filter);
+}
+
+.section-projects .section-title__text {
+  color: var(--project-section-title);
+}
+
+.section-projects .section-copy {
+  color: var(--project-section-copy);
+}
+
+.projects-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 2rem;
+}
+
+.projects-action-link {
+  min-height: auto;
+  padding: 0.42rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+:root:not([data-theme="light"]) .section-knowledge .section-title-framed-left .section-title__icon,
+:root:not([data-theme="light"]) .section-education .section-title-framed-left .section-title__icon,
+:root:not([data-theme="light"]) .section-contact .section-title-framed-left .section-title__icon,
+:root:not([data-theme="light"]) .section-about .section-title-framed-left .section-title__icon {
+  background: var(--project-section-icon);
+}
+
+:root:not([data-theme="light"]) .section-knowledge .section-title-framed-left .section-title__icon img,
+:root:not([data-theme="light"]) .section-education .section-title-framed-left .section-title__icon img,
+:root:not([data-theme="light"]) .section-contact .section-title-framed-left .section-title__icon img,
+:root:not([data-theme="light"]) .section-about .section-title-framed-left .section-title__icon img {
+  filter: var(--project-section-icon-filter);
+}
+
+:root:not([data-theme="light"]) .section-knowledge .section-title__text,
+:root:not([data-theme="light"]) .section-education .section-title__text,
+:root:not([data-theme="light"]) .section-contact .section-title__text {
+  color: var(--project-section-title);
+}
+
+:root:not([data-theme="light"]) .section-knowledge .section-copy,
+:root:not([data-theme="light"]) .section-education .section-copy,
+:root:not([data-theme="light"]) .section-contact .section-copy {
+  color: var(--project-section-copy);
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -20,4 +82,16 @@
 .projects-grid-compact {
   grid-template-columns: 1fr;
   gap: 1rem;
+}
+
+@media (max-width: 720px) {
+  .projects-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .projects-action-link {
+    width: 100%;
+    justify-content: center;
+  }
 }

@@ -2,7 +2,7 @@
 import "./AboutSection.css";
 import type { Profile } from "../../types/portfolio";
 import { asset } from "../../utils/assets";
-import InlineTechBadge from "../shared/InlineTechBadge.astro";
+import SectionHeader from "../shared/SectionHeader.astro";
 
 interface Props {
   profile: Profile;
@@ -13,44 +13,33 @@ const { profile } = Astro.props;
 
 <section class="section section-about section-light" id="about">
   <div class="section-inner">
-    <div class="about-layout-enhanced">
-      <div class="about-visual-column">
-        <div class="about-profile-card" aria-hidden="true">
-          <span class="about-profile-face">
-            <img src={asset("/brand/nelson-github-profile.png")} alt="Foto de perfil de GitHub de Nelson" />
-          </span>
-        </div>
+    <SectionHeader
+      className="about-header"
+      fluid={true}
+      title={profile.sectionTexts.aboutTitle}
+      icon={asset("/icons/lucide--user.svg")}
+      variant="framed-left"
+      text={profile.aboutText}
+    />
 
-        <p class="about-profile-hint">Imagen de perfil de GitHub.</p>
+    <div class="about-layout-enhanced">
+      <div class="about-copy-column">
+        <p class="section-lead">{profile.summary}</p>
+        <p class="about-copy">{profile.aboutCallout}</p>
       </div>
 
-      <div class="about-copy-column">
-        <h2 class="about-heading">Sobre mí</h2>
-        <p class="section-lead">{profile.summary}</p>
-        <p class="about-copy">{profile.aboutText}</p>
-        <p class="about-copy">
-          He trabajado en levantamiento de requerimientos, prototipado, modelado de datos,
-          validación funcional y desarrollo de módulos con
-          <InlineTechBadge item="React" />,
-          <InlineTechBadge item="Next.js" />,
-          <InlineTechBadge item="Node.js" />,
-          <InlineTechBadge item="PostgreSQL" />,
-          <InlineTechBadge item="Python" />,
-          <InlineTechBadge item="SQLite" />
-          y
-          <InlineTechBadge item="Electron" />.
-        </p>
-
-        <div class="about-mini-links" aria-label="Enlaces de perfil">
-          <a class="about-mini-link about-mini-link-github" href={profile.contact.github} target="_blank" rel="noreferrer">
-            <i class="devicon-github-original about-mini-link-icon" aria-hidden="true"></i>
-            <span>GitHub</span>
-          </a>
-          <a class="about-mini-link about-mini-link-linkedin" href={profile.contact.linkedin} target="_blank" rel="noreferrer">
-            <i class="devicon-linkedin-plain about-mini-link-icon" aria-hidden="true"></i>
-            <span>LinkedIn</span>
-          </a>
-        </div>
+      <div class="about-workflow" aria-label="Forma de trabajo">
+        {profile.workflowSteps.map((step) => (
+          <article class="about-workflow-item">
+            <span class="about-workflow-index">
+              <img src={step.icon} alt="" aria-hidden="true" />
+            </span>
+            <div class="about-workflow-copy">
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </div>
+          </article>
+        ))}
       </div>
     </div>
   </div>

@@ -12,18 +12,33 @@ interface Props {
 const { profile } = Astro.props;
 
 const sectionIcons = {
-  title: asset("/icons/code-icon.svg"),
-  main: asset("/icons/star-icon.svg"),
-  areas: asset("/icons/menu-icon.svg")
+  title: asset("/icons/lucide--code-xml.svg"),
+  main: asset("/icons/lucide--package.svg"),
+  complement: asset("/icons/lucide--puzzle.svg")
 };
 
 const areaMeta: Record<string, { icon: string; tone: string }> = {
-  Frontend: { icon: asset("/icons/monitor-icon.svg"), tone: "frontend" },
-  Backend: { icon: asset("/icons/server-icon.svg"), tone: "backend" },
-  "Bases de datos": { icon: asset("/icons/database-icon.svg"), tone: "database" },
-  "Desktop / Local tools": { icon: asset("/icons/monitor-icon.svg"), tone: "desktop" },
-  Herramientas: { icon: asset("/icons/tools-icon.svg"), tone: "tools" }
+  Frontend: { icon: asset("/icons/lucide--monitor.svg"), tone: "projects" },
+  "Bases de datos": { icon: asset("/icons/lucide--database.svg"), tone: "skills" },
+  "Cloud y despliegue": { icon: asset("/icons/lucide--cloud.svg"), tone: "projects" },
+  "Lenguajes y frameworks": { icon: asset("/icons/lucide--layers.svg"), tone: "tools" },
+  "Capacidades aplicadas": { icon: asset("/icons/lucide--brain-circuit.svg"), tone: "skills" },
+  Herramientas: { icon: asset("/icons/lucide--wrench.svg"), tone: "tools" },
+  Idiomas: { icon: asset("/icons/lucide--languages.svg"), tone: "languages" }
 };
+
+const capacidadesGroup = profile.knowledgeAreas.find((g) => g.area === "Capacidades aplicadas");
+const idiomasGroup = profile.knowledgeAreas.find((g) => g.area === "Idiomas");
+const otherGroups = profile.knowledgeAreas.filter(
+  (g) => g.area !== "Capacidades aplicadas" && g.area !== "Idiomas"
+);
+
+const capacidadesMid = Math.ceil((capacidadesGroup?.items.length ?? 0) / 2);
+const capacidadesCol1 = capacidadesGroup?.items.slice(0, capacidadesMid) ?? [];
+const capacidadesCol2 = capacidadesGroup?.items.slice(capacidadesMid) ?? [];
+
+const complementCol1 = otherGroups.filter((_, i) => i % 2 === 0);
+const complementCol2 = otherGroups.filter((_, i) => i % 2 === 1);
 ---
 
 <section class="section section-knowledge section-muted" id="stack">
@@ -31,10 +46,10 @@ const areaMeta: Record<string, { icon: string; tone: string }> = {
     <SectionHeader
       className="knowledge-header"
       fluid={true}
-      title="Stack técnico"
+      title={profile.sectionTexts.knowledgeTitle}
       icon={sectionIcons.title}
       variant="framed-left"
-      text="Tecnologías que uso para construir aplicaciones web, backends, herramientas locales y sistemas orientados a procesos reales."
+      text={profile.sectionTexts.knowledgeCopy}
     />
 
     <div class="knowledge-main-stack" aria-label="Stack principal">
@@ -49,29 +64,78 @@ const areaMeta: Record<string, { icon: string; tone: string }> = {
       </div>
     </div>
 
-    <div class="knowledge-area-block">
-      <p class="knowledge-main-stack-label knowledge-area-label knowledge-label-with-icon">
-        <span class="knowledge-inline-icon" aria-hidden="true">
-          <img src={sectionIcons.areas} alt="" />
-        </span>
-        <span>Por área</span>
-      </p>
-    </div>
-
-    <div class="knowledge-groups" aria-label="Áreas de conocimiento">
-      {profile.knowledgeAreas.map((group) => (
-        <article class="knowledge-area-card">
+    {capacidadesGroup && idiomasGroup && (
+      <article class="knowledge-merged-block" aria-label="Capacidades aplicadas e idiomas">
+        <div class="knowledge-merged-capacidades">
           <div class="knowledge-area-heading">
-            <span class:list={["knowledge-area-icon", `knowledge-area-icon-${areaMeta[group.area]?.tone ?? "default"}`]} aria-hidden="true">
-              <img src={areaMeta[group.area]?.icon ?? sectionIcons.areas} alt="" />
+            <span class:list={["knowledge-area-icon", `knowledge-area-icon-${areaMeta[capacidadesGroup.area]?.tone ?? "default"}`]} aria-hidden="true">
+              <img src={areaMeta[capacidadesGroup.area]?.icon ?? sectionIcons.title} alt="" />
             </span>
-            <h3 class="knowledge-row-title">{group.area}</h3>
+            <h3 class="knowledge-row-title">{capacidadesGroup.area}</h3>
           </div>
-          <div class="knowledge-chip-row">
-            {group.items.map((item) => <TechChip item={item} variant="knowledge" />)}
+          <div class="knowledge-capacidades-grid">
+            <div class="knowledge-capacidades-col">
+              {capacidadesCol1.map((item) => <TechChip item={item} variant="knowledge" />)}
+            </div>
+            <div class="knowledge-capacidades-col">
+              {capacidadesCol2.map((item) => <TechChip item={item} variant="knowledge" />)}
+            </div>
           </div>
-        </article>
-      ))}
-    </div>
+        </div>
+        <div class="knowledge-merged-divider" aria-hidden="true"></div>
+        <div class="knowledge-merged-idiomas">
+          <div class="knowledge-area-heading">
+            <span class:list={["knowledge-area-icon", `knowledge-area-icon-${areaMeta[idiomasGroup.area]?.tone ?? "default"}`]} aria-hidden="true">
+              <img src={areaMeta[idiomasGroup.area]?.icon ?? sectionIcons.title} alt="" />
+            </span>
+            <h3 class="knowledge-row-title">{idiomasGroup.area}</h3>
+          </div>
+          <div class="knowledge-idiomas-list">
+            {idiomasGroup.items.map((item) => <TechChip item={item} variant="knowledge" />)}
+          </div>
+        </div>
+      </article>
+    )}
+
+    <p class="knowledge-main-stack-label knowledge-label-with-icon" style="margin-top: 1.2rem;">
+      <span class="knowledge-inline-icon" aria-hidden="true">
+        <img src={sectionIcons.complement} alt="" />
+      </span>
+      <span>Tecnologías complementarias</span>
+    </p>
+
+    <article class="knowledge-complement-panel" aria-label="Habilidades y tecnologías complementarias">
+      <div class="knowledge-complement-col">
+        {complementCol1.map((group) => (
+          <div class="knowledge-complement-section">
+            <div class="knowledge-area-heading">
+              <span class:list={["knowledge-area-icon", "knowledge-area-icon--plain", `knowledge-area-icon-${areaMeta[group.area]?.tone ?? "default"}`]} aria-hidden="true">
+                <img src={areaMeta[group.area]?.icon ?? sectionIcons.title} alt="" />
+              </span>
+              <h3 class="knowledge-row-title">{group.area}</h3>
+            </div>
+            <div class="knowledge-chip-row">
+              {group.items.map((item) => <TechChip item={item} variant="knowledge" />)}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="knowledge-merged-divider" aria-hidden="true"></div>
+      <div class="knowledge-complement-col">
+        {complementCol2.map((group) => (
+          <div class="knowledge-complement-section">
+            <div class="knowledge-area-heading">
+              <span class:list={["knowledge-area-icon", "knowledge-area-icon--plain", `knowledge-area-icon-${areaMeta[group.area]?.tone ?? "default"}`]} aria-hidden="true">
+                <img src={areaMeta[group.area]?.icon ?? sectionIcons.title} alt="" />
+              </span>
+              <h3 class="knowledge-row-title">{group.area}</h3>
+            </div>
+            <div class="knowledge-chip-row">
+              {group.items.map((item) => <TechChip item={item} variant="knowledge" />)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </article>
   </div>
 </section>

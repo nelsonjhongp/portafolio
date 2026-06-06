@@ -23,6 +23,17 @@
   transform: translateY(0);
 }
 
+.back-to-top__icon {
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: auto;
+}
+
+:root[data-theme="light"] .back-to-top__icon {
+  filter: brightness(0) invert(1);
+}
+
 .back-to-top:hover {
   background: var(--icon-strong);
 }

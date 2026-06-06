@@ -11,13 +11,14 @@ const { project } = Astro.props;
 ---
 
 <div class="project-heading">
-  {project.eyebrow ? <p class="project-eyebrow">{project.eyebrow}</p> : null}
+  <div class="project-header-row">
+    {project.eyebrow ? <p class="project-eyebrow">{project.eyebrow}</p> : null}
+    <span class="project-status">{project.status}</span>
+  </div>
   <h3>{project.name}</h3>
-  <p>{project.summary}</p>
+  <p class="project-summary">{project.summary}</p>
 </div>
 
-<p class="project-role">{project.role}</p>
-
 <div class="project-tech-row" aria-label={`Tecnologías usadas en ${project.name}`}>
-  {project.stack.map((item) => <TechChip item={item} variant="project" />)}
+  {(project.cardStack ?? project.stack).map((item) => <TechChip item={item} variant="project" />)}
 </div>

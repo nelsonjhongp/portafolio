@@ -2,36 +2,38 @@
   border: none;
 }
 
+.action-link {
+  white-space: nowrap;
+}
+
 .action-link__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.action-link__icon-image--arrow {
-  filter: brightness(0) saturate(100%) invert(100%);
-}
-
-.action-link__icon i {
-  color: inherit;
-  font-size: 0.95rem;
-}
-
 .action-link__icon-image {
   width: 0.95rem;
   height: 0.95rem;
   object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(100%);
 }
 
 .button-projects {
   color: white;
-  background: var(--accent);
-  border-color: var(--accent);
+  background: #365ddc;
+  border-color: #365ddc;
+  box-shadow: 0 12px 24px rgba(23, 37, 84, 0.16);
 }
 
 .button-projects:hover {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: #254ecf;
+  border-color: #254ecf;
+  box-shadow: 0 16px 30px rgba(23, 37, 84, 0.2);
+}
+
+.button-projects:focus-visible {
+  box-shadow: 0 0 0 3px rgba(54, 93, 220, 0.12), 0 16px 30px rgba(23, 37, 84, 0.22);
 }
 
 .button-github {
@@ -57,23 +59,83 @@
 }
 
 .button-cv {
-  color: white;
-  background: #d97706;
-  border-color: #d97706;
+  color: var(--text-strong);
+  background: rgb(var(--theme-elevated-rgb) / 0.72);
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(10px);
 }
 
 .button-cv:hover {
-  background: #b86508;
-  border-color: #b86508;
+  background: rgb(var(--theme-elevated-rgb) / 0.88);
+  border-color: var(--line-strong);
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.12);
+}
+
+.button-cv:focus-visible {
+  box-shadow: 0 0 0 3px rgb(var(--theme-elevated-rgb) / 0.22), 0 16px 30px rgba(15, 23, 42, 0.14);
 }
 
 .button-contact {
   color: white;
-  background: var(--icon-strong);
-  border-color: var(--icon-strong);
+  background: #365ddc;
+  border: 1px solid #365ddc;
+  box-shadow: 0 8px 18px rgba(23, 37, 84, 0.10);
 }
 
 .button-contact:hover {
-  background: var(--text-strong);
-  border-color: var(--text-strong);
+  background: #254ecf;
+  border-color: #254ecf;
+  box-shadow: 0 10px 22px rgba(23, 37, 84, 0.12);
+}
+
+.button-contact:focus-visible {
+  box-shadow: 0 0 0 3px rgba(54, 93, 220, 0.14), 0 10px 22px rgba(23, 37, 84, 0.14);
+}
+
+.button-secondary {
+  color: var(--text-strong);
+  background: rgb(var(--theme-elevated-rgb) / 0.68);
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.button-secondary:hover {
+  background: rgb(var(--theme-elevated-rgb) / 0.84);
+  border-color: var(--line-strong);
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.12);
+}
+
+.button-secondary:focus-visible {
+  box-shadow: 0 0 0 3px rgb(var(--theme-elevated-rgb) / 0.2), 0 16px 30px rgba(15, 23, 42, 0.14);
+}
+
+.button-secondary .action-link__icon-image {
+  filter: var(--github-icon-filter);
+}
+
+.action-link--pending {
+  cursor: help;
+}
+
+.action-link--pending:hover,
+.action-link--pending:focus-visible {
+  transform: translateY(-1px);
+}
+
+:root:not([data-theme="light"]) .button-contact {
+  color: #f7f9fc;
+  background: rgba(54, 93, 220, 0.94);
+  border-color: rgba(126, 156, 255, 0.44);
+  box-shadow: 0 16px 28px rgba(4, 8, 18, 0.32);
+}
+
+:root:not([data-theme="light"]) .button-contact:hover {
+  background: rgba(79, 116, 231, 0.98);
+  border-color: rgba(150, 181, 255, 0.54);
+}
+
+:root:not([data-theme="light"]) .button-contact:focus-visible {
+  box-shadow: 0 0 0 3px rgba(122, 162, 255, 0.2), 0 18px 32px rgba(4, 8, 18, 0.38);
 }
