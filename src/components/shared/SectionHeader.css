@@ -56,11 +56,11 @@
   --section-title-icon-size: 2.7rem;
   --section-title-icon-offset: -0.08rem;
   display: inline-grid;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: var(--section-title-gap);
   width: fit-content;
+  max-width: 100%;
   margin-bottom: 0.8rem;
   vertical-align: top;
 }

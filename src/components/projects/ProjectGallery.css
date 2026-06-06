@@ -156,3 +156,8 @@
     gap: 0.3rem;
   }
 }
+
+[data-project-id="ripnel-platform"] .project-screen-tag {
+  background: rgba(0, 0, 0, 0.58);
+  color: white;
+}

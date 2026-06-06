@@ -36,9 +36,14 @@
 }
 
 [data-project-id="ripnel-platform"] .project-status {
-  background: rgba(0, 0, 0, 0.56);
-  border-color: rgba(255, 255, 255, 0.32);
-  color: white;
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.18);
+  border-color: rgba(22, 163, 74, 0.24);
+}
+
+:root:not([data-theme="light"]) [data-project-id="ripnel-platform"] .project-status {
+  background: rgba(34, 197, 94, 0.28);
+  border-color: rgba(34, 197, 94, 0.35);
 }
 
 .project-heading h3 {
