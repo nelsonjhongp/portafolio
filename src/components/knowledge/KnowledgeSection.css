@@ -248,7 +248,7 @@
   }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 380px) {
   .knowledge-main-stack-row {
     grid-template-columns: 1fr;
   }

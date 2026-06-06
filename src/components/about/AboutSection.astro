@@ -24,8 +24,8 @@ const { profile } = Astro.props;
 
     <div class="about-layout-enhanced">
       <div class="about-copy-column">
-        <p class="section-lead">{profile.summary}</p>
-        <p class="about-copy">{profile.aboutCallout}</p>
+        <p class="section-lead" set:html={profile.summary} />
+        <p class="about-copy" set:html={profile.aboutCallout} />
       </div>
 
       <div class="about-workflow" aria-label="Forma de trabajo">

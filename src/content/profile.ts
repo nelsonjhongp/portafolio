@@ -7,7 +7,7 @@ export const profile: Profile = {
   subtitle:
     "Construyo aplicaciones web y herramientas locales para ordenar información, automatizar tareas administrativas y apoyar operaciones con interfaces claras y bases de datos relacionales.",
   summary:
-    "Soy estudiante de décimo ciclo de Ingeniería de Software, con enfoque en aplicaciones web, bases de datos, interfaces administrativas y herramientas orientadas a operaciones reales.",
+    "Soy estudiante de décimo ciclo de Ingeniería de Software, con enfoque en <strong>aplicaciones web</strong>, <strong>bases de datos</strong>, <strong>interfaces administrativas</strong> y herramientas orientadas a operaciones reales.",
   aboutText:
     "Me interesa construir software cerca del problema: entender el flujo operativo, ordenar requerimientos, modelar información y validar reglas de negocio antes de desarrollar.",
   mainStack: ["TypeScript", "React", "Next.js", "Node.js", "PostgreSQL"],
@@ -145,7 +145,7 @@ export const profile: Profile = {
       "Base universitaria en Ingeniería de Software y formación complementaria enfocada en JavaScript y PostgreSQL."
   },
   aboutCallout:
-    "Actualmente busco prácticas preprofesionales u oportunidades junior donde pueda aportar en desarrollo web, lógica de negocio, modelado de datos y soporte a procesos administrativos.",
+    "Actualmente busco <strong>prácticas preprofesionales</strong> u oportunidades junior donde pueda aportar en <strong>desarrollo web</strong>, <strong>lógica de negocio</strong>, <strong>modelado de datos</strong> y soporte a procesos administrativos.",
   contactEmailLabel: "Escríbeme por correo",
   contactCvLabel: "Descargar CV",
   contactCtaHeading: "Disponible para prácticas y oportunidades junior",
