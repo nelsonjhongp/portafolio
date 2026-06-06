@@ -13,7 +13,7 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-<article class="project-card" id={project.id}>
+<article class="project-card" id={project.id} data-project-id={project.id}>
   <ProjectGallery project={project} />
 
   <div class="project-body">

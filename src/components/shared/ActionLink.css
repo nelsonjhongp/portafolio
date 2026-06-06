@@ -59,21 +59,20 @@
 }
 
 .button-cv {
-  color: var(--text-strong);
-  background: rgb(var(--theme-elevated-rgb) / 0.72);
-  border: 1px solid var(--panel-border);
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
-  backdrop-filter: blur(10px);
+  color: white;
+  background: #d97706;
+  border-color: #d97706;
+  box-shadow: 0 12px 24px rgba(217, 119, 6, 0.24);
 }
 
 .button-cv:hover {
-  background: rgb(var(--theme-elevated-rgb) / 0.88);
-  border-color: var(--line-strong);
-  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.12);
+  background: #b66004;
+  border-color: #b66004;
+  box-shadow: 0 16px 30px rgba(217, 119, 6, 0.32);
 }
 
 .button-cv:focus-visible {
-  box-shadow: 0 0 0 3px rgb(var(--theme-elevated-rgb) / 0.22), 0 16px 30px rgba(15, 23, 42, 0.14);
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.32), 0 16px 30px rgba(217, 119, 6, 0.32);
 }
 
 .button-contact {
