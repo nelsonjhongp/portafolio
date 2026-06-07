@@ -44,10 +44,6 @@ export const profile: Profile = {
       ]
     },
     {
-      area: "Herramientas",
-      items: ["Git", "GitHub", "Jira", "Confluence", "Office"]
-    },
-    {
       area: "Idiomas",
       items: ["Español nativo", "Inglés técnico: lectura y comprensión"]
     }

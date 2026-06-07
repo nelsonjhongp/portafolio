@@ -36,10 +36,6 @@ export const techIconMap: Record<string, TechMeta> = {
     iconImage: asset("/icons/tech/nodejs-original.svg"),
     label: "Node.js"
   },
-  Express: {
-    iconImage: asset("/icons/tech/express-original.svg"),
-    label: "Express"
-  },
   Astro: {
     iconImage: asset("/icons/tech/Astro_dark.svg"),
     iconImageDark: asset("/icons/tech/Astro_light.svg"),
@@ -77,6 +73,15 @@ export const techIconMap: Record<string, TechMeta> = {
   Python: {
     iconImage: asset("/icons/tech/python-original.svg"),
     label: "Python"
+  },
+  PySide6: {
+    iconImage: asset("/icons/tech/python-plain.svg"),
+    shortLabel: "QT6",
+    label: "PySide6"
+  },
+  FFmpeg: {
+    iconImage: asset("/icons/tech/ffmpeg-icon.svg"),
+    label: "FFmpeg"
   },
   Java: {
     iconImage: asset("/icons/tech/java-original.svg"),

@@ -116,7 +116,7 @@ export const projects: Project[] = [
     status: "Herramienta local",
     featured: true,
     links: [
-      { label: "Ver repositorio", href: "https://github.com/nelsonjhongp", kind: "repo" },
+      { label: "Ver repositorio", href: "https://github.com/nelsonjhongp/metrion-app", kind: "repo" },
       { label: "Ver releases", href: "https://github.com/nelsonjhongp/metrion-app/releases", kind: "release" }
     ]
   },
@@ -136,7 +136,8 @@ export const projects: Project[] = [
       "Procesamiento por lotes y guardado de resultados",
       "Integración con procesamiento multimedia local"
     ],
-    stack: ["Python"],
+    stack: ["Python", "PySide6", "FFmpeg"],
+    cardStack: ["Python", "PySide6"],
     image: asset("/projects/01-njgktranscriber-inicio.webp"),
     screens: [
       {
