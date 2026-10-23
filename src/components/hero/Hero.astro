@@ -10,6 +10,7 @@ interface Props {
 }
 
 const { profile } = Astro.props;
+const [roleLabel, roleFocus] = profile.title.split(" · ");
 const heroPortrait = asset("/brand/nelson-linkedin-profile-hero.webp");
 const heroBackgroundLight = asset("/brand/portafolio-njgk-hero-background.webp");
 const heroBackgroundDark = asset("/brand/portafolio-njgk-hero-background-dark.webp");
@@ -35,8 +36,8 @@ const emailIcon = asset("/icons/lucide--mail.svg");
       </div>
 
       <p class="hero-role">
-        <span class="hero-role-accent">Desarrollador full stack</span>
-        <span class="hero-role-rest"> · sistemas para operaciones reales</span>
+        <span class="hero-role-accent">{roleLabel}</span>
+        {roleFocus && <span class="hero-role-rest"> · {roleFocus}</span>}
       </p>
 
       <p class="hero-summary">
