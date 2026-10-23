@@ -1,4 +1,5 @@
 .project-card {
+  scroll-margin-top: 5rem;
   display: grid;
   grid-template-columns: 11fr 9fr;
   background: var(--surface);
