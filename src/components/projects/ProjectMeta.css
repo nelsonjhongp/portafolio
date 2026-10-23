@@ -73,3 +73,8 @@
     font-size: 0.62rem;
   }
 }
+
+[data-project-id="ripnel-platform"] .project-eyebrow { font-size:.75rem; letter-spacing:.06em; }
+[data-project-id="ripnel-platform"] .project-status { color:var(--accent-strong); background:var(--accent-soft); border-color:var(--line-strong); font-size:.8rem; text-transform:none; letter-spacing:0; }
+[data-project-id="ripnel-platform"] .project-summary { font-size:1rem; max-width:42ch; }
+[data-project-id="ripnel-platform"] h3 { font-size:1.5rem; }

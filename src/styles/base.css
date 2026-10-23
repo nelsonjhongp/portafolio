@@ -33,3 +33,21 @@ h3,
 .site-nav nav a {
   font-family: "Source Sans 3", sans-serif;
 }
+
+[hidden] { display:none !important; }
+body { font-size:16px; }
+:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+.skip-link { position:fixed; top:-10rem; left:1rem; z-index:100; padding:.8rem; background:var(--bg); border:2px solid var(--accent); }
+.skip-link:focus { top:1rem; }
+.project-private-code { color:var(--text-muted); font-size:.85rem; }
+.drawer-close { position:absolute; top:1.5rem; right:1rem; min-height:44px; background:var(--surface); color:var(--ink); border:1px solid var(--line); border-radius:4px; padding:.5rem; cursor:pointer; }
+.site-theme-toggle { min-width:44px; min-height:44px; }
+.site-nav-toggle { min-width:44px; min-height:44px; }
+@media(max-width:720px) {
+  html:not(.nav-enhanced) .site-nav-links { display:flex; font-size:.8rem; gap:.5rem; }
+  html:not(.nav-enhanced) .site-nav { position:static; background:var(--nav-bg); }
+}
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+  html { scroll-behavior:auto; }
+}

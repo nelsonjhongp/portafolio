@@ -3,9 +3,9 @@ import { asset } from "../utils/assets";
 
 export const profile: Profile = {
   name: "Nelson Jhon Gil Pari",
-  title: "Desarrollador de software orientado a sistemas internos y datos",
+  title: "Desarrollador full stack · sistemas para operaciones reales",
   subtitle:
-    "Construyo aplicaciones web y herramientas locales para ordenar información, automatizar tareas administrativas y apoyar operaciones con interfaces claras y bases de datos relacionales.",
+    "Desarrollo productos completos: desde el flujo del usuario y el modelo de datos hasta la interfaz, la API y su puesta en operación.",
   summary:
     "Soy estudiante de décimo ciclo de Ingeniería de Software, con enfoque en <strong>aplicaciones web</strong>, <strong>bases de datos</strong>, <strong>interfaces administrativas</strong> y herramientas orientadas a operaciones reales.",
   aboutText:
@@ -112,20 +112,7 @@ export const profile: Profile = {
     { label: "GitHub", href: "https://github.com/nelsonjhongp", kind: "github" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/nelsonjhongp/", kind: "linkedin" }
   ],
-  projectCtas: [
-    {
-      label: "Ver más proyectos",
-      kind: "projects",
-      pending: true,
-      title: "Próximamente"
-    },
-    {
-      label: "Más sobre mí",
-      kind: "secondary",
-      pending: true,
-      title: "Próximamente"
-    }
-  ],
+  projectCtas: [{ label: "Más sobre mí", href: "#about", kind: "secondary" }],
   sectionTexts: {
     projectsTitle: "Proyectos destacados",
     projectsCopy:
