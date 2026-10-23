@@ -2,39 +2,91 @@
 import { Image } from "astro:assets";
 import "./ProjectGallery.css";
 import type { Project } from "../../types/portfolio";
+
 interface Props { project: Project }
 const { project } = Astro.props;
-const screens = project.screens?.length ? project.screens : [{ src: project.image, alt: `Vista previa de ${project.name}`, label: "Vista general" }];
+const screens = project.screens?.length
+  ? project.screens
+  : [{ src: project.image, alt: `Vista previa de ${project.name}`, label: "Vista general" }];
 ---
+
 <div class="project-visual-shell" role="group" data-project-gallery aria-label={`Capturas de ${project.name}`}>
-  <div class="project-visual">
+  <div class="project-visual" data-gallery-viewport>
     {screens.map((screen, index) => (
-      <div class="project-screen" data-project-screen hidden={index !== 0} data-screen-label={screen.label}>
-        {typeof screen.src === "string" ? <img src={screen.src} alt={screen.alt} loading="lazy" /> :
-          <Image src={screen.src} alt={screen.alt} widths={[480, 960]} sizes="(max-width: 760px) 100vw, 560px" format="webp" quality={80} loading="lazy" />}
+      <div class="project-screen" id={`${project.id}-screen-${index + 1}`} data-project-screen hidden={index !== 0} data-screen-label={screen.label}>
+        {typeof screen.src === "string" ? (
+          <img src={screen.src} alt={screen.alt} loading="lazy" draggable="false" />
+        ) : (
+          <Image src={screen.src} alt={screen.alt} widths={[480, 960]} sizes="(max-width: 720px) calc(100vw - 2rem), (max-width: 1152px) 55vw, 616px" format="webp" quality={80} loading="lazy" draggable="false" />
+        )}
       </div>
     ))}
   </div>
-  {screens.length > 1 && <div class="project-gallery-controls" hidden data-gallery-controls>
-    <button type="button" data-gallery-prev aria-label={`Captura anterior de ${project.name}`}>←</button>
-    <span data-gallery-label aria-live="polite">1 / {screens.length} · {screens[0].label}</span>
-    <button type="button" data-gallery-next aria-label={`Captura siguiente de ${project.name}`}>→</button>
-  </div>}
+  {screens.length > 1 && (
+    <>
+      <div class:list={["project-carousel-dots", `project-carousel-dots-${project.dotTone ?? "dark"}`]} hidden data-gallery-controls aria-label={`Elegir captura de ${project.name}`}>
+        {screens.map((screen, index) => (
+          <button
+            class="project-carousel-dot"
+            type="button"
+            data-project-dot
+            aria-label={`Mostrar ${screen.label} de ${project.name}`}
+            aria-controls={`${project.id}-screen-${index + 1}`}
+            aria-pressed={index === 0 ? "true" : "false"}
+          />
+        ))}
+      </div>
+      <span class="project-gallery-status" data-gallery-label aria-live="polite" aria-atomic="true">{screens[0].label}</span>
+    </>
+  )}
 </div>
+
 <script>
   document.querySelectorAll<HTMLElement>("[data-project-gallery]").forEach(gallery => {
     const screens = Array.from(gallery.querySelectorAll<HTMLElement>("[data-project-screen]"));
+    const dots = Array.from(gallery.querySelectorAll<HTMLButtonElement>("[data-project-dot]"));
     const controls = gallery.querySelector<HTMLElement>("[data-gallery-controls]");
+    const viewport = gallery.querySelector<HTMLElement>("[data-gallery-viewport]");
     const label = gallery.querySelector<HTMLElement>("[data-gallery-label]");
-    if (screens.length < 2 || !controls || !label) return;
+    if (screens.length < 2 || !controls || !viewport || !label) return;
     controls.hidden = false;
     let index = 0;
+
     const show = (next: number) => {
       index = (next + screens.length) % screens.length;
       screens.forEach((screen, i) => screen.hidden = i !== index);
-      label.textContent = `${index + 1} / ${screens.length} · ${screens[index].dataset.screenLabel}`;
+      dots.forEach((dot, i) => dot.setAttribute("aria-pressed", String(i === index)));
+      label.textContent = screens[index].dataset.screenLabel ?? "";
     };
-    gallery.querySelector("[data-gallery-prev]")?.addEventListener("click", () => show(index - 1));
-    gallery.querySelector("[data-gallery-next]")?.addEventListener("click", () => show(index + 1));
+
+    dots.forEach((dot, i) => dot.addEventListener("click", () => show(i)));
+    controls.addEventListener("keydown", event => {
+      const offsets: Record<string, number> = { ArrowLeft: index - 1, ArrowRight: index + 1, Home: 0, End: screens.length - 1 };
+      if (!(event.key in offsets)) return;
+      event.preventDefault();
+      show(offsets[event.key]);
+      dots[index].focus();
+    });
+
+    let touchStart: { id: number; x: number; y: number } | undefined;
+    viewport.addEventListener("touchstart", event => {
+      const touch = event.touches[0];
+      touchStart = event.touches.length === 1 && touch
+        ? { id: touch.identifier, x: touch.clientX, y: touch.clientY }
+        : undefined;
+    }, { passive: true });
+    viewport.addEventListener("touchend", event => {
+      const start = touchStart;
+      touchStart = undefined;
+      if (!start) return;
+      const touch = Array.from(event.changedTouches).find(item => item.identifier === start.id);
+      if (!touch) return;
+      const dx = touch.clientX - start.x;
+      const dy = touch.clientY - start.y;
+      if (Math.abs(dx) >= 48 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+        show(index + (dx < 0 ? 1 : -1));
+      }
+    }, { passive: true });
+    viewport.addEventListener("touchcancel", () => { touchStart = undefined; }, { passive: true });
   });
 </script>

@@ -40,7 +40,9 @@ El workflow conserva publicación automática para pushes a `main` y ejecución 
 sobre `main`; integrar un PR sí publicará, por lo que requiere revisión previa.
 `check:dist` requiere un build con base `/portafolio/` y no comprueba destinos externos.
 
-La galería es manual. El contenido y los enlaces de las capturas funcionan sin JS;
+La galería es manual, con puntos y deslizamiento móvil. Las tarjetas usan un marco
+16:10 con recorte superior; el caso dedicado conserva las imágenes completas.
+El contenido y los enlaces de las capturas funcionan sin JS;
 con JS se habilitan tema, menú móvil y ampliación en dialog. No hay acceso de DEMO
 público ni se exponen credenciales del ERP.
 ## Pendiente técnico previo a publicación
