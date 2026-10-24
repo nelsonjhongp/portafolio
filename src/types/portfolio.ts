@@ -1,3 +1,5 @@
+import type { ImageMetadata } from "astro";
+
 export interface ProjectLink {
   label: string;
   href: string;
@@ -5,7 +7,7 @@ export interface ProjectLink {
 }
 
 export interface ProjectScreen {
-  src: string;
+  src: string | ImageMetadata;
   alt: string;
   label: string;
 }
@@ -20,7 +22,9 @@ export interface Project {
   responsibilities: string[];
   stack: string[];
   cardStack?: string[];
-  image: string;
+  image: string | ImageMetadata;
+  caseStudyHref?: string;
+  privateCode?: boolean;
   screens?: ProjectScreen[];
   dotTone?: "dark" | "light";
   status: string;

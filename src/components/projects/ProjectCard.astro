@@ -18,7 +18,7 @@ const { project } = Astro.props;
 
   <div class="project-body">
     <ProjectMeta project={project} />
-    <ProjectLinks projectName={project.name} links={project.links} modalDialogId={`project-modal-${project.id}`} />
-    <ProjectModal project={project} />
+    <ProjectLinks projectName={project.name} links={project.links} caseStudyHref={project.caseStudyHref} privateCode={project.privateCode} modalDialogId={project.caseStudyHref ? undefined : `project-modal-${project.id}`} />
+    {!project.caseStudyHref && <ProjectModal project={project} />}
   </div>
 </article>

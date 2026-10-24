@@ -1,13 +1,16 @@
 import type { Profile } from "../types/portfolio";
 import { asset } from "../utils/assets";
 
+const introduction =
+  "Desarrollo aplicaciones web y herramientas de escritorio, con atención a las interfaces y los datos.";
+const firstOpportunity = "Busco mi primera oportunidad profesional en desarrollo de software";
+
 export const profile: Profile = {
   name: "Nelson Jhon Gil Pari",
-  title: "Desarrollador de software orientado a sistemas internos y datos",
-  subtitle:
-    "Construyo aplicaciones web y herramientas locales para ordenar información, automatizar tareas administrativas y apoyar operaciones con interfaces claras y bases de datos relacionales.",
+  title: "Desarrollador de software · enfoque full stack",
+  subtitle: introduction,
   summary:
-    "Soy estudiante de décimo ciclo de Ingeniería de Software, con enfoque en <strong>aplicaciones web</strong>, <strong>bases de datos</strong>, <strong>interfaces administrativas</strong> y herramientas orientadas a operaciones reales.",
+    "Soy bachiller en Ingeniería de Software y desarrollo proyectos propios para aplicar <strong>interfaces web</strong>, <strong>lógica de negocio</strong> y <strong>modelado de datos</strong>.",
   aboutText:
     "Me interesa construir software cerca del problema: entender el flujo operativo, ordenar requerimientos, modelar información y validar reglas de negocio antes de desarrollar.",
   mainStack: ["TypeScript", "React", "Next.js", "Node.js", "PostgreSQL"],
@@ -52,9 +55,9 @@ export const profile: Profile = {
     {
       name: "Ingeniería de Software",
       institution: "Universidad Tecnológica del Perú",
-      period: "Mar 2021 - Actualidad",
+      period: "",
       kind: "degree",
-      status: "10mo ciclo",
+      status: "Bachiller",
       image: asset("/logos/utp-logo.png"),
       imageDark: asset("/logos/utp-logo-dark.png")
     },
@@ -112,39 +115,24 @@ export const profile: Profile = {
     { label: "GitHub", href: "https://github.com/nelsonjhongp", kind: "github" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/nelsonjhongp/", kind: "linkedin" }
   ],
-  projectCtas: [
-    {
-      label: "Ver más proyectos",
-      kind: "projects",
-      pending: true,
-      title: "Próximamente"
-    },
-    {
-      label: "Más sobre mí",
-      kind: "secondary",
-      pending: true,
-      title: "Próximamente"
-    }
-  ],
+  projectCtas: [{ label: "Más sobre mí", href: "#about", kind: "secondary" }],
   sectionTexts: {
     projectsTitle: "Proyectos destacados",
     projectsCopy:
-      "Proyectos que demuestran mi capacidad para convertir procesos reales en sistemas web, herramientas administrativas y aplicaciones orientadas a datos.",
+      "Proyectos propios en los que aplico desarrollo web, bases de datos y diseño de interfaces para resolver problemas concretos.",
     knowledgeTitle: "Habilidades y tecnologías",
     knowledgeCopy:
-      "Tecnologías y capacidades que aplico para construir aplicaciones web, trabajar con bases de datos y ordenar procesos administrativos reales.",
+      "Tecnologías y capacidades que aplico en mis proyectos para construir aplicaciones web, trabajar con bases de datos y desarrollar herramientas administrativas.",
     aboutTitle: "Sobre mí",
     contactTitle: "Contacto",
-    contactCopy:
-      "Disponible para prácticas preprofesionales y oportunidades junior en desarrollo web, bases de datos y sistemas administrativos.",
+    contactCopy: `${firstOpportunity}.`,
     educationCopy:
-      "Base universitaria en Ingeniería de Software y formación complementaria enfocada en JavaScript y PostgreSQL."
+      "Grado de bachiller en Ingeniería de Software y formación complementaria enfocada en JavaScript y PostgreSQL."
   },
-  aboutCallout:
-    "Actualmente busco <strong>prácticas preprofesionales</strong> u oportunidades junior donde pueda aportar en <strong>desarrollo web</strong>, <strong>lógica de negocio</strong>, <strong>modelado de datos</strong> y soporte a procesos administrativos.",
+  aboutCallout: `${firstOpportunity}.`,
   contactEmailLabel: "Escríbeme por correo",
   contactCvLabel: "Descargar CV",
-  contactCtaHeading: "Disponible para prácticas y oportunidades junior",
+  contactCtaHeading: firstOpportunity,
   contactCtaText:
     "Escríbeme para conversar sobre cómo puedo aportar a tu equipo.",
   workflowSteps: [
@@ -160,7 +148,7 @@ export const profile: Profile = {
     },
     {
       title: "Construyo y valido",
-      description: "Desarrollo interfaces y módulos revisando que el flujo funcione para usuarios reales.",
+      description: "Desarrollo interfaces y módulos, y reviso sus recorridos y validaciones en mis proyectos.",
       icon: asset("/icons/lucide--list-check.svg")
     }
   ],

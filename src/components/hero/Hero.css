@@ -64,6 +64,7 @@
 
 .hero-role {
   max-width: 30rem;
+  text-wrap: balance;
   margin: 1.35rem 0 0;
   font-size: clamp(1.3rem, 2vw, 1.8rem);
   font-weight: 700;

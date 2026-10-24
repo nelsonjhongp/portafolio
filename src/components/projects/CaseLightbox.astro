@@ -1,0 +1,41 @@
+<dialog class="case-lightbox" aria-labelledby="lightbox-title" data-case-lightbox>
+  <div class="lightbox-toolbar">
+    <h2 id="lightbox-title">Captura de RIPNEL</h2>
+    <button type="button" data-lightbox-close autofocus>Cerrar ×</button>
+  </div>
+  <img data-lightbox-image alt="" />
+  <div class="lightbox-toolbar">
+    <button type="button" data-lightbox-prev aria-label="Captura anterior">← Anterior</button>
+    <a data-lightbox-original target="_blank" rel="noreferrer">Abrir imagen ↗</a>
+    <button type="button" data-lightbox-next aria-label="Captura siguiente">Siguiente →</button>
+  </div>
+</dialog>
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>("[data-case-lightbox]");
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-case-image]"));
+  const image = dialog?.querySelector<HTMLImageElement>("[data-lightbox-image]");
+  const title = dialog?.querySelector<HTMLElement>("#lightbox-title");
+  const original = dialog?.querySelector<HTMLAnchorElement>("[data-lightbox-original]");
+  if (dialog && image && title && original) {
+    let index = 0, opener: HTMLAnchorElement | undefined;
+    const show = (next: number) => {
+      index = (next + links.length) % links.length;
+      image.src = links[index].href;
+      image.alt = links[index].querySelector("img")?.alt ?? "Captura de RIPNEL";
+      title.textContent = `${index + 1} / ${links.length} · ${links[index].dataset.caption}`;
+      original.href = links[index].href;
+    };
+    links.forEach((link, i) => link.addEventListener("click", event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault(); opener = link; show(i); dialog.showModal();
+      document.documentElement.style.overflow = "hidden";
+    }));
+    dialog.querySelector("[data-lightbox-close]")?.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("close", () => { document.documentElement.style.overflow = ""; opener?.focus(); });
+    dialog.querySelector("[data-lightbox-prev]")?.addEventListener("click", () => show(index - 1));
+    dialog.querySelector("[data-lightbox-next]")?.addEventListener("click", () => show(index + 1));
+    dialog.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") { event.preventDefault(); show(index + (event.key === "ArrowRight" ? 1 : -1)); }
+    });
+  }
+</script>

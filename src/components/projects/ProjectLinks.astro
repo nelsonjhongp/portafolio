@@ -7,15 +7,19 @@ interface Props {
   projectName: string;
   links: ProjectLink[];
   modalDialogId?: string;
+  caseStudyHref?: string;
+  privateCode?: boolean;
 }
 
-const { projectName, links, modalDialogId } = Astro.props;
+const { projectName, links, modalDialogId, caseStudyHref, privateCode } = Astro.props;
 const arrowIcon = asset("/icons/lucide--arrow-right.svg");
 const githubIcon = asset("/icons/tech/github-mark.svg");
 const downloadIcon = asset("/icons/lucide--download.svg");
 ---
 
 <div class="project-links" aria-label={`Enlaces de ${projectName}`}>
+  {caseStudyHref && <a class="project-link project-link-arrow" href={caseStudyHref}>Ver caso completo <span aria-hidden="true">→</span></a>}
+  {privateCode && <span class="project-private-code">Código privado</span>}
   {modalDialogId ? (
     <button
       class="project-link project-link-arrow project-link-button"

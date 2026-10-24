@@ -1,67 +1,9 @@
 import type { Project } from "../types/portfolio";
 import { asset } from "../utils/assets";
+import { ripnelProject } from "./ripnel";
 
 export const projects: Project[] = [
-  {
-    id: "ripnel-platform",
-    name: "RIPNEL Platform",
-    eyebrow: "Plataforma web",
-    summary:
-      "Sistema web tipo ERP para una empresa textil multi-sede, orientado a inventario por ubicación, ventas, precios, transferencias internas y control administrativo modular.",
-    problem:
-      "Negocios con operaciones textiles necesitan controlar inventario, ventas, precios y transferencias internas entre sedes sin depender de procesos manuales dispersos.",
-    solution:
-      "Sistema web pensado para ordenar procesos administrativos, centralizar información operativa y crecer por módulos según las necesidades del negocio.",
-    responsibilities: [
-      "Levantamiento de requerimientos con usuarios reales",
-      "Prototipado funcional en Figma",
-      "Modelado de base de datos relacional",
-      "Planificación del proyecto con Scrum, sprints y Jira",
-      "Desarrollo de módulos de inventario, ventas y transferencias",
-      "Validación funcional de flujos administrativos"
-    ],
-    stack: ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL", "Supabase", "Render", "Vercel"],
-    cardStack: ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL"],
-    image: asset("/projects/ripnel-3-dashboard.webp"),
-    screens: [
-      {
-        src: asset("/projects/ripnel-1-login.webp"),
-        alt: "Pantalla de acceso al sistema RIPNEL Platform.",
-        label: "Login"
-      },
-      {
-        src: asset("/projects/ripnel-2-inicio.webp"),
-        alt: "Pantalla de inicio del ERP RIPNEL Platform.",
-        label: "Inicio"
-      },
-      {
-        src: asset("/projects/ripnel-3-dashboard.webp"),
-        alt: "Vista principal del dashboard de RIPNEL Platform.",
-        label: "Dashboard"
-      },
-      {
-        src: asset("/projects/ripnel-4-venta.webp"),
-        alt: "Flujo de ventas dentro de RIPNEL Platform.",
-        label: "Ventas"
-      },
-      {
-        src: asset("/projects/ripnel-5-caja.webp"),
-        alt: "Módulo de caja de RIPNEL Platform.",
-        label: "Caja"
-      },
-      {
-        src: asset("/projects/ripnel-6-trasnferencia.webp"),
-        alt: "Vista de transferencias internas en RIPNEL Platform.",
-        label: "Transferencias"
-      }
-    ],
-    dotTone: "dark",
-    status: "Implementación real",
-    featured: true,
-    links: [
-      { label: "Ver repositorio", href: "https://github.com/nelsonjhongp/ripnel-platform", kind: "repo" }
-    ]
-  },
+  ripnelProject,
   {
     id: "metrion",
     name: "Metrion",
