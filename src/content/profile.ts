@@ -2,7 +2,7 @@ import type { Profile } from "../types/portfolio";
 import { asset } from "../utils/assets";
 
 const introduction =
-  "Soy bachiller en Ingeniería de Software. En mis proyectos propios desarrollo interfaces, APIs y bases de datos con React, Node.js y PostgreSQL. RIPNEL es mi proyecto principal: un ERP textil que integra inventario, ventas y caja.";
+  "Desarrollo aplicaciones web y herramientas de escritorio, con atención a las interfaces y los datos.";
 const firstOpportunity = "Busco mi primera oportunidad profesional en desarrollo de software";
 
 export const profile: Profile = {

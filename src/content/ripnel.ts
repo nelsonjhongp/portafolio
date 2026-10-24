@@ -23,7 +23,7 @@ export const ripnelProject: Project = {
   id: "ripnel-platform",
   name: "RIPNEL Platform",
   eyebrow: "Producto completo · ERP textil",
-  summary: "Diseñé y desarrollé un ERP para conectar inventario por ubicación, ventas, caja y transferencias de un negocio textil. Del modelo de datos a la interfaz y al proceso de releases.",
+  summary: "ERP textil para gestionar inventario por ubicación, ventas, caja y transferencias. Desarrollado con Next.js, Express y PostgreSQL.",
   problem: "Coordinar productos, stock y ventas entre ubicaciones sin perder las reglas de cada operación.",
   solution: "Un ERP con interfaz operativa, API con autorización y transacciones, y releases separados por destino.",
   responsibilities: ["Requerimientos y diseño de flujos", "Frontend y API", "Modelo relacional y transacciones", "Pruebas, CI y preparación de releases"],
