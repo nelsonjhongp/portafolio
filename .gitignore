@@ -4,3 +4,5 @@ dist/
 .DS_Store
 *.log
 content-review.md
+output/
+.playwright-cli/

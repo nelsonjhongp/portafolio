@@ -6,14 +6,16 @@ import "../styles/layout.css";
 interface Props {
   title: string;
   description: string;
+  ogImage?: string;
+  ogAlt?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogImage = "og/portfolio-og.png", ogAlt = "Portafolio de Nelson Jhon Gil Pari" } = Astro.props;
 const site = Astro.site ?? new URL("https://nelsonjhongp.github.io");
 const deployedBaseUrl = import.meta.env.BASE_URL === "/" ? "/portafolio/" : import.meta.env.BASE_URL;
 const canonicalPath = Astro.url.pathname === "/" ? deployedBaseUrl : Astro.url.pathname;
 const canonical = new URL(canonicalPath, site).toString();
-const image = new URL(`${deployedBaseUrl}og/portfolio-og.png`, site).toString();
+const image = new URL(`${deployedBaseUrl}${ogImage}`, site).toString();
 const baseUrl = import.meta.env.BASE_URL;
 const favicon = `${baseUrl}brand/nj-icon.png`;
 ---
@@ -34,7 +36,7 @@ const favicon = `${baseUrl}brand/nj-icon.png`;
     <meta property="og:site_name" content="Nelson Jhon Gil Pari" />
     <meta property="og:image" content={image} />
     <meta property="og:image:secure_url" content={image} />
-    <meta property="og:image:alt" content="Vista previa del portafolio de Nelson Jhon Gil Pari" />
+    <meta property="og:image:alt" content={ogAlt} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/png" />
@@ -44,11 +46,12 @@ const favicon = `${baseUrl}brand/nj-icon.png`;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:url" content={canonical} />
     <meta name="twitter:image" content={image} />
-    <meta name="twitter:image:alt" content="Vista previa del portafolio de Nelson Jhon Gil Pari" />
+    <meta name="twitter:image:alt" content={ogAlt} />
     <script is:inline>
       (() => {
         const storageKey = "nejigiku-theme";
-        const storedTheme = window.localStorage.getItem(storageKey);
+        let storedTheme;
+        try { storedTheme = window.localStorage.getItem(storageKey); } catch { /* Storage is optional. */ }
         const theme = storedTheme === "light" || storedTheme === "dark" ? storedTheme : "dark";
         const root = document.documentElement;
         root.dataset.theme = theme;
@@ -62,6 +65,7 @@ const favicon = `${baseUrl}brand/nj-icon.png`;
     </script>
   </head>
   <body data-app-shell>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
     <slot />
   </body>
 </html>

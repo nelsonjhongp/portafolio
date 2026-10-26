@@ -9,7 +9,7 @@
 .project-heading .project-eyebrow {
   margin: 0;
   color: var(--text-muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.18em;
@@ -23,7 +23,7 @@
   border: 1px solid var(--accent-soft);
   border-radius: 999px;
   color: var(--accent);
-  font-size: 0.66rem;
+  font-size: var(--type-meta);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -35,20 +35,9 @@
   border-color: rgba(122, 162, 255, 0.35);
 }
 
-[data-project-id="ripnel-platform"] .project-status {
-  color: #16a34a;
-  background: rgba(22, 163, 74, 0.18);
-  border-color: rgba(22, 163, 74, 0.24);
-}
-
-:root:not([data-theme="light"]) [data-project-id="ripnel-platform"] .project-status {
-  background: rgba(34, 197, 94, 0.28);
-  border-color: rgba(34, 197, 94, 0.35);
-}
-
 .project-heading h3 {
   margin: 0.42rem 0 0.4rem;
-  font-size: 1.26rem;
+  font-size: var(--type-card-title);
   font-weight: 700;
   line-height: 1.2;
 }
@@ -56,9 +45,10 @@
 .project-summary {
   margin: 0;
   color: var(--text-body);
-  font-size: 0.9rem;
-  line-height: 1.55;
-  max-width: 34ch;
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
+  max-width: none;
+  text-align: left;
 }
 
 .project-tech-row {
@@ -70,6 +60,9 @@
 
 @media (max-width: 720px) {
   .project-status {
-    font-size: 0.62rem;
+    font-size: var(--type-meta);
   }
+}
+@media (max-width: 1000px) {
+  .project-header-row { flex-direction:column; align-items:flex-start; }
 }

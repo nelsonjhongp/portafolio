@@ -1,0 +1,121 @@
+---
+import "./ripnel.css";
+import "../../components/projects/ProjectMeta.css";
+import MainLayout from "../../layouts/MainLayout.astro";
+import SiteNavigation from "../../components/shared/SiteNavigation.astro";
+import Footer from "../../components/shared/Footer.astro";
+import CaseScreen from "../../components/projects/CaseScreen.astro";
+import CaseLightbox from "../../components/projects/CaseLightbox.astro";
+import ActionLink from "../../components/shared/ActionLink.astro";
+import TechChip from "../../components/shared/TechChip.astro";
+import { profile } from "../../content/profile";
+import { ripnelProject as project, ripnelScreens, ripnelMobile } from "../../content/ripnel";
+import { asset } from "../../utils/assets";
+const sections = [{ id: "producto", label: "Recorridos" }, { id: "aporte", label: "Desarrollo" }, { id: "arquitectura", label: "Arquitectura" }, { id: "calidad", label: "Verificación" }];
+---
+<MainLayout title={`${project.name} · Proyecto de desarrollo de software | ${profile.name}`} description={`${project.summary} Mi aporte, recorridos y decisiones técnicas en un proyecto propio.`} ogImage="og/ripnel-og.png" ogAlt="RIPNEL Platform: proyecto propio de desarrollo de software de Nelson Jhon Gil Pari, con una captura del ERP textil.">
+  <div class="page-shell case-page">
+    <SiteNavigation brandHref={asset("#top")} brandImage="/brand/nj-logo.png" brandAlt="Nelson Nejigiku · Volver al inicio" links={[{ href: asset("#projects"), label: "Todos los proyectos" }, { href: asset("proyectos/ripnel/#producto"), label: "Ver recorrido" }, { href: asset("#contact"), label: "Contacto" }]} />
+    <main id="main-content" tabindex="-1">
+      <header class="case-hero case-container">
+        <ActionLink className="case-back" appearance="text" href={asset("#ripnel-platform")} label="Volver a proyectos" kind="secondary" iconName="arrow-left" />
+        <div class="case-hero-grid">
+          <div class="case-hero-copy" id="contexto">
+            <p class="case-eyebrow">Proyecto propio · Desarrollo de software</p>
+            <h1>{project.name}</h1>
+            <p class="case-lead">{project.summary}</p>
+            <p class="case-role"><strong>Mi aporte</strong><span>Diseño de flujos, interfaz, API y base de datos.</span></p>
+            <p class="case-code"><span class="project-status">{project.status}</span></p>
+            <ul class="case-stack case-stack-summary" aria-label="Tecnologías principales">{profile.mainStack.map(item => <li><TechChip item={item} variant="project" /></li>)}</ul>
+            <div class="case-actions"><ActionLink href="#producto" label="Ver recorrido" kind="projects" icon="trailing" iconName="arrow-down" /><ActionLink appearance="text" href={profile.contact.cvEs} label={profile.contactCvLabel} kind="cv" icon="trailing" iconName="external-link" /></div>
+          </div>
+          <div id="venta-en-mostrador"><CaseScreen {...ripnelScreens[0]} placement="hero" caption="Datos sintéticos. Venta en borrador." eager /></div>
+        </div>
+      </header>
+      <div class="case-container case-body">
+        <aside class="case-toc" aria-label="Contenido del caso">
+          <details open><summary>En este caso</summary><nav aria-label="Secciones del caso" data-case-toc>{sections.map(section => <a href={`#${section.id}`}>{section.label}</a>)}</nav></details>
+        </aside>
+        <div class="case-story">
+          <section id="producto" class="case-section">
+            <p class="case-eyebrow">01 / Interfaz</p><h2>Recorridos</h2>
+            <p>Capturas del ERP agrupadas por tarea. Puedes abrir cada grupo y ampliar las imágenes.</p>
+            <details class="case-journey" open>
+              <summary><span><strong>Preparar una venta</strong><span>Consultar productos y revisar caja antes de pasar al punto de venta.</span></span></summary>
+              <div class="case-journey-body">
+                <p>El catálogo muestra productos, variantes y precios. Caja permite revisar su apertura y las operaciones de la sesión.</p>
+                <ActionLink appearance="text" href="#venta-en-mostrador" label="Ver el punto de venta mostrado al inicio" kind="secondary" icon="trailing" iconName="arrow-up" />
+                <CaseScreen {...ripnelScreens[1]} />
+                <CaseScreen {...ripnelScreens[4]} />
+              </div>
+            </details>
+            <details class="case-journey">
+              <summary><span><strong>Consultar y trasladar existencias</strong><span>Revisar stock por ubicación y preparar una solicitud de transferencia.</span></span></summary>
+              <div class="case-journey-body">
+                <p>Inventario muestra el stock por ubicación. Las transferencias tienen etapas de solicitud, despacho y recepción; la captura corresponde a una solicitud en borrador.</p>
+                <CaseScreen {...ripnelScreens[2]} />
+                <CaseScreen {...ripnelScreens[3]} caption="Solicitud en borrador entre ubicaciones ficticias. La captura no acredita un despacho ni una recepción completados." />
+              </div>
+            </details>
+            <details class="case-journey">
+              <summary><span><strong>Navegar según la sesión</strong><span>Encontrar las tareas disponibles en escritorio y móvil.</span></span></summary>
+              <div class="case-journey-body">
+                <p>El inicio muestra las tareas disponibles según los permisos de la sesión.</p>
+                <CaseScreen {...ripnelScreens[5]} />
+                <CaseScreen {...ripnelMobile} label="Vista móvil" mobile />
+              </div>
+            </details>
+          </section>
+          <section id="aporte" class="case-section">
+            <p class="case-eyebrow">02 / Implementación</p><h2>Desarrollo</h2>
+            <p>Definí los flujos y sus estados, desarrollé las pantallas en Next.js, la API en Express y el modelo PostgreSQL. Estas son tres decisiones de implementación.</p>
+            <div id="decisiones" class="case-decisions">
+              <article class="case-decision"><h3>Ventas, stock y caja</h3><p><strong>Requisito:</strong> una venta necesita caja abierta y existencias suficientes.</p><p><strong>Implementación:</strong> la API valida ambas condiciones y registra la operación dentro de una transacción. El cierre de caja se coordina con las ventas en curso.</p><p><strong>Comprobación:</strong> el repositorio incluye casos de conflicto de caja, stock y operaciones simultáneas.</p></article>
+              <article class="case-decision"><h3>Transferencias entre ubicaciones</h3><p><strong>Requisito:</strong> distinguir lo solicitado, lo despachado y lo recibido.</p><p><strong>Implementación:</strong> cantidades separadas por etapa y validación de estados y permisos en la API.</p><p><strong>Comprobación:</strong> el repositorio incluye escenarios de solicitud, despacho y recepción con sus restricciones.</p></article>
+              <article class="case-decision"><h3>Permisos por rol</h3><p><strong>Requisito:</strong> cada usuario debe acceder solo a las acciones autorizadas.</p><p><strong>Implementación:</strong> la interfaz refleja los permisos de la sesión; el backend comprueba la autorización en cada operación.</p><p><strong>Comprobación:</strong> pruebas de acceso permitido y denegado, más un recorrido integrado de sesión y permisos.</p></article>
+            </div>
+          </section>
+          <section id="arquitectura" class="case-section">
+            <p class="case-eyebrow">03 / Estructura</p><h2>Arquitectura</h2>
+            <div class="case-architecture">
+              <div class="architecture-row"><div><h3>Interfaz</h3><p>Sesión y tareas</p><ul class="case-stack" aria-label="Tecnologías de interfaz">{["Next.js", "React", "TypeScript"].map(item => <li><TechChip item={item} variant="project" /></li>)}</ul></div><span aria-hidden="true"><img src={asset("/icons/lucide--arrow-right.svg")} alt="" /></span><div><h3>API</h3><p>Permisos y reglas</p><ul class="case-stack" aria-label="Tecnologías de API">{["Node.js", "Express"].map(item => <li><TechChip item={item} variant="project" /></li>)}</ul></div><span aria-hidden="true"><img src={asset("/icons/lucide--arrow-right.svg")} alt="" /></span><div><h3>Datos</h3><p>Integridad y transacciones</p><ul class="case-stack" aria-label="Base de datos"><li><TechChip item="PostgreSQL" variant="project" /></li></ul></div></div>
+            </div>
+            <p>La interfaz consulta la API por HTTP. La API autoriza las acciones y aplica las reglas antes de modificar PostgreSQL; el frontend no consulta la base de datos directamente.</p>
+          </section>
+          <section id="calidad" class="case-section">
+            <p class="case-eyebrow">04 / Pruebas y estado</p><h2>Verificación</h2>
+            <div class="case-evidence"><h3>Pruebas de desarrollo</h3><p>La base revisada incluye pruebas unitarias y pruebas de interfaz con APIs simuladas. Otra comprobación recorre inicio de sesión, identidad, permisos, consulta de productos y cierre de sesión con el frontend compilado, la API y PostgreSQL reales.</p><p>Estas pruebas cubren comportamientos concretos; no certifican por sí solas todos los procesos del ERP.</p></div>
+            <div class="case-evidence"><h3>Desarrollo y entrega</h3><p>Comprobaciones automáticas en GitHub y despliegues manuales.</p><ul class="case-stack" aria-label="Herramientas de desarrollo y verificación">{["GitHub Actions", "Docker"].map(item => <li><TechChip item={item} variant="project" /></li>)}</ul><p>ERP desarrollado, con repositorio privado. El acceso al ERP no es público.</p></div>
+            <div class="case-related"><ActionLink appearance="text" href="https://ripnel.com" label="Web pública de RIPNEL" kind="secondary" icon="trailing" iconName="external-link" /><p>Prendas, tiendas y catálogos.</p></div>
+            <details class="case-provenance"><summary>Procedencia y límites de la evidencia</summary><div><p>Capturas del código de referencia <code>4019c10</code>, ejecutado localmente el 22 de octubre de 2026 con el frontend compilado, la API y PostgreSQL 17 descartable. Todos los registros son sintéticos. La venta y la solicitud de transferencia son borradores.</p><p>Las imágenes acreditan estas vistas del sistema, no datos de clientes, adopción ni impacto comercial. La capacitación existente requiere autenticación y un entorno DEMO temporal; no implica disponibilidad pública.</p></div></details>
+          </section>
+        </div>
+      </div>
+      <nav class="case-contact case-container" id="case-contact" aria-label="Continuar desde el caso"><ActionLink href={asset("#contact")} label="Contacto" kind="contact" icon="trailing" /><ActionLink appearance="text" href={profile.contact.cvEs} label={profile.contactCvLabel} kind="cv" icon="trailing" iconName="external-link" /><ActionLink appearance="text" href={asset("#ripnel-platform")} label="Volver a proyectos" kind="secondary" icon="trailing" iconName="arrow-left" /></nav>
+    </main>
+    <Footer name={profile.name} />
+    <CaseLightbox />
+    <script>
+      const links = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-case-toc] a"));
+      const sections = links.map(link => ({ link, section: document.getElementById(link.hash.slice(1)) })).filter((item): item is { link: HTMLAnchorElement; section: HTMLElement } => item.section !== null);
+      let queued = false;
+      const markCurrent = () => {
+        queued = false;
+        const anchor = (document.querySelector("[data-site-nav]")?.getBoundingClientRect().bottom ?? 60) + 40;
+        let active = sections[0];
+        for (const item of sections) { if (item.section.getBoundingClientRect().top <= anchor) active = item; }
+        if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) active = sections.at(-1) ?? active;
+        for (const item of sections) {
+          if (item === active) item.link.setAttribute("aria-current", "location");
+          else item.link.removeAttribute("aria-current");
+        }
+      };
+      const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(markCurrent); } };
+      window.addEventListener("scroll", schedule, { passive: true });
+      window.addEventListener("resize", schedule);
+      window.addEventListener("hashchange", schedule);
+      document.querySelectorAll(".case-journey").forEach(group => group.addEventListener("toggle", schedule));
+      markCurrent();
+    </script>
+  </div>
+</MainLayout>

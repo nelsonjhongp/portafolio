@@ -9,5 +9,7 @@ const base = process.env.PUBLIC_BASE_PATH || defaultBase;
 export default defineConfig({
   site: "https://nelsonjhongp.github.io",
   base,
+  // Preserve the inline spacing used by the portfolio before Astro 7.
+  compressHTML: true,
   output: "static"
 });

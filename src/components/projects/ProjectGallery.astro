@@ -1,312 +1,92 @@
 ---
+import { Image } from "astro:assets";
 import "./ProjectGallery.css";
 import type { Project } from "../../types/portfolio";
 
-interface Props {
-  project: Project;
-}
-
+interface Props { project: Project }
 const { project } = Astro.props;
 const screens = project.screens?.length
   ? project.screens
-  : [
-      {
-        src: project.image,
-        alt: `Vista previa de ${project.name}`,
-        label: "Vista general"
-      }
-    ];
-const hasGallery = screens.length > 1;
+  : [{ src: project.image, alt: `Vista previa de ${project.name}`, label: "Vista general" }];
 ---
 
-<div class="project-visual-shell" data-project-gallery-shell>
-  <div
-    class:list={[
-      "project-visual",
-      hasGallery && "project-visual-gallery",
-      hasGallery && `project-visual-dots-${project.dotTone ?? "dark"}`
-    ]}
-    data-project-gallery
-  >
-    <div class="project-screen-track" data-project-track>
-      {screens.map((screen, index) => (
-        <div
-          class:list={["project-screen", index === 0 && "is-active"]}
-          data-project-screen
-          data-screen-label={screen.label}
-          aria-hidden={index === 0 ? "false" : "true"}
-        >
-          <img src={screen.src} alt={screen.alt} loading="lazy" />
-        </div>
-      ))}
-    </div>
-
-    {hasGallery ? <span class="project-screen-tag" data-project-screen-tag>{screens[0].label}</span> : null}
-
-    {hasGallery ? (
-      <div class="project-carousel-dots" aria-label={`Pantallas disponibles en ${project.name}`}>
+<div class="project-visual-shell" role="group" data-project-gallery aria-label={`Capturas de ${project.name}`}>
+  <div class="project-visual" data-gallery-viewport>
+    {screens.map((screen, index) => (
+      <div class="project-screen" id={`${project.id}-screen-${index + 1}`} data-project-screen hidden={index !== 0} data-screen-label={screen.label}>
+        {typeof screen.src === "string" ? (
+          <img src={screen.src} alt={screen.alt} loading="lazy" draggable="false" />
+        ) : (
+          <Image src={screen.src} alt={screen.alt} widths={[480, 960]} sizes="(max-width: 720px) calc(100vw - 2rem), (max-width: 1152px) 55vw, 616px" format="webp" quality={80} loading="lazy" draggable="false" />
+        )}
+      </div>
+    ))}
+  </div>
+  {screens.length > 1 && (
+    <>
+      <div class:list={["project-carousel-dots", `project-carousel-dots-${project.dotTone ?? "dark"}`]} hidden data-gallery-controls aria-label={`Elegir captura de ${project.name}`}>
         {screens.map((screen, index) => (
           <button
-            class:list={["project-carousel-dot", index === 0 && "is-active"]}
+            class="project-carousel-dot"
             type="button"
             data-project-dot
-            data-project-dot-index={index}
-            aria-label={`Mostrar ${screen.label}`}
+            aria-label={`Mostrar ${screen.label} de ${project.name}`}
+            aria-controls={`${project.id}-screen-${index + 1}`}
             aria-pressed={index === 0 ? "true" : "false"}
           />
         ))}
       </div>
-    ) : null}
-  </div>
+      <span class="project-gallery-status" data-gallery-label aria-live="polite" aria-atomic="true">{screens[0].label}</span>
+    </>
+  )}
 </div>
 
 <script>
-  const setupProjectGalleries = () => {
-    const galleries = document.querySelectorAll<HTMLElement>("[data-project-gallery]");
+  document.querySelectorAll<HTMLElement>("[data-project-gallery]").forEach(gallery => {
+    const screens = Array.from(gallery.querySelectorAll<HTMLElement>("[data-project-screen]"));
+    const dots = Array.from(gallery.querySelectorAll<HTMLButtonElement>("[data-project-dot]"));
+    const controls = gallery.querySelector<HTMLElement>("[data-gallery-controls]");
+    const viewport = gallery.querySelector<HTMLElement>("[data-gallery-viewport]");
+    const label = gallery.querySelector<HTMLElement>("[data-gallery-label]");
+    if (screens.length < 2 || !controls || !viewport || !label) return;
+    controls.hidden = false;
+    let index = 0;
 
-    for (const gallery of galleries) {
-      if (gallery.dataset.ready === "true") {
-        continue;
+    const show = (next: number) => {
+      index = (next + screens.length) % screens.length;
+      screens.forEach((screen, i) => screen.hidden = i !== index);
+      dots.forEach((dot, i) => dot.setAttribute("aria-pressed", String(i === index)));
+      label.textContent = screens[index].dataset.screenLabel ?? "";
+    };
+
+    dots.forEach((dot, i) => dot.addEventListener("click", () => show(i)));
+    controls.addEventListener("keydown", event => {
+      const offsets: Record<string, number> = { ArrowLeft: index - 1, ArrowRight: index + 1, Home: 0, End: screens.length - 1 };
+      if (!(event.key in offsets)) return;
+      event.preventDefault();
+      show(offsets[event.key]);
+      dots[index].focus();
+    });
+
+    let touchStart: { id: number; x: number; y: number } | undefined;
+    viewport.addEventListener("touchstart", event => {
+      const touch = event.touches[0];
+      touchStart = event.touches.length === 1 && touch
+        ? { id: touch.identifier, x: touch.clientX, y: touch.clientY }
+        : undefined;
+    }, { passive: true });
+    viewport.addEventListener("touchend", event => {
+      const start = touchStart;
+      touchStart = undefined;
+      if (!start) return;
+      const touch = Array.from(event.changedTouches).find(item => item.identifier === start.id);
+      if (!touch) return;
+      const dx = touch.clientX - start.x;
+      const dy = touch.clientY - start.y;
+      if (Math.abs(dx) >= 48 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+        show(index + (dx < 0 ? 1 : -1));
       }
-
-      gallery.dataset.ready = "true";
-
-      const slides = Array.from(gallery.querySelectorAll<HTMLElement>("[data-project-screen]"));
-      const dots = Array.from(gallery.querySelectorAll<HTMLButtonElement>("[data-project-dot]"));
-      const tag = gallery.querySelector<HTMLElement>("[data-project-screen-tag]");
-      const track = gallery.querySelector<HTMLElement>("[data-project-track]");
-
-      if (!track || slides.length <= 1) {
-        continue;
-      }
-
-      let currentIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
-
-      if (currentIndex < 0) {
-        currentIndex = 0;
-      }
-
-      let hideTimeoutId: ReturnType<typeof setTimeout> | undefined;
-      let tagTransitionTimeoutId: ReturnType<typeof setTimeout> | undefined;
-      let autoplayTimeoutId: ReturnType<typeof setTimeout> | undefined;
-      let isPointerInside = false;
-      let touchStartX = 0;
-      let touchStartY = 0;
-      let touchDeltaX = 0;
-      let touchDeltaY = 0;
-      let isTouchTracking = false;
-
-      const clearHideTimeout = () => {
-        if (hideTimeoutId) {
-          window.clearTimeout(hideTimeoutId);
-          hideTimeoutId = undefined;
-        }
-      };
-
-      const clearAutoplayTimeout = () => {
-        if (autoplayTimeoutId) {
-          window.clearTimeout(autoplayTimeoutId);
-          autoplayTimeoutId = undefined;
-        }
-      };
-
-      const showDots = () => {
-        gallery.classList.add("is-dots-visible");
-        clearHideTimeout();
-      };
-
-      const scheduleHideDots = () => {
-        if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-          gallery.classList.add("is-dots-visible");
-          return;
-        }
-
-        clearHideTimeout();
-
-        if (isPointerInside) {
-          return;
-        }
-
-        hideTimeoutId = window.setTimeout(() => {
-          gallery.classList.remove("is-dots-visible");
-        }, 1500);
-      };
-
-      const scheduleAutoplay = () => {
-        clearAutoplayTimeout();
-
-        if (isPointerInside || isTouchTracking) {
-          return;
-        }
-
-        autoplayTimeoutId = window.setTimeout(() => {
-          sync(currentIndex + 1);
-          scheduleAutoplay();
-        }, 3000);
-      };
-
-      const sync = (nextIndex: number) => {
-        currentIndex = (nextIndex + slides.length) % slides.length;
-        track.style.transform = `translate3d(${-100 * currentIndex}%, 0, 0)`;
-
-        slides.forEach((slide, index) => {
-          const isActive = index === currentIndex;
-          slide.classList.toggle("is-active", isActive);
-          slide.setAttribute("aria-hidden", String(!isActive));
-        });
-
-        dots.forEach((dot, index) => {
-          const isActive = index === currentIndex;
-          dot.classList.toggle("is-active", isActive);
-          dot.setAttribute("aria-pressed", String(isActive));
-        });
-
-        if (tag) {
-          const nextLabel = slides[currentIndex]?.dataset.screenLabel ?? "";
-
-          if (tag.textContent !== nextLabel) {
-            if (tagTransitionTimeoutId) {
-              window.clearTimeout(tagTransitionTimeoutId);
-            }
-
-            tag.classList.add("is-updating");
-
-            tagTransitionTimeoutId = window.setTimeout(() => {
-              tag.textContent = nextLabel;
-              tag.classList.remove("is-updating");
-            }, 110);
-          } else {
-            tag.textContent = nextLabel;
-          }
-        }
-      };
-
-      const endTouchInteraction = () => {
-        isTouchTracking = false;
-        touchDeltaX = 0;
-        touchDeltaY = 0;
-      };
-
-      dots.forEach((dot, index) => {
-        dot.addEventListener("click", () => {
-          sync(index);
-          showDots();
-          scheduleHideDots();
-          scheduleAutoplay();
-        });
-      });
-
-      gallery.addEventListener("mouseenter", () => {
-        isPointerInside = true;
-        showDots();
-        clearAutoplayTimeout();
-      });
-
-      gallery.addEventListener("mouseleave", () => {
-        isPointerInside = false;
-        scheduleHideDots();
-        scheduleAutoplay();
-      });
-
-      gallery.addEventListener("focusin", () => {
-        showDots();
-        clearAutoplayTimeout();
-      });
-
-      gallery.addEventListener("focusout", () => {
-        const activeElement = document.activeElement;
-
-        if (activeElement instanceof Node && gallery.contains(activeElement)) {
-          return;
-        }
-
-        scheduleHideDots();
-        scheduleAutoplay();
-      });
-
-      if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-        gallery.classList.add("is-dots-visible");
-      }
-
-      gallery.addEventListener(
-        "touchstart",
-        (event) => {
-          const touch = event.touches[0];
-
-          if (!touch) {
-            return;
-          }
-
-          isTouchTracking = true;
-          touchStartX = touch.clientX;
-          touchStartY = touch.clientY;
-          touchDeltaX = 0;
-          touchDeltaY = 0;
-          showDots();
-          clearAutoplayTimeout();
-        },
-        { passive: true }
-      );
-
-      gallery.addEventListener(
-        "touchmove",
-        (event) => {
-          if (!isTouchTracking) {
-            return;
-          }
-
-          const touch = event.touches[0];
-
-          if (!touch) {
-            return;
-          }
-
-          touchDeltaX = touch.clientX - touchStartX;
-          touchDeltaY = touch.clientY - touchStartY;
-        },
-        { passive: true }
-      );
-
-      gallery.addEventListener(
-        "touchend",
-        () => {
-          if (!isTouchTracking) {
-            return;
-          }
-
-          const absX = Math.abs(touchDeltaX);
-          const absY = Math.abs(touchDeltaY);
-          const swipeThreshold = 48;
-
-          if (absX >= swipeThreshold && absX > absY) {
-            sync(touchDeltaX < 0 ? currentIndex + 1 : currentIndex - 1);
-          }
-
-          endTouchInteraction();
-          scheduleHideDots();
-          scheduleAutoplay();
-        },
-        { passive: true }
-      );
-
-      gallery.addEventListener(
-        "touchcancel",
-        () => {
-          endTouchInteraction();
-          scheduleHideDots();
-          scheduleAutoplay();
-        },
-        { passive: true }
-      );
-
-      sync(currentIndex);
-      scheduleAutoplay();
-    }
-  };
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupProjectGalleries, { once: true });
-  } else {
-    setupProjectGalleries();
-  }
+    }, { passive: true });
+    viewport.addEventListener("touchcancel", () => { touchStart = undefined; }, { passive: true });
+  });
 </script>

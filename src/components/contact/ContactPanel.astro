@@ -2,7 +2,6 @@
 import "./ContactPanel.css";
 import type { Profile } from "../../types/portfolio";
 import { asset } from "../../utils/assets";
-import ActionLink from "../shared/ActionLink.astro";
 import SectionHeader from "../shared/SectionHeader.astro";
 
 interface Props {
@@ -78,13 +77,5 @@ const contactItems = [
       ))}
     </div>
 
-    <div class="contact-cta">
-      <div class="contact-cta-copy">
-        <strong>{profile.contactCtaHeading}</strong>
-        <p>{profile.contactCtaText}</p>
-      </div>
-
-      <ActionLink className="contact-cta-button" href={profile.contact.email} label={profile.contactEmailLabel} kind="contact" />
-    </div>
   </div>
 </section>

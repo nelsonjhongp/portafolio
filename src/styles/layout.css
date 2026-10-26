@@ -37,6 +37,11 @@
   backdrop-filter: none;
 }
 
+:root[data-theme="light"] .site-nav[data-nav-state="hero"] {
+  background: var(--nav-bg);
+  border-bottom-color: var(--nav-border);
+}
+
 .site-nav[data-nav-state="scrolled"] {
   background: var(--nav-bg-scrolled);
   border-bottom-color: var(--nav-border);
@@ -47,6 +52,7 @@
 
 .site-brand {
   display: inline-flex;
+  min-height: 44px;
   align-items: center;
   transition: transform 180ms ease, opacity 180ms ease;
 }
@@ -92,6 +98,8 @@
   gap: 1rem;
 }
 
+.site-nav-links a { display:inline-flex; align-items:center; min-height:44px; }
+
 .site-nav-links a,
 .site-nav-drawer__links a {
   position: relative;
@@ -133,7 +141,8 @@
   align-items: center;
   justify-content: center;
   gap: 0;
-  min-height: 2.05rem;
+  min-height: 44px;
+  min-width: 44px;
   padding: 0.18rem 0.2rem;
   border: 0;
   border-radius: 0;
@@ -476,8 +485,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 44px;
+    height: 44px;
     padding: 0;
     border: 0;
     background: transparent;
@@ -507,7 +516,7 @@
   .site-nav-toggle:focus-visible .site-nav-toggle__icon,
   .site-nav-toggle:active .site-nav-toggle__icon {
     opacity: 1;
-    filter: brightness(1.06);
+    filter: brightness(0) invert(1);
     transform: scale(1.04);
   }
 
@@ -522,7 +531,7 @@
   }
 
   .site-theme-toggle {
-    min-height: 2rem;
+    min-height: 44px;
     padding-inline: 0.12rem;
   }
 

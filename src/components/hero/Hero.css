@@ -17,7 +17,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(12, 16, 24, 0.14);
+  background: linear-gradient(90deg,rgba(12,16,24,.92),rgba(12,16,24,.86) 56%,rgba(12,16,24,.45));
   pointer-events: none;
 }
 
@@ -26,7 +26,7 @@
 }
 
 :root[data-theme="light"] .hero::before {
-  background: rgba(245, 247, 251, 0.12);
+  background: linear-gradient(90deg,rgba(245,247,251,.96),rgba(245,247,251,.92) 56%,rgba(245,247,251,.55));
 }
 
 .hero-inner {
@@ -64,6 +64,7 @@
 
 .hero-role {
   max-width: 30rem;
+  text-wrap: balance;
   margin: 1.35rem 0 0;
   font-size: clamp(1.3rem, 2vw, 1.8rem);
   font-weight: 700;
@@ -147,9 +148,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.7rem;
-  height: 2.7rem;
-  flex: 0 0 2.7rem;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
   border-radius: 999px;
   background: var(--hero-social);
   color: var(--nav-link-strong);
@@ -204,6 +205,8 @@
 }
 
 @media (max-width: 900px) {
+  .hero::before { background:rgba(12,16,24,.9); }
+  :root[data-theme="light"] .hero::before { background:rgba(245,247,251,.94); }
   .hero-inner {
     grid-template-columns: 1fr;
     min-height: auto;
@@ -238,7 +241,7 @@
 
   .hero-inner {
     gap: 0.72rem;
-    width: min(calc(100% - 1.5rem), 34rem);
+    width: min(calc(100% - 2rem), 34rem);
   }
 
   .hero-portrait {
@@ -323,8 +326,8 @@
   }
 
   .hero-social-link {
-    width: 2.42rem;
-    height: 2.42rem;
+    width: 44px;
+    height: 44px;
   }
 
   .hero-social-link i {
