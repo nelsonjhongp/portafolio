@@ -516,7 +516,7 @@
   .site-nav-toggle:focus-visible .site-nav-toggle__icon,
   .site-nav-toggle:active .site-nav-toggle__icon {
     opacity: 1;
-    filter: brightness(1.06);
+    filter: brightness(0) invert(1);
     transform: scale(1.04);
   }
 
