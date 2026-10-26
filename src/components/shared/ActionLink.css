@@ -1,5 +1,6 @@
 .button.action-link {
   border: none;
+  min-height:44px;
 }
 
 .action-link {

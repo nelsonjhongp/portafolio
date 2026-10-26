@@ -106,8 +106,30 @@
   --dark-section-title: var(--theme-dark-section-title);
   --dark-section-copy: var(--theme-dark-section-copy);
   --dark-section-icon: var(--theme-dark-section-icon);
-  --radius-md: 10px;
-  --radius-sm: 999px;
+  --radius-control: 8px;
+  --radius-panel: 16px;
+  --radius-pill: 999px;
+  --radius-md: var(--radius-panel);
+  --radius-sm: var(--radius-pill);
+  --type-meta: .75rem;
+  --type-small: .875rem;
+  --type-body: 1rem;
+  --type-reading: 1.125rem;
+  --type-card-title: 1.25rem;
+  --type-subtitle: 1.5rem;
+  --type-section: clamp(2rem, 3vw, 2.5rem);
+  --leading-body: 1.65;
+  --leading-heading: 1.2;
+  --measure-reading: 72ch;
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
   --max: 1120px;
 }
 
@@ -147,7 +169,7 @@
   --theme-hero-heading: #121722;
   --theme-hero-role: #151c28;
   --theme-hero-summary: #4f5a6d;
-  --theme-hero-role-accent: #fe4c20;
+  --theme-hero-role-accent: #b9380c;
   --theme-hero-panel: rgba(255, 255, 255, 0.15);
   --theme-hero-social: rgba(29, 33, 41, 0.16);
   --theme-hero-social-hover: rgba(29, 33, 41, 0.24);

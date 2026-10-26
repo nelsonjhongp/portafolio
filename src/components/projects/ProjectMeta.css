@@ -9,7 +9,7 @@
 .project-heading .project-eyebrow {
   margin: 0;
   color: var(--text-muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.18em;
@@ -23,7 +23,7 @@
   border: 1px solid var(--accent-soft);
   border-radius: 999px;
   color: var(--accent);
-  font-size: 0.66rem;
+  font-size: var(--type-meta);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -37,7 +37,7 @@
 
 .project-heading h3 {
   margin: 0.42rem 0 0.4rem;
-  font-size: 1.26rem;
+  font-size: var(--type-card-title);
   font-weight: 700;
   line-height: 1.2;
 }
@@ -45,8 +45,8 @@
 .project-summary {
   margin: 0;
   color: var(--text-body);
-  font-size: 0.9rem;
-  line-height: 1.55;
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
   max-width: none;
   text-align: left;
 }
@@ -60,6 +60,6 @@
 
 @media (max-width: 720px) {
   .project-status {
-    font-size: 0.62rem;
+    font-size: var(--type-meta);
   }
 }
