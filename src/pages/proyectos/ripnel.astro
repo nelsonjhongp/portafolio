@@ -32,7 +32,7 @@ const sections = [{ id: "contexto", label: "Qué hace el sistema" }, { id: "apor
       </header>
       <div class="case-container case-body">
         <aside class="case-toc" aria-label="Contenido del caso">
-          <details open><summary>En este caso</summary><nav aria-label="Secciones del caso">{sections.map(section => <a href={`#${section.id}`}>{section.label}</a>)}</nav></details>
+          <details open><summary>En este caso</summary><nav aria-label="Secciones del caso" data-case-toc>{sections.map(section => <a href={`#${section.id}`}>{section.label}</a>)}</nav></details>
         </aside>
         <div class="case-story">
           <section id="contexto" class="case-section">
@@ -81,7 +81,7 @@ const sections = [{ id: "contexto", label: "Qué hace el sistema" }, { id: "apor
           <section id="arquitectura" class="case-section">
             <p class="case-eyebrow">04 / Estructura</p><h2>Arquitectura</h2>
             <div class="case-architecture" role="img" aria-label="El navegador ERP Next.js consulta la API Express mediante HTTP. La API autoriza y ejecuta transacciones en PostgreSQL. La web pública es independiente. Staging, DEMO temporal y producción aceptan releases por separado.">
-              <div class="architecture-row"><div><small>Interfaz</small><strong>ERP · Next.js</strong><span>Sesión y tareas</span></div><span aria-hidden="true">→</span><div><small>Dominio</small><strong>API · Express</strong><span>Permisos y reglas</span></div><span aria-hidden="true">→</span><div><small>Persistencia</small><strong>PostgreSQL</strong><span>Integridad y transacciones</span></div></div>
+              <div class="architecture-row"><div><small>Interfaz</small><strong>ERP · Next.js</strong><span>Sesión y tareas</span></div><span aria-hidden="true"><img src={asset("/icons/lucide--arrow-right.svg")} alt="" /></span><div><small>Dominio</small><strong>API · Express</strong><span>Permisos y reglas</span></div><span aria-hidden="true"><img src={asset("/icons/lucide--arrow-right.svg")} alt="" /></span><div><small>Persistencia</small><strong>PostgreSQL</strong><span>Integridad y transacciones</span></div></div>
               <div class="architecture-separate"><strong>Web pública</strong><span>Contenido e identidad propios · publicación independiente</span></div>
               <div class="architecture-destinations"><span>Staging</span><span>DEMO temporal</span><span>Producción</span></div>
               <p>Promociones manuales · aceptación independiente por destino</p>
@@ -107,5 +107,27 @@ const sections = [{ id: "contexto", label: "Qué hace el sistema" }, { id: "apor
     </main>
     <Footer name={profile.name} />
     <CaseLightbox />
+    <script>
+      const links = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-case-toc] a"));
+      const sections = links.map(link => ({ link, section: document.getElementById(link.hash.slice(1)) })).filter((item): item is { link: HTMLAnchorElement; section: HTMLElement } => item.section !== null);
+      let queued = false;
+      const markCurrent = () => {
+        queued = false;
+        const anchor = (document.querySelector("[data-site-nav]")?.getBoundingClientRect().bottom ?? 60) + 40;
+        let active = sections[0];
+        for (const item of sections) { if (item.section.getBoundingClientRect().top <= anchor) active = item; }
+        if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) active = sections.at(-1) ?? active;
+        for (const item of sections) {
+          if (item === active) item.link.setAttribute("aria-current", "location");
+          else item.link.removeAttribute("aria-current");
+        }
+      };
+      const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(markCurrent); } };
+      window.addEventListener("scroll", schedule, { passive: true });
+      window.addEventListener("resize", schedule);
+      window.addEventListener("hashchange", schedule);
+      document.querySelectorAll(".case-journey").forEach(group => group.addEventListener("toggle", schedule));
+      markCurrent();
+    </script>
   </div>
 </MainLayout>

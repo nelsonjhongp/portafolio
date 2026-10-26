@@ -15,7 +15,8 @@
 .case-screen { margin:2rem 0; min-width:0; }
 .case-screen > a { display:block; position:relative; border:1px solid var(--line-strong); border-radius:10px; overflow:hidden; background:var(--surface); }
 .case-screen img { width:100%; height:auto; }
-.case-screen-zoom { position:absolute; bottom:.7rem; right:.7rem; padding:.35rem .65rem; color:#fff; background:#161a21e8; border:1px solid #ffffff55; border-radius:4px; font-size:.8rem; }
+.case-screen-zoom { position:absolute; bottom:.7rem; right:.7rem; display:inline-flex; align-items:center; gap:.35rem; padding:.35rem .65rem; color:#fff; background:#161a21e8; border:1px solid #ffffff55; border-radius:4px; font-size:.8rem; }
+.case-screen .case-screen-zoom img { width:14px; height:14px; filter:brightness(0) invert(1); }
 .case-screen figcaption { font-size:.95rem; line-height:1.6; padding:.85rem .2rem; color:var(--text-body); }
 .case-screen figcaption strong,.case-screen figcaption span { display:block; }
 .case-screen figcaption strong { color:var(--ink); margin-bottom:.2rem; }
@@ -24,7 +25,8 @@
 .case-toc { align-self:start; position:sticky; top:6rem; font-size:.9rem; padding-top:2rem; }
 .case-toc summary { font-weight:700; color:var(--text-muted); }
 .case-toc nav { display:grid; margin-top:.75rem; }
-.case-toc a { padding:.55rem 0; color:var(--text-body); }
+.case-toc a { display:flex; align-items:center; min-height:44px; padding:.55rem .5rem; border-left:2px solid transparent; color:var(--text-body); }
+.case-toc a[aria-current="location"] { border-left-color:var(--accent); font-weight:700; text-decoration:underline; text-underline-offset:3px; }
 .case-toc a:hover { color:var(--accent); }
 .case-section { padding:2rem 0 3rem; border-bottom:1px solid var(--line); scroll-margin-top:5rem; }
 .case-section h2 { font-size:clamp(1.8rem,3vw,2.35rem); line-height:1.2; letter-spacing:-.02em; max-width:25ch; margin:.5rem 0 1.5rem; }
@@ -54,6 +56,7 @@
 .architecture-row small { color:var(--accent); margin-bottom:.4rem; }
 .architecture-row div span { color:var(--text-body); font-size:.8rem; margin-top:.4rem; }
 .architecture-row > span { color:var(--accent); }
+.architecture-row > span > img { width:20px; height:20px; filter:var(--project-section-icon-filter); }
 .architecture-separate { margin-top:1.5rem; padding:1rem; border:1px dashed var(--line-strong); border-radius:6px; display:grid; gap:.4rem; }
 .architecture-separate span { color:var(--text-body); font-size:.9rem; }
 .architecture-destinations { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.5rem; }
@@ -67,12 +70,17 @@
 .case-evidence { padding:1.25rem 0; }
 .case-evidence h3 { font-size:1.3rem; margin:0; }
 .case-contact { display:flex; flex-wrap:wrap; align-items:center; gap:1.5rem; padding-block:2rem 1rem; scroll-margin-top:5rem; }
-.case-lightbox { background:var(--bg); color:var(--ink); border:1px solid var(--line-strong); border-radius:8px; width:min(1500px,calc(100% - 2rem)); max-height:94dvh; padding:1rem; }
+.case-lightbox { background:var(--bg); color:var(--ink); border:1px solid var(--line-strong); border-radius:8px; width:calc(var(--viewer-width, 320px) + 18px); max-width:calc(100vw - 2rem); max-height:calc(100dvh - 2rem); padding:8px; }
 .case-lightbox::backdrop { background:#06090ee8; }
-.case-lightbox > img { max-height:calc(94dvh - 140px); width:auto; max-width:100%; margin:auto; object-fit:contain; }
-.lightbox-toolbar { display:flex; align-items:center; justify-content:space-between; gap:.5rem; }
-.lightbox-toolbar h2 { font-size:1rem; margin:.5rem 0; }
-.lightbox-toolbar button,.lightbox-toolbar a { color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:4px; min-height:44px; padding:.5rem .8rem; font:inherit; cursor:pointer; display:inline-flex; align-items:center; }
-.lightbox-toolbar:last-child { margin-top:.75rem; }
+.lightbox-toolbar { display:flex; align-items:center; gap:8px; min-height:44px; }
+.lightbox-toolbar h2 { flex:1; min-width:0; font-size:.95rem; line-height:1.3; margin:0; overflow-wrap:anywhere; }
+.lightbox-controls { display:flex; flex-shrink:0; }
+.lightbox-controls button,.lightbox-controls a { color:var(--ink); background:transparent; border:0; border-radius:4px; width:44px; height:44px; padding:12px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; }
+.lightbox-controls button:hover,.lightbox-controls a:hover { background:var(--surface); }
+.lightbox-controls img { width:20px; height:20px; filter:var(--project-section-icon-filter); }
+.lightbox-arrow-back { transform:rotate(180deg); }
+.lightbox-stage { display:grid; place-items:center; width:100%; height:var(--capture-height, 220px); margin-top:8px; }
+.lightbox-stage > img { grid-area:1 / 1; width:var(--capture-width); height:var(--capture-height); max-width:100%; object-fit:contain; }
+.lightbox-stage > p { grid-area:1 / 1; max-width:32ch; padding:1rem; margin:0; color:var(--text-body); line-height:1.5; text-align:center; }
 @media(max-width:900px) { .case-body { grid-template-columns:1fr; gap:0; } .case-toc { position:static; padding-top:0; } .case-toc details { padding:1rem; border:1px solid var(--line); border-radius:6px; } .case-toc nav { grid-template-columns:repeat(3,1fr); } }
-@media(max-width:600px) { .case-hero { padding-top:5.5rem; } .case-facts { grid-template-columns:1fr; gap:1rem; } .case-grid { grid-template-columns:1fr; } .case-mobile-layout { grid-template-columns:1fr; gap:0; } .case-toc nav { grid-template-columns:repeat(2,1fr); } .case-section { padding-block:1rem 2rem; } .case-architecture { padding:1rem; } .architecture-row { flex-direction:column; } .architecture-row > div { width:100%; } .architecture-row > span { transform:rotate(90deg); } .lightbox-toolbar { flex-wrap:wrap; } .lightbox-toolbar h2 { flex:1; } .lightbox-toolbar:last-child { justify-content:center; } .case-lightbox { padding:.6rem; } }
+@media(max-width:600px) { .case-hero { padding-top:5.5rem; } .case-facts { grid-template-columns:1fr; gap:1rem; } .case-grid { grid-template-columns:1fr; } .case-toc nav { grid-template-columns:repeat(2,1fr); } .case-section { padding-block:1rem 2rem; } .case-architecture { padding:1rem; } .architecture-row { flex-direction:column; } .architecture-row > div { width:100%; } .architecture-row > span { transform:rotate(90deg); } }

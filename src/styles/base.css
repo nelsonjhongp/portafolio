@@ -41,6 +41,8 @@ body { font-size:16px; }
 .skip-link:focus { top:1rem; }
 .project-private-code { color:var(--text-muted); font-size:.85rem; }
 .drawer-close { position:absolute; top:1.5rem; right:1rem; min-height:44px; background:var(--surface); color:var(--ink); border:1px solid var(--line); border-radius:4px; padding:.5rem; cursor:pointer; }
+.drawer-close { display:inline-flex; align-items:center; gap:.5rem; }
+.drawer-close img { width:16px; height:16px; filter:var(--project-section-icon-filter); }
 .site-theme-toggle { min-width:44px; min-height:44px; }
 .site-nav-toggle { min-width:44px; min-height:44px; }
 @media(max-width:720px) {

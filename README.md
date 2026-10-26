@@ -57,6 +57,12 @@ Contacto se concentra en la portada; el caso termina con enlaces a Contacto, CV 
 `ActionLink` comparte presentación de botón o texto e iconos direccionales; `TechChip`
 comparte las insignias de tecnologías entre portada, tarjetas y caso.
 
+El visor nativo del caso ajusta el panel a la captura, con una sola fila de controles
+accesibles. Mantiene navegación circular, teclado, Escape y retorno del foco; informa
+carga/error y descarta cargas anteriores al cambiar de selección. «Abrir imagen completa»
+abre el WebP completo en otra pestaña; no es un zoom ni una descarga del PNG original.
+El índice conserva las anclas y señala la sección activa con `aria-current`.
+
 Los SVG locales de Docker y GitHub Actions proceden de [Simple Icons](https://github.com/simple-icons/simple-icons/tree/90646e4bf7f3b89df6c37e65baf3e7bc759a517c/icons),
 referencia `90646e4bf7f3b89df6c37e65baf3e7bc759a517c`. Se conserva su licencia CC0-1.0
 en `public/icons/tech/simple-icons-LICENSE.txt`; identifican las tecnologías utilizadas.
