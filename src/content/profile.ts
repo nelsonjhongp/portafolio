@@ -2,12 +2,12 @@ import type { Profile } from "../types/portfolio";
 import { asset } from "../utils/assets";
 
 const introduction =
-  "Desarrollo aplicaciones web y herramientas de escritorio, con atención a las interfaces y los datos.";
+  "Aplicaciones web y herramientas de escritorio para organizar información y simplificar tareas.";
 const firstOpportunity = "Busco mi primera oportunidad profesional en desarrollo de software";
 
 export const profile: Profile = {
   name: "Nelson Jhon Gil Pari",
-  title: "Desarrollador de software · enfoque full stack",
+  title: "Desarrollador de software",
   subtitle: introduction,
   summary:
     "Soy bachiller en Ingeniería de Software y desarrollo proyectos propios para aplicar <strong>interfaces web</strong>, <strong>lógica de negocio</strong> y <strong>modelado de datos</strong>.",

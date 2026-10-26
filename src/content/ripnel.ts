@@ -22,8 +22,8 @@ export const ripnelMobile = { src: mobile, label: "Inicio en móvil", alt: "Inic
 export const ripnelProject: Project = {
   id: "ripnel-platform",
   name: "RIPNEL Platform",
-  eyebrow: "Producto completo · ERP textil",
-  summary: "ERP textil para gestionar inventario por ubicación, ventas, caja y transferencias. Desarrollado con Next.js, Express y PostgreSQL.",
+  eyebrow: "Aplicación web",
+  summary: "ERP textil para gestionar inventario, ventas, caja y transferencias entre ubicaciones.",
   problem: "Coordinar productos, stock y ventas entre ubicaciones sin perder las reglas de cada operación.",
   solution: "Un ERP con interfaz operativa, API con autorización y transacciones, y releases separados por destino.",
   responsibilities: ["Requerimientos y diseño de flujos", "Frontend y API", "Modelo relacional y transacciones", "Pruebas, CI y preparación de releases"],
@@ -33,7 +33,7 @@ export const ripnelProject: Project = {
   screens: ripnelScreens,
   caseStudyHref: asset("proyectos/ripnel/"),
   privateCode: true,
-  status: "ERP desarrollado · demo en preparación",
+  status: "ERP desarrollado",
   featured: true,
   links: []
 };
