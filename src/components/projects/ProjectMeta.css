@@ -63,3 +63,6 @@
     font-size: var(--type-meta);
   }
 }
+@media (max-width: 1000px) {
+  .project-header-row { flex-direction:column; align-items:flex-start; }
+}

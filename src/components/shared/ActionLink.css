@@ -81,14 +81,14 @@
 
 .button-cv {
   color: white;
-  background: #d97706;
-  border-color: #d97706;
+  background: #b66004;
+  border-color: #b66004;
   box-shadow: 0 12px 24px rgba(217, 119, 6, 0.24);
 }
 
 .button-cv:hover {
-  background: #b66004;
-  border-color: #b66004;
+  background: #955003;
+  border-color: #955003;
   box-shadow: 0 16px 30px rgba(217, 119, 6, 0.32);
 }
 

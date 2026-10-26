@@ -171,8 +171,8 @@
   --theme-hero-summary: #4f5a6d;
   --theme-hero-role-accent: #b9380c;
   --theme-hero-panel: rgba(255, 255, 255, 0.15);
-  --theme-hero-social: rgba(29, 33, 41, 0.16);
-  --theme-hero-social-hover: rgba(29, 33, 41, 0.24);
+  --theme-hero-social: #4e5a6d;
+  --theme-hero-social-hover: #3c4759;
   --theme-panel-bg: #ffffff;
   --theme-panel-muted-bg: #f3f6fb;
   --theme-panel-border: rgba(38, 48, 66, 0.1);

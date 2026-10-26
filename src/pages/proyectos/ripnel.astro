@@ -15,7 +15,7 @@ const sections = [{ id: "producto", label: "Recorridos" }, { id: "aporte", label
 ---
 <MainLayout title={`${project.name} · Proyecto de desarrollo de software | ${profile.name}`} description={`${project.summary} Mi aporte, recorridos y decisiones técnicas en un proyecto propio.`} ogImage="og/ripnel-og.png" ogAlt="RIPNEL Platform: proyecto propio de desarrollo de software de Nelson Jhon Gil Pari, con una captura del ERP textil.">
   <div class="page-shell case-page">
-    <SiteNavigation brandHref={asset("#top")} brandImage="/brand/nj-logo.png" brandAlt="Nelson Nejigiku · Volver al inicio" links={[{ href: asset("#projects"), label: "Todos los proyectos" }, { href: "#producto", label: "Ver recorrido" }, { href: asset("#contact"), label: "Contacto" }]} />
+    <SiteNavigation brandHref={asset("#top")} brandImage="/brand/nj-logo.png" brandAlt="Nelson Nejigiku · Volver al inicio" links={[{ href: asset("#projects"), label: "Todos los proyectos" }, { href: asset("proyectos/ripnel/#producto"), label: "Ver recorrido" }, { href: asset("#contact"), label: "Contacto" }]} />
     <main id="main-content" tabindex="-1">
       <header class="case-hero case-container">
         <ActionLink className="case-back" appearance="text" href={asset("#ripnel-platform")} label="Volver a proyectos" kind="secondary" iconName="arrow-left" />

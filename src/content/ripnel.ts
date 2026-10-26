@@ -32,7 +32,6 @@ export const ripnelProject: Project = {
   image: pos,
   screens: ripnelScreens,
   caseStudyHref: asset("proyectos/ripnel/"),
-  privateCode: true,
   status: "Código privado",
   featured: true,
   links: []

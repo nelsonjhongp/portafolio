@@ -20,5 +20,11 @@ recorridos desplegables; el punto de venta permanece visible en la cabecera.
 La figura móvil se presenta hasta 280 px, con una sola leyenda «Vista móvil»;
 sus medidas originales siguen siendo 390×844. El visor mantiene el WebP completo
 y ajusta el panel a cada proporción. `sizes` distingue cabecera, columna y móvil.
+La cabecera presenta información y POS en dos columnas desde 1024 px; por debajo
+se apilan. Las capturas del cuerpo se ajustan a la columna de lectura. `placement`
+selecciona el contexto responsivo y `eager` controla únicamente carga y prioridad.
+La nota de datos sintéticos y venta en borrador permanece junto al POS.
+El ajuste visual del 26/10/2026 reutiliza estos archivos; no vuelve a ejecutar el
+ERP ni acredita nuevas pruebas de sus flujos.
 Estas imágenes acreditan vistas del sistema, no adopción, facturación ni una
 certificación de todos sus flujos. Revisar la vigencia del contenido antes de publicar.

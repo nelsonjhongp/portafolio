@@ -24,7 +24,6 @@ export interface Project {
   cardStack?: string[];
   image: string | ImageMetadata;
   caseStudyHref?: string;
-  privateCode?: boolean;
   screens?: ProjectScreen[];
   dotTone?: "dark" | "light";
   status: string;

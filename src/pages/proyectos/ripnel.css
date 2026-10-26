@@ -23,7 +23,7 @@
 .case-body { display:grid; grid-template-columns:160px minmax(0,var(--measure-reading)); justify-content:center; gap:var(--space-12); padding-top:var(--space-8); font-size:var(--type-reading); }
 .case-story { min-width:0; }
 .case-toc { align-self:start; position:sticky; top:6rem; font-size:var(--type-small); padding-top:var(--space-8); }
-.case-toc summary { font-weight:700; color:var(--text-muted); }
+.case-toc summary { min-height:44px; padding-block:12px; font-weight:700; color:var(--text-muted); cursor:pointer; }
 .case-toc nav { display:grid; margin-top:var(--space-3); }
 .case-toc a { display:flex; align-items:center; min-height:44px; padding:var(--space-2); border-left:2px solid transparent; color:var(--text-body); }
 .case-toc a[aria-current="location"] { border-left-color:var(--accent); font-weight:700; text-decoration:underline; text-underline-offset:3px; }
@@ -59,12 +59,12 @@
 .case-related p { font-size:var(--type-small); margin:0; }
 .case-provenance p { font-size:var(--type-small); overflow-wrap:anywhere; }
 .case-contact { display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-6); padding:var(--space-8) 0 var(--space-4); scroll-margin-top:5rem; }
-.case-lightbox { background:var(--bg); color:var(--ink); border:1px solid var(--line-strong); border-radius:8px; width:calc(var(--viewer-width, 320px) + 18px); max-width:calc(100vw - 2rem); max-height:calc(100dvh - 2rem); padding:8px; }
+.case-lightbox { background:var(--bg); color:var(--ink); border:1px solid var(--line-strong); border-radius:var(--radius-panel); width:calc(var(--viewer-width, 320px) + 18px); max-width:calc(100vw - 2rem); max-height:calc(100dvh - 2rem); padding:8px; }
 .case-lightbox::backdrop { background:#06090ee8; }
 .lightbox-toolbar { display:flex; align-items:center; gap:8px; min-height:44px; }
 .lightbox-toolbar h2 { flex:1; min-width:0; font-size:.95rem; line-height:1.3; margin:0; overflow-wrap:anywhere; }
 .lightbox-controls { display:flex; flex-shrink:0; }
-.lightbox-controls button,.lightbox-controls a { color:var(--ink); background:transparent; border:0; border-radius:4px; width:44px; height:44px; padding:12px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; }
+.lightbox-controls button,.lightbox-controls a { color:var(--ink); background:transparent; border:0; border-radius:var(--radius-control); width:44px; height:44px; padding:12px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; }
 .lightbox-controls button:hover,.lightbox-controls a:hover { background:var(--surface); }
 .lightbox-controls img { width:20px; height:20px; filter:var(--project-section-icon-filter); }
 .lightbox-arrow-back { transform:rotate(180deg); }

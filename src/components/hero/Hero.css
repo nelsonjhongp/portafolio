@@ -148,9 +148,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.7rem;
-  height: 2.7rem;
-  flex: 0 0 2.7rem;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
   border-radius: 999px;
   background: var(--hero-social);
   color: var(--nav-link-strong);
@@ -241,7 +241,7 @@
 
   .hero-inner {
     gap: 0.72rem;
-    width: min(calc(100% - 1.5rem), 34rem);
+    width: min(calc(100% - 2rem), 34rem);
   }
 
   .hero-portrait {
@@ -326,8 +326,8 @@
   }
 
   .hero-social-link {
-    width: 2.42rem;
-    height: 2.42rem;
+    width: 44px;
+    height: 44px;
   }
 
   .hero-social-link i {
