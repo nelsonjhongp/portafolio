@@ -55,7 +55,7 @@ export const projects: Project[] = [
       }
     ],
     dotTone: "light",
-    status: "Herramienta local",
+    status: "Código público",
     featured: true,
     links: [
       { label: "Ver repositorio", href: "https://github.com/nelsonjhongp/metrion-app", kind: "repo" },
@@ -109,7 +109,7 @@ export const projects: Project[] = [
       }
     ],
     dotTone: "light",
-    status: "Herramienta local",
+    status: "Código público",
     featured: true,
     links: [
       { label: "Ver repositorio", href: "https://github.com/nelsonjhongp/njgk-transcriber", kind: "repo" }

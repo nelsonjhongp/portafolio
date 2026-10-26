@@ -67,6 +67,10 @@
   background: var(--surface);
   box-shadow: 0 12px 24px rgba(10, 18, 28, 0.04);
 }
+.knowledge-complement { margin-top:var(--space-6); border:1px solid var(--panel-border); border-radius:var(--radius-panel); background:var(--surface); }
+.knowledge-complement > summary { padding:var(--space-4); min-height:44px; cursor:pointer; color:var(--text-body); font-size:var(--type-body); font-weight:700; }
+.knowledge-complement > summary .knowledge-label-with-icon { vertical-align:middle; }
+.knowledge-complement > .knowledge-complement-panel { border:0; border-top:1px solid var(--panel-border); border-radius:0 0 var(--radius-panel) var(--radius-panel); box-shadow:none; }
 
 .knowledge-complement-col {
   display: flex;
@@ -106,7 +110,7 @@
   width: 2rem;
   height: 2rem;
   padding: 0.38rem;
-  border-radius: 10px;
+  border-radius: var(--radius-control);
   background: var(--project-section-icon);
   box-shadow: none;
   flex: 0 0 2rem;

@@ -97,12 +97,13 @@ const complementCol2 = otherGroups.filter((_, i) => i % 2 === 1);
       </article>
     )}
 
-    <p class="knowledge-main-stack-label knowledge-label-with-icon" style="margin-top: 1.2rem;">
+    <details class="knowledge-complement">
+    <summary><span class="knowledge-label-with-icon">
       <span class="knowledge-inline-icon" aria-hidden="true">
         <img src={sectionIcons.complement} alt="" />
       </span>
       <span>Tecnologías complementarias</span>
-    </p>
+    </span></summary>
 
     <article class="knowledge-complement-panel" aria-label="Habilidades y tecnologías complementarias">
       <div class="knowledge-complement-col">
@@ -137,5 +138,6 @@ const complementCol2 = otherGroups.filter((_, i) => i % 2 === 1);
         ))}
       </div>
     </article>
+    </details>
   </div>
 </section>
