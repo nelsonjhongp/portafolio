@@ -42,7 +42,7 @@
   min-height: 7.8rem;
   padding: 1.2rem 0.9rem 1.1rem;
   border: none;
-  border-radius: 18px;
+  border-radius: var(--radius-panel);
   background: var(--surface);
   color: var(--text-body);
   font-size: 1rem;
@@ -65,15 +65,12 @@
 
 .tech-chip-main:hover,
 .tech-chip-main:focus-visible {
-  transform: translateY(-3px);
   border-color: var(--line);
   background: var(--surface);
-  box-shadow: 0 14px 24px rgba(10, 18, 28, 0.06);
 }
 
 .tech-chip-main:hover .tech-chip-icon img,
 .tech-chip-main:focus-visible .tech-chip-icon img {
-  transform: translateY(-1px) scale(1.04);
   filter: none;
 }
 

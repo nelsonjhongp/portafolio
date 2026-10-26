@@ -8,7 +8,7 @@
   padding: 0;
   z-index: 10000;
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: var(--radius-panel);
   background: transparent;
   color: inherit;
   box-shadow: 0 28px 70px rgba(15, 23, 42, 0.34);
@@ -30,7 +30,7 @@
 .project-modal__eyebrow,
 .project-modal__kicker {
   margin: 0;
-  font-size: 0.76rem;
+  font-size: var(--type-meta);
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -48,7 +48,7 @@
   border-radius: 999px;
   background: var(--accent-soft);
   color: var(--accent);
-  font-size: 0.66rem;
+  font-size: var(--type-meta);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -62,8 +62,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.35rem;
-  height: 2.35rem;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -142,7 +142,7 @@
 .project-modal__copy {
   margin: 0;
   color: var(--text-body);
-  font-size: 0.95rem;
+  font-size: var(--type-body);
   line-height: 1.7;
 }
 
@@ -152,7 +152,7 @@
   margin: 0;
   padding-left: 1.1rem;
   color: var(--text-body);
-  font-size: 0.95rem;
+  font-size: var(--type-body);
   line-height: 1.65;
 }
 
@@ -191,7 +191,7 @@
   .project-modal {
     width: min(100vw - 1rem, 720px);
     max-height: min(92vh, 860px);
-    border-radius: 20px;
+    border-radius: var(--radius-panel);
   }
 
   .project-modal__panel {
