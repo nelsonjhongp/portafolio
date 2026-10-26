@@ -105,6 +105,16 @@ export const techIconMap: Record<string, TechMeta> = {
     label: "GitHub",
     themeAwareIcon: true
   },
+  "GitHub Actions": {
+    iconImage: asset("/icons/tech/githubactions.svg"),
+    label: "GitHub Actions",
+    themeAwareIcon: true
+  },
+  Docker: {
+    iconImage: asset("/icons/tech/docker.svg"),
+    label: "Docker",
+    themeAwareIcon: true
+  },
   Figma: {
     iconImage: asset("/icons/tech/figma-original.svg"),
     label: "Figma"

@@ -104,11 +104,7 @@ export interface Profile {
   ctas: ActionLink[];
   projectCtas: ActionLink[];
   sectionTexts: SectionTexts;
-  aboutCallout: string;
-  contactEmailLabel: string;
   contactCvLabel: string;
-  contactCtaHeading: string;
-  contactCtaText: string;
   workflowSteps: WorkflowStep[];
   educationLabels: EducationLabels;
 }

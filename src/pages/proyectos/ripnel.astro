@@ -5,17 +5,19 @@ import SiteNavigation from "../../components/shared/SiteNavigation.astro";
 import Footer from "../../components/shared/Footer.astro";
 import CaseScreen from "../../components/projects/CaseScreen.astro";
 import CaseLightbox from "../../components/projects/CaseLightbox.astro";
+import ActionLink from "../../components/shared/ActionLink.astro";
+import TechChip from "../../components/shared/TechChip.astro";
 import { profile } from "../../content/profile";
 import { ripnelProject as project, ripnelScreens, ripnelMobile } from "../../content/ripnel";
 import { asset } from "../../utils/assets";
-const sections = [{ id: "contexto", label: "El problema" }, { id: "aporte", label: "Mi aporte" }, { id: "producto", label: "Recorridos" }, { id: "arquitectura", label: "Arquitectura" }, { id: "decisiones", label: "Decisiones" }, { id: "calidad", label: "Verificación y estado" }];
+const sections = [{ id: "contexto", label: "Qué hace el sistema" }, { id: "aporte", label: "Qué desarrollé" }, { id: "producto", label: "Recorridos del sistema" }, { id: "arquitectura", label: "Arquitectura" }, { id: "decisiones", label: "Decisiones técnicas" }, { id: "calidad", label: "Pruebas y estado actual" }];
 ---
 <MainLayout title={`${project.name} · Proyecto de desarrollo de software | ${profile.name}`} description={`${project.summary} Mi aporte, recorridos y decisiones técnicas en un proyecto propio.`} ogImage="og/ripnel-og.png" ogAlt="RIPNEL Platform: proyecto propio de desarrollo de software de Nelson Jhon Gil Pari, con una captura del ERP textil.">
   <div class="page-shell case-page">
-    <SiteNavigation brandHref={asset("#top")} brandImage="/brand/nj-logo.png" brandAlt="Nelson Nejigiku · Volver al inicio" links={[{ href: asset("#projects"), label: "Todos los proyectos" }, { href: "#producto", label: "Ver recorrido" }, { href: "#case-contact", label: "Contacto" }]} />
+    <SiteNavigation brandHref={asset("#top")} brandImage="/brand/nj-logo.png" brandAlt="Nelson Nejigiku · Volver al inicio" links={[{ href: asset("#projects"), label: "Todos los proyectos" }, { href: "#producto", label: "Ver recorrido" }, { href: asset("#contact"), label: "Contacto" }]} />
     <main id="main-content" tabindex="-1">
       <header class="case-hero case-container">
-        <a class="case-back" href={asset("#ripnel-platform")}>← Volver a proyectos</a>
+        <ActionLink className="case-back" appearance="text" href={asset("#ripnel-platform")} label="Volver a proyectos" kind="secondary" iconName="arrow-left" />
         <p class="case-eyebrow">Proyecto propio · Desarrollo de software</p>
         <h1>{project.name}</h1>
         <p class="case-lead">{project.summary}</p>
@@ -24,7 +26,7 @@ const sections = [{ id: "contexto", label: "El problema" }, { id: "aporte", labe
           <div><dt>Contexto</dt><dd>Gestión textil entre ubicaciones</dd></div>
           <div><dt>Código</dt><dd>Repositorio privado</dd></div>
         </dl>
-        <div class="case-actions"><a class="case-button" href="#producto">Ver recorrido ↓</a><a href={profile.contact.cvEs} target="_blank" rel="noreferrer">Ver mi CV ↗</a></div>
+        <div class="case-actions"><ActionLink href="#producto" label="Ver recorrido" kind="projects" icon="trailing" iconName="arrow-down" /><ActionLink appearance="text" href={profile.contact.cvEs} label={profile.contactCvLabel} kind="cv" icon="trailing" iconName="external-link" /></div>
         <div id="venta-en-mostrador"><CaseScreen {...ripnelScreens[0]} caption="El punto de venta reúne productos, variantes, cantidades y cobro. La captura muestra una venta en borrador con datos sintéticos; no se confirmó la operación." eager /></div>
         <p class="case-source">Capturas reales del ERP en un entorno local aislado, con datos sintéticos. Octubre de 2026.</p>
       </header>
@@ -54,7 +56,7 @@ const sections = [{ id: "contexto", label: "El problema" }, { id: "aporte", labe
               <summary><span><strong>Preparar una venta</strong><span>Consultar productos y revisar caja antes de pasar al punto de venta.</span></span></summary>
               <div class="case-journey-body">
                 <p>El catálogo muestra productos, variantes y precios. Caja permite revisar su apertura y las operaciones de la sesión.</p>
-                <a class="case-inline-link" href="#venta-en-mostrador">Ver el punto de venta mostrado al inicio ↑</a>
+                <ActionLink appearance="text" href="#venta-en-mostrador" label="Ver el punto de venta mostrado al inicio" kind="secondary" icon="trailing" iconName="arrow-up" />
                 <CaseScreen {...ripnelScreens[1]} />
                 <CaseScreen {...ripnelScreens[4]} />
               </div>
@@ -72,7 +74,7 @@ const sections = [{ id: "contexto", label: "El problema" }, { id: "aporte", labe
               <div class="case-journey-body">
                 <p>El inicio muestra las tareas disponibles según los permisos de la sesión.</p>
                 <CaseScreen {...ripnelScreens[5]} />
-                <div class="case-mobile-layout"><div><h3>Inicio en móvil</h3><p>La misma pantalla de inicio a 390 px de ancho, con accesos rápidos y estado de caja.</p></div><CaseScreen {...ripnelMobile} mobile /></div>
+                <CaseScreen {...ripnelMobile} label="Vista móvil" mobile />
               </div>
             </details>
           </section>
@@ -85,7 +87,7 @@ const sections = [{ id: "contexto", label: "El problema" }, { id: "aporte", labe
               <p>Promociones manuales · aceptación independiente por destino</p>
             </div>
             <p>La interfaz consulta la API, que valida permisos y reglas de inventario, precios y caja antes de modificar datos. El frontend no consulta PostgreSQL. Cada entorno se valida por separado antes de un despliegue manual.</p>
-            <ul class="case-stack" aria-label="Tecnologías del proyecto">{project.stack.map(item => <li>{item}</li>)}</ul>
+            <ul class="case-stack" aria-label="Tecnologías del proyecto">{project.stack.map(item => <li><TechChip item={item} variant="project" /></li>)}</ul>
           </section>
           <section id="decisiones" class="case-section">
             <p class="case-eyebrow">05 / Implementación</p><h2>Decisiones técnicas</h2>
@@ -101,7 +103,7 @@ const sections = [{ id: "contexto", label: "El problema" }, { id: "aporte", labe
           </section>
         </div>
       </div>
-      <section class="case-contact case-container" id="case-contact"><h2>{profile.sectionTexts.contactTitle}</h2><p>{profile.sectionTexts.contactCopy}</p><div class="case-actions"><a class="case-button" href={profile.contact.email}>Escríbeme</a><a href={profile.contact.cvEs} target="_blank" rel="noreferrer">Ver mi CV ↗</a><a href={asset("#ripnel-platform")}>Volver a proyectos →</a></div></section>
+      <nav class="case-contact case-container" id="case-contact" aria-label="Continuar desde el caso"><ActionLink href={asset("#contact")} label="Contacto" kind="contact" icon="trailing" /><ActionLink appearance="text" href={profile.contact.cvEs} label={profile.contactCvLabel} kind="cv" icon="trailing" iconName="external-link" /><ActionLink appearance="text" href={asset("#ripnel-platform")} label="Volver a proyectos" kind="secondary" icon="trailing" iconName="arrow-left" /></nav>
     </main>
     <Footer name={profile.name} />
     <CaseLightbox />

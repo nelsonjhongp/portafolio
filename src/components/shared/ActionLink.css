@@ -5,6 +5,26 @@
 .action-link {
   white-space: nowrap;
 }
+.action-link--text {
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  min-height:44px;
+  color:var(--accent-strong);
+  font:inherit;
+  font-weight:600;
+  border:0;
+  padding:0;
+  background:transparent;
+  white-space:normal;
+  line-height:1.4;
+}
+.action-link--text .action-link__icon { flex-shrink:0; }
+.action-link--text:hover { text-decoration:underline; text-underline-offset:3px; }
+.action-link--text .action-link__icon-image { filter:var(--project-section-icon-filter); }
+.action-link__icon--arrow-left { transform:rotate(180deg); }
+.action-link__icon--arrow-down { transform:rotate(90deg); }
+.action-link__icon--arrow-up { transform:rotate(-90deg); }
 
 .action-link__icon {
   display: inline-flex;

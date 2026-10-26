@@ -51,6 +51,15 @@ con JS se habilitan tema, menú móvil y ampliación en dialog. No hay acceso de
 público ni se exponen credenciales del ERP. La web de la marca, ripnel.com, es
 independiente. Una futura DEMO mínima queda por definir y no se confunde con el
 entorno temporal de capacitación existente.
+
+La presentación y los textos de disponibilidad se mantienen en `src/content/profile.ts`.
+Contacto se concentra en la portada; el caso termina con enlaces a Contacto, CV y proyectos.
+`ActionLink` comparte presentación de botón o texto e iconos direccionales; `TechChip`
+comparte las insignias de tecnologías entre portada, tarjetas y caso.
+
+Los SVG locales de Docker y GitHub Actions proceden de [Simple Icons](https://github.com/simple-icons/simple-icons/tree/90646e4bf7f3b89df6c37e65baf3e7bc759a517c/icons),
+referencia `90646e4bf7f3b89df6c37e65baf3e7bc759a517c`. Se conserva su licencia CC0-1.0
+en `public/icons/tech/simple-icons-LICENSE.txt`; identifican las tecnologías utilizadas.
 ## Pendiente técnico previo a publicación
 
 La instalación reproducible del lockfile existente (`npm ci`, 22/10/2026) informó

@@ -21,7 +21,7 @@ const featuredProjects = projects.filter((project) => project.featured);
 
 <MainLayout
   title={`${profile.name} | ${profile.title}`}
-  description="Portafolio de desarrollador orientado a desarrollo web, bases de datos y sistemas administrativos con TypeScript, React, Node.js y PostgreSQL."
+  description={`${profile.name}. ${profile.subtitle}`}
 >
   <div class="page-shell">
     <SiteNavigation

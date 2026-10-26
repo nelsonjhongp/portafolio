@@ -2,8 +2,7 @@ import type { Profile } from "../types/portfolio";
 import { asset } from "../utils/assets";
 
 const introduction =
-  "Aplicaciones web y herramientas de escritorio para organizar información y simplificar tareas.";
-const firstOpportunity = "Busco mi primera oportunidad profesional en desarrollo de software";
+  "Desarrollo aplicaciones web y herramientas de escritorio.";
 
 export const profile: Profile = {
   name: "Nelson Jhon Gil Pari",
@@ -122,19 +121,14 @@ export const profile: Profile = {
       "Proyectos propios en los que aplico desarrollo web, bases de datos y diseño de interfaces para resolver problemas concretos.",
     knowledgeTitle: "Habilidades y tecnologías",
     knowledgeCopy:
-      "Tecnologías y capacidades que aplico en mis proyectos para construir aplicaciones web, trabajar con bases de datos y desarrollar herramientas administrativas.",
+      "Tecnologías y herramientas que utilizo en mis proyectos de software.",
     aboutTitle: "Sobre mí",
     contactTitle: "Contacto",
-    contactCopy: `${firstOpportunity}.`,
+    contactCopy: "Disponible para oportunidades en desarrollo de software.",
     educationCopy:
       "Grado de bachiller en Ingeniería de Software y formación complementaria enfocada en JavaScript y PostgreSQL."
   },
-  aboutCallout: `${firstOpportunity}.`,
-  contactEmailLabel: "Escríbeme por correo",
-  contactCvLabel: "Descargar CV",
-  contactCtaHeading: firstOpportunity,
-  contactCtaText:
-    "Escríbeme para conversar sobre cómo puedo aportar a tu equipo.",
+  contactCvLabel: "Ver CV",
   workflowSteps: [
     {
       title: "Entiendo el proceso",
