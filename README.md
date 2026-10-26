@@ -19,7 +19,9 @@ npm run build
 Automático vía GitHub Actions al pushear a `main`.
 ## Caso RIPNEL
 
-La página `/portafolio/proyectos/ripnel/` presenta RIPNEL como producto full stack.
+La página `/portafolio/proyectos/ripnel/` presenta RIPNEL como proyecto propio de
+desarrollo de software: problema, aporte personal, recorridos, arquitectura,
+decisiones y verificación. No es una landing comercial ni ofrece acceso al ERP.
 Los datos compartidos con la portada viven en `src/content/ripnel.ts`. Las capturas
 originales están en `src/assets/projects/ripnel/`; Astro genera WebP responsivos al compilar.
 Ver procedencia y límites en [la nota de assets](src/assets/projects/ripnel/README.md).
@@ -42,9 +44,13 @@ sobre `main`; integrar un PR sí publicará, por lo que requiere revisión previ
 
 La galería es manual, con puntos y deslizamiento móvil. Las tarjetas usan un marco
 16:10 con recorte superior; el caso dedicado conserva las imágenes completas.
+Sus recorridos se agrupan en desplegables nativos (venta, existencias y sesión),
+con el primero abierto inicialmente. También funcionan sin JavaScript.
 El contenido y los enlaces de las capturas funcionan sin JS;
 con JS se habilitan tema, menú móvil y ampliación en dialog. No hay acceso de DEMO
-público ni se exponen credenciales del ERP.
+público ni se exponen credenciales del ERP. La web de la marca, ripnel.com, es
+independiente. Una futura DEMO mínima queda por definir y no se confunde con el
+entorno temporal de capacitación existente.
 ## Pendiente técnico previo a publicación
 
 La instalación reproducible del lockfile existente (`npm ci`, 22/10/2026) informó

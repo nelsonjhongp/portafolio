@@ -12,6 +12,10 @@
   venta, catálogo, existencias, solicitud de transferencia, caja e inicio (desktop/móvil).
 
 La vista social `public/og/ripnel-og.png` es una composición editorial de código
-con la captura de POS y texto. No se generó ni alteró la UI con IA.
+con la captura de POS y el título «RIPNEL Platform», identificado como proyecto
+propio de desarrollo de software. No se generó ni alteró la UI con IA.
+El caso conserva las siete imágenes completas y su ampliación. Catálogo y caja,
+inventario y solicitud de transferencia, e inicio desktop/móvil se agrupan en
+recorridos desplegables; el punto de venta permanece visible en la cabecera.
 Estas imágenes acreditan vistas del sistema, no adopción, facturación ni una
 certificación de todos sus flujos. Revisar la vigencia del contenido antes de publicar.

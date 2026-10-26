@@ -8,24 +8,24 @@ import CaseLightbox from "../../components/projects/CaseLightbox.astro";
 import { profile } from "../../content/profile";
 import { ripnelProject as project, ripnelScreens, ripnelMobile } from "../../content/ripnel";
 import { asset } from "../../utils/assets";
-const sections = [{ id: "contexto", label: "El problema" }, { id: "aporte", label: "Mi aporte" }, { id: "producto", label: "El producto" }, { id: "arquitectura", label: "Arquitectura" }, { id: "decisiones", label: "Decisiones" }, { id: "calidad", label: "Calidad y estado" }];
+const sections = [{ id: "contexto", label: "El problema" }, { id: "aporte", label: "Mi aporte" }, { id: "producto", label: "Recorridos" }, { id: "arquitectura", label: "Arquitectura" }, { id: "decisiones", label: "Decisiones" }, { id: "calidad", label: "Verificación y estado" }];
 ---
-<MainLayout title="RIPNEL · Un ERP textil de punta a punta | Nelson Jhon Gil Pari" description="Caso de desarrollo full stack: inventario, ventas, caja y transferencias con Next.js, Express y PostgreSQL. Diseño, decisiones técnicas y evidencia de RIPNEL." ogImage="og/ripnel-og.png" ogAlt="RIPNEL: del flujo operativo al producto completo. Caso de Nelson Jhon Gil Pari.">
+<MainLayout title={`${project.name} · Proyecto de desarrollo de software | ${profile.name}`} description={`${project.summary} Mi aporte, recorridos y decisiones técnicas en un proyecto propio.`} ogImage="og/ripnel-og.png" ogAlt="RIPNEL Platform: proyecto propio de desarrollo de software de Nelson Jhon Gil Pari, con una captura del ERP textil.">
   <div class="page-shell case-page">
-    <SiteNavigation brandHref={asset("#top")} brandImage="/brand/nj-logo.png" brandAlt="Nelson Nejigiku · Volver al inicio" links={[{ href: asset("#projects"), label: "Todos los proyectos" }, { href: "#producto", label: "Ver el producto" }, { href: "#case-contact", label: "Contacto" }]} />
+    <SiteNavigation brandHref={asset("#top")} brandImage="/brand/nj-logo.png" brandAlt="Nelson Nejigiku · Volver al inicio" links={[{ href: asset("#projects"), label: "Todos los proyectos" }, { href: "#producto", label: "Ver recorrido" }, { href: "#case-contact", label: "Contacto" }]} />
     <main id="main-content" tabindex="-1">
       <header class="case-hero case-container">
         <a class="case-back" href={asset("#ripnel-platform")}>← Volver a proyectos</a>
-        <p class="case-eyebrow">Caso de producto · Desarrollo full stack</p>
-        <h1>RIPNEL<span>Del flujo operativo<br /> al producto completo.</span></h1>
-        <p class="case-lead">Un ERP para conectar inventario, ventas, caja y transferencias de un negocio textil. Diseñé y desarrollé el sistema de punta a punta, desde los requerimientos hasta la preparación de sus releases.</p>
+        <p class="case-eyebrow">Proyecto propio · Desarrollo de software</p>
+        <h1>{project.name}</h1>
+        <p class="case-lead">{project.summary}</p>
         <dl class="case-facts">
-          <div><dt>Mi rol</dt><dd>Diseño y desarrollo integral</dd></div>
-          <div><dt>Contexto</dt><dd>Operación textil entre ubicaciones</dd></div>
-          <div><dt>Acceso</dt><dd>Código privado · demo en preparación</dd></div>
+          <div><dt>Mi aporte</dt><dd>Diseño de flujos, interfaz, API y base de datos</dd></div>
+          <div><dt>Contexto</dt><dd>Gestión textil entre ubicaciones</dd></div>
+          <div><dt>Código</dt><dd>Repositorio privado</dd></div>
         </dl>
-        <div class="case-actions"><a class="case-button" href="#producto">Explorar el producto ↓</a><a href={profile.contact.cvEs} target="_blank" rel="noreferrer">Ver mi CV ↗</a></div>
-        <CaseScreen {...ripnelScreens[0]} eager />
+        <div class="case-actions"><a class="case-button" href="#producto">Ver recorrido ↓</a><a href={profile.contact.cvEs} target="_blank" rel="noreferrer">Ver mi CV ↗</a></div>
+        <div id="venta-en-mostrador"><CaseScreen {...ripnelScreens[0]} caption="El punto de venta reúne productos, variantes, cantidades y cobro. La captura muestra una venta en borrador con datos sintéticos; no se confirmó la operación." eager /></div>
         <p class="case-source">Capturas reales del ERP en un entorno local aislado, con datos sintéticos. Octubre de 2026.</p>
       </header>
       <div class="case-container case-body">
@@ -34,52 +34,74 @@ const sections = [{ id: "contexto", label: "El problema" }, { id: "aporte", labe
         </aside>
         <div class="case-story">
           <section id="contexto" class="case-section">
-            <p class="case-eyebrow">01 / Contexto</p><h2>Una operación, varias piezas que deben coincidir.</h2>
-            <p>Una venta no termina al añadir un producto al carrito: afecta existencias, precios y caja. Cuando el stock se mueve entre ubicaciones, también importa quién solicita, quién despacha y quién recibe.</p>
-            <p>El reto fue convertir esas relaciones en flujos claros y reglas consistentes. El sistema debía ayudar a operar sin trasladar al usuario la complejidad del modelo de datos.</p>
-            <div class="case-note"><strong>Alcance del caso</strong><p>ERP interno y su proceso de desarrollo. La web pública de RIPNEL tiene identidad y publicación propias; no es esta página del portafolio.</p></div>
+            <p class="case-eyebrow">01 / Contexto</p><h2>Qué hace el sistema</h2>
+            <p>RIPNEL permite registrar ventas, consultar stock por ubicación y gestionar caja y transferencias. Los accesos dependen del rol del usuario.</p>
+            <p>Es un proyecto propio de desarrollo de software. Esta página presenta mi trabajo en el ERP; ripnel.com es la web de la marca.</p>
           </section>
           <section id="aporte" class="case-section">
-            <p class="case-eyebrow">02 / Responsabilidad</p><h2>Mi aporte abarca el producto completo.</h2>
+            <p class="case-eyebrow">02 / Desarrollo</p><h2>Qué desarrollé</h2>
             <div class="case-grid">
-              <article><span>Diseño</span><h3>Entender antes de construir</h3><p>Requerimientos, recorridos operativos, prototipos e interfaces que mantienen el contexto de la tarea.</p></article>
-              <article><span>Implementación</span><h3>Conectar interfaz y dominio</h3><p>Frontend React/Next.js, API Express y modelo PostgreSQL con permisos, validación y transacciones.</p></article>
-              <article><span>Entrega</span><h3>Hacer verificable el cambio</h3><p>Pruebas proporcionadas al delta, CI, documentación y preparación de candidatos para promociones manuales.</p></article>
+              <article><span>Diseño</span><h3>Requerimientos y flujos</h3><p>Definí los recorridos de venta, caja y transferencias, sus estados y las acciones disponibles para cada rol.</p></article>
+              <article><span>Implementación</span><h3>Frontend, API y datos</h3><p>Desarrollé las pantallas en Next.js, la API en Express y el modelo PostgreSQL, con autorización y transacciones en el backend.</p></article>
+              <article><span>Verificación</span><h3>Pruebas y CI</h3><p>Preparé pruebas de interfaz e integración, comprobaciones en GitHub y documentación para los despliegues manuales.</p></article>
             </div>
-            <p class="case-secondary">Trabajo con asistencia de herramientas de IA durante el desarrollo. La responsabilidad sobre las decisiones, la revisión y la validación del producto es mía.</p>
+            <p class="case-secondary">Trabajo con asistencia de herramientas de IA durante el desarrollo. La responsabilidad sobre las decisiones, la revisión y la validación del proyecto es mía.</p>
           </section>
           <section id="producto" class="case-section">
-            <p class="case-eyebrow">03 / Recorrido visual</p><h2>Una interfaz alrededor de las tareas.</h2>
-            <p>El recorrido empieza en la sesión y conecta catálogo, existencias y operación. Puedes ampliar cada captura; todos los registros mostrados son sintéticos.</p>
-            {ripnelScreens.slice(1).map(screen => <CaseScreen {...screen} />)}
-            <div class="case-mobile-layout"><div><h3>También en una pantalla pequeña</h3><p>Las consultas conservan su jerarquía en móvil. El punto de venta y las tablas requieren revisar cada tarea en su contexto; una captura adaptable no sustituye esa validación.</p></div><CaseScreen {...ripnelMobile} mobile /></div>
+            <p class="case-eyebrow">03 / Interfaz</p><h2>Recorridos del sistema</h2>
+            <p>Capturas del ERP agrupadas por tarea. Puedes abrir cada grupo y ampliar las imágenes.</p>
+            <details class="case-journey" open>
+              <summary><span><strong>Preparar una venta</strong><span>Consultar productos y revisar caja antes de pasar al punto de venta.</span></span></summary>
+              <div class="case-journey-body">
+                <p>El catálogo muestra productos, variantes y precios. Caja permite revisar su apertura y las operaciones de la sesión.</p>
+                <a class="case-inline-link" href="#venta-en-mostrador">Ver el punto de venta mostrado al inicio ↑</a>
+                <CaseScreen {...ripnelScreens[1]} />
+                <CaseScreen {...ripnelScreens[4]} />
+              </div>
+            </details>
+            <details class="case-journey">
+              <summary><span><strong>Consultar y trasladar existencias</strong><span>Revisar stock por ubicación y preparar una solicitud de transferencia.</span></span></summary>
+              <div class="case-journey-body">
+                <p>Inventario muestra el stock por ubicación. Las transferencias tienen etapas de solicitud, despacho y recepción; la captura corresponde a una solicitud en borrador.</p>
+                <CaseScreen {...ripnelScreens[2]} />
+                <CaseScreen {...ripnelScreens[3]} caption="Solicitud en borrador entre ubicaciones ficticias. La captura no acredita un despacho ni una recepción completados." />
+              </div>
+            </details>
+            <details class="case-journey">
+              <summary><span><strong>Navegar según la sesión</strong><span>Encontrar las tareas disponibles en escritorio y móvil.</span></span></summary>
+              <div class="case-journey-body">
+                <p>El inicio muestra las tareas disponibles según los permisos de la sesión.</p>
+                <CaseScreen {...ripnelScreens[5]} />
+                <div class="case-mobile-layout"><div><h3>Inicio en móvil</h3><p>La misma pantalla de inicio a 390 px de ancho, con accesos rápidos y estado de caja.</p></div><CaseScreen {...ripnelMobile} mobile /></div>
+              </div>
+            </details>
           </section>
           <section id="arquitectura" class="case-section">
-            <p class="case-eyebrow">04 / Estructura</p><h2>Límites claros para proteger la operación.</h2>
+            <p class="case-eyebrow">04 / Estructura</p><h2>Arquitectura</h2>
             <div class="case-architecture" role="img" aria-label="El navegador ERP Next.js consulta la API Express mediante HTTP. La API autoriza y ejecuta transacciones en PostgreSQL. La web pública es independiente. Staging, DEMO temporal y producción aceptan releases por separado.">
               <div class="architecture-row"><div><small>Interfaz</small><strong>ERP · Next.js</strong><span>Sesión y tareas</span></div><span aria-hidden="true">→</span><div><small>Dominio</small><strong>API · Express</strong><span>Permisos y reglas</span></div><span aria-hidden="true">→</span><div><small>Persistencia</small><strong>PostgreSQL</strong><span>Integridad y transacciones</span></div></div>
               <div class="architecture-separate"><strong>Web pública</strong><span>Contenido e identidad propios · publicación independiente</span></div>
               <div class="architecture-destinations"><span>Staging</span><span>DEMO temporal</span><span>Producción</span></div>
               <p>Promociones manuales · aceptación independiente por destino</p>
             </div>
-            <p>El ERP consume HTTP; la API decide autorización, stock, precios y caja. El frontend no consulta PostgreSQL. Separar las promociones permite validar un candidato sin convertir un merge en un despliegue automático.</p>
+            <p>La interfaz consulta la API, que valida permisos y reglas de inventario, precios y caja antes de modificar datos. El frontend no consulta PostgreSQL. Cada entorno se valida por separado antes de un despliegue manual.</p>
             <ul class="case-stack" aria-label="Tecnologías del proyecto">{project.stack.map(item => <li>{item}</li>)}</ul>
           </section>
           <section id="decisiones" class="case-section">
-            <p class="case-eyebrow">05 / Criterio técnico</p><h2>Tres decisiones detrás de las pantallas.</h2>
+            <p class="case-eyebrow">05 / Implementación</p><h2>Decisiones técnicas</h2>
             <article class="case-decision"><span>01</span><div><h3>Autorizar en el backend</h3><p><strong>Problema:</strong> ocultar un botón no impide ejecutar una acción.</p><p><strong>Decisión:</strong> validar sesión y permisos en la API; la interfaz refleja las acciones disponibles.</p><p><strong>Coste:</strong> mantener contratos y probar tanto la experiencia permitida como la denegación.</p></div></article>
-            <article class="case-decision"><span>02</span><div><h3>Tratar cada operación como una unidad</h3><p><strong>Problema:</strong> una venta o transferencia puede afectar varios registros relacionados.</p><p><strong>Decisión:</strong> centralizar las reglas y las transacciones en el backend y PostgreSQL.</p><p><strong>Coste:</strong> diseñar estados, integridad y concurrencia, además de la pantalla del recorrido feliz.</p></div></article>
-            <article class="case-decision"><span>03</span><div><h3>Separar integrar de publicar</h3><p><strong>Problema:</strong> un cambio válido en Git no garantiza un release aceptado para cada destino.</p><p><strong>Decisión:</strong> CI proporcional en PR, comprobación completa en main y promociones manuales identificadas por candidato y artefacto.</p><p><strong>Coste:</strong> conservar evidencias y realizar una aceptación operativa antes de promover.</p></div></article>
+            <article class="case-decision"><span>02</span><div><h3>Tratar cada operación como una unidad</h3><p><strong>Problema:</strong> una venta o transferencia puede afectar varios registros relacionados.</p><p><strong>Decisión:</strong> centralizar las reglas y las transacciones en el backend y PostgreSQL.</p><p><strong>Coste:</strong> contemplar estados, integridad y operaciones simultáneas, también cuando una acción falla.</p></div></article>
+            <article class="case-decision"><span>03</span><div><h3>Separar integrar de desplegar</h3><p><strong>Problema:</strong> aprobar un cambio de código no demuestra que esté listo para todos los entornos.</p><p><strong>Decisión:</strong> comprobar en GitHub lo afectado en cada propuesta de cambio y ejecutar una verificación completa en main. Los despliegues son manuales y usan una versión identificada.</p><p><strong>Coste:</strong> registrar las comprobaciones y validar esa versión en el entorno de destino antes de habilitarla.</p></div></article>
           </section>
           <section id="calidad" class="case-section">
-            <p class="case-eyebrow">06 / Evidencia y límites</p><h2>Mostrar lo construido y explicar lo pendiente.</h2>
-            <div class="case-evidence"><h3>Verificación de desarrollo</h3><p>La base revisada de octubre de 2026 incluye pruebas unitarias y E2E de interfaz con APIs simuladas. Un smoke separado recorre login, identidad, permisos, productos y logout con build ERP, API real y PostgreSQL 17 descartable.</p><p>Son capas complementarias: las pruebas con mocks aíslan comportamientos de la interfaz; el smoke comprueba una integración concreta. Ninguna acredita por sí sola todos los procesos comerciales.</p></div>
-            <div class="case-evidence"><h3>Estado del producto</h3><p>El ERP está desarrollado y tiene un flujo de CI y releases manuales. La DEMO de capacitación sigue en preparación y no se ofrece como acceso público en este caso. La web pública conserva su propia aceptación.</p><p>Las capturas muestran el código de referencia <code>4019c10</code>, ejecutado localmente el 22 de octubre de 2026. No representan datos de clientes ni una medición de adopción o impacto comercial.</p></div>
-            <div class="case-note"><strong>Lo que me llevo</strong><p>Una interfaz operativa depende tanto del diseño como de los permisos, el estado de los datos y la forma de entregar cambios. Hacer visibles esos límites es parte de construir un producto mantenible.</p></div>
+            <p class="case-eyebrow">06 / Verificación</p><h2>Pruebas y estado actual</h2>
+            <div class="case-evidence"><h3>Pruebas de desarrollo</h3><p>La base revisada incluye pruebas unitarias y pruebas de interfaz con APIs simuladas. Otra comprobación recorre inicio de sesión, identidad, permisos, consulta de productos y cierre de sesión con el frontend compilado, la API y PostgreSQL reales.</p><p>Estas pruebas cubren comportamientos concretos; no certifican por sí solas todos los procesos del ERP.</p></div>
+            <div class="case-evidence"><h3>Acceso y disponibilidad</h3><p>ERP desarrollado, con repositorio privado y despliegues manuales. Este caso ofrece capturas y documentación de la implementación; el acceso al ERP no es público.</p><p>Una futura DEMO reducida queda por definir, separada de la capacitación existente y de la web ripnel.com.</p></div>
+            <details class="case-provenance"><summary>Procedencia y límites de la evidencia</summary><div><p>Capturas del código de referencia <code>4019c10</code>, ejecutado localmente el 22 de octubre de 2026 con el frontend compilado, la API y PostgreSQL 17 descartable. Todos los registros son sintéticos. La venta y la solicitud de transferencia son borradores.</p><p>Las imágenes acreditan estas vistas del sistema, no datos de clientes, adopción ni impacto comercial. La capacitación existente requiere autenticación y un entorno DEMO temporal; no implica disponibilidad pública.</p></div></details>
           </section>
         </div>
       </div>
-      <section class="case-contact case-container" id="case-contact"><p class="case-eyebrow">Sigamos la conversación</p><h2>¿Buscas un perfil full stack con visión de producto?</h2><p>{profile.sectionTexts.contactCopy} Podemos conversar sobre los flujos, las decisiones o la implementación de RIPNEL.</p><div class="case-actions"><a class="case-button" href={profile.contact.email}>Escríbeme</a><a href={profile.contact.cvEs} target="_blank" rel="noreferrer">Ver mi CV ↗</a><a href={asset("#ripnel-platform")}>Volver a proyectos →</a></div></section>
+      <section class="case-contact case-container" id="case-contact"><h2>{profile.sectionTexts.contactTitle}</h2><p>{profile.sectionTexts.contactCopy}</p><div class="case-actions"><a class="case-button" href={profile.contact.email}>Escríbeme</a><a href={profile.contact.cvEs} target="_blank" rel="noreferrer">Ver mi CV ↗</a><a href={asset("#ripnel-platform")}>Volver a proyectos →</a></div></section>
     </main>
     <Footer name={profile.name} />
     <CaseLightbox />
