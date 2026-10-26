@@ -4,7 +4,7 @@ Portafolio personal con Astro y GitHub Pages.
 
 ## Stack
 
-Astro, TypeScript, CSS.
+Astro 7.4.2, TypeScript 5.9.3 y CSS. Desarrollo y CI usan Node.js 24.
 
 ## Uso
 
@@ -76,6 +76,12 @@ Los espacios siguen la escala 4/8/12/16/24/32/48/64/80 px y los radios compartid
 son 8 px para controles, 16 px para paneles y 999 px para píldoras.
 La capa sobre la fotografía protege el contraste del texto. En tema claro, la
 navegación conserva fondo oscuro para mantener legibles sus enlaces e iconos.
+Las tecnologías principales no tienen borde ni elevación al pasar el cursor;
+capacidades, idiomas y tecnologías complementarias conservan el borde de agrupación.
+Formación y los detalles de Metrion/Transcriber comparten el radio de panel de 16 px
+y etiquetas de 12 px. Sus detalles usan cuerpo de 16 px y cierres de 44 × 44 px.
+«Ver caso» solo se muestra cuando se ha registrado el control del diálogo con JS;
+sin JS permanecen las tarjetas y los enlaces a los repositorios públicos.
 
 El contenedor general llega a 1120 px con al menos 16 px laterales. A partir de
 1024 px, la cabecera del caso distribuye información y captura en dos columnas;
@@ -101,12 +107,24 @@ la URL de la ventana de prueba. La emulación de ancho no se presenta como esa p
 Los SVG locales de Docker y GitHub Actions proceden de [Simple Icons](https://github.com/simple-icons/simple-icons/tree/90646e4bf7f3b89df6c37e65baf3e7bc759a517c/icons),
 referencia `90646e4bf7f3b89df6c37e65baf3e7bc759a517c`. Se conserva su licencia CC0-1.0
 en `public/icons/tech/simple-icons-LICENSE.txt`; identifican las tecnologías utilizadas.
-## Pendiente técnico previo a publicación
+## Dependencias y compatibilidad
 
-La instalación reproducible del lockfile existente (`npm ci`, 22/10/2026) informó
-17 avisos de auditoría: 1 bajo, 4 moderados, 11 altos y 1 crítico. Astro 5.18.1 figura
-entre las dependencias afectadas. El sitio genera HTML estático; no se debe asumir
-que todos los avisos son explotables en GitHub Pages ni descartarlos por ese motivo.
-Evaluar las rutas afectadas y una actualización compatible en un cambio separado
-antes de publicar. Esta entrega no modifica las versiones ni el lockfile y no
-utiliza `npm audit fix --force`.
+La instalación del 22/10/2026 con Astro 5.18.1 informó 17 avisos. La revisión del
+lockfile del 26/10/2026 informó 19 (1 bajo, 4 moderados, 13 altos y 1 crítico).
+Se resolvieron en un cambio separado mediante versiones elegidas explícitamente:
+Astro 7.4.2 y `@astrojs/check` 0.9.12, conservando TypeScript 5.9.3. La instalación
+limpia con `npm ci` y la auditoría del nuevo lockfile informaron cero vulnerabilidades
+el 26/10/2026. Ese resultado corresponde a la base de avisos de esa fecha.
+
+Se contrastaron las guías oficiales de [Astro 6](https://docs.astro.build/en/guides/upgrade-to/v6/)
+y [Astro 7](https://docs.astro.build/en/guides/upgrade-to/v7/): el sitio no usa adaptador
+SSR, colecciones con esquemas, plugins Vite, MDX ni API internas. `compressHTML: true`
+conserva el tratamiento anterior de espacios entre elementos. Se regeneran y revisan
+las imágenes responsivas, además de la navegación y los estilos del build estático.
+No se ejecutó un actualizador automático de versiones mayores ni `npm audit fix`.
+
+El [aviso crítico de AVIF](https://github.com/withastro/astro/security/advisories/GHSA-26w7-cxv4-gfx2)
+afecta al procesamiento de imágenes AVIF no confiables. El portafolio usa imágenes
+locales controladas y publica archivos estáticos, sin endpoint de optimización ni
+carga de archivos del visitante. Eso limita esa vía de exposición; la corrección se
+incorpora igualmente actualizando la herramienta de build y su servicio de imágenes.
