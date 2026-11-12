@@ -10,6 +10,8 @@ export interface ProjectScreen {
   src: string | ImageMetadata;
   alt: string;
   label: string;
+  width?: number;
+  height?: number;
 }
 
 export interface Project {

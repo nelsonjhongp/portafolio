@@ -1,7 +1,7 @@
 .project-visual-shell {
   position: relative;
   min-width: 0;
-  align-self: center;
+  align-self: stretch;
   border-right: 1px solid var(--line);
   background: var(--surface);
 }
@@ -9,6 +9,7 @@
 .project-visual {
   position: relative;
   aspect-ratio: 16 / 10;
+  height: 100%;
   overflow: hidden;
   touch-action: pan-y pinch-zoom;
 }
@@ -33,7 +34,7 @@
 
 #sai-t .project-screen img,
 #scrum-fundamentals .project-screen img {
-  object-fit: contain;
+  object-fit: fill;
 }
 
 .project-carousel-dots {
@@ -108,5 +109,9 @@
   .project-visual-shell {
     border-right: 0;
     border-bottom: 1px solid var(--line);
+  }
+
+  .project-visual {
+    height: auto;
   }
 }

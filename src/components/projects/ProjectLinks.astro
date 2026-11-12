@@ -38,13 +38,9 @@ const downloadIcon = asset("/icons/lucide--download.svg");
         "project-link",
         link.kind === "release"
           ? "project-link-release"
-          : link.kind === "repo"
-            ? "project-link-arrow"
-            : "project-link-subtle"
+          : "project-link-arrow"
       ]}
       href={link.href}
-      target="_blank"
-      rel="noreferrer"
     >
       {link.kind === "repo" ? (
         <span class="project-link-github" style={`--icon-url: url('${githubIcon}')`} aria-hidden="true"></span>
@@ -52,7 +48,7 @@ const downloadIcon = asset("/icons/lucide--download.svg");
         <span class="project-link-release-icon" style={`--icon-url: url('${downloadIcon}')`} aria-hidden="true"></span>
       ) : null}
       {link.label}
-      {link.kind === "repo" ? (
+      {link.kind !== "release" ? (
         <span class="link-arrow" style={`--icon-url: url('${arrowIcon}')`} aria-hidden="true"></span>
       ) : null}
     </a>

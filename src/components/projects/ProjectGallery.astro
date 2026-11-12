@@ -15,7 +15,7 @@ const screens = project.screens?.length
     {screens.map((screen, index) => (
       <div class="project-screen" id={`${project.id}-screen-${index + 1}`} data-project-screen hidden={index !== 0} data-screen-label={screen.label}>
         {typeof screen.src === "string" ? (
-          <img src={screen.src} alt={screen.alt} loading="lazy" draggable="false" />
+          <img src={screen.src} alt={screen.alt} width={"width" in screen ? screen.width : undefined} height={"height" in screen ? screen.height : undefined} loading="lazy" draggable="false" />
         ) : (
           <Image src={screen.src} alt={screen.alt} widths={[480, 960]} sizes="(max-width: 720px) calc(100vw - 2rem), (max-width: 1152px) 55vw, 616px" format="webp" quality={80} loading="lazy" draggable="false" />
         )}
