@@ -5,6 +5,44 @@ import { ripnelProject } from "./ripnel";
 export const projects: Project[] = [
   ripnelProject,
   {
+    id: "sai-t",
+    name: "Sai-T",
+    eyebrow: "Proyecto para cliente",
+    summary: "Aplicación de análisis de datos y simulación. Trabajé con el cliente en interfaz, backend, autenticación, almacenamiento y pruebas. El producto ha seguido evolucionando.",
+    problem: "Explorar datos y simulaciones de forma que sus resultados puedan revisarse.",
+    solution: "Una aplicación web que reúne datos, simulaciones y herramientas de consulta.",
+    responsibilities: ["Interfaz y backend", "Autenticación y almacenamiento", "Pruebas de funcionalidades"],
+    stack: ["Python", "React", "TypeScript"],
+    image: asset("/projects/sai-t-public.png"),
+    screens: [{ src: asset("/projects/sai-t-public.png"), alt: "Página pública de Sai-T con una simulación ilustrativa.", label: "Página pública" }],
+    status: "Proyecto para cliente · sitio en evolución",
+    cardOnly: true,
+    featured: true,
+    links: [{ label: "Visitar sitio público", href: "https://sai-t.sotravil.com/welcome", kind: "demo" }]
+  },
+  {
+    id: "scrum-fundamentals",
+    name: "Scrum Fundamentals",
+    eyebrow: "Proyecto personal",
+    summary: "Aplicación de estudio con temario, práctica, narración y progreso guardado en el navegador.",
+    problem: "Organizar el estudio y la práctica de los conceptos de Scrum en un solo lugar.",
+    solution: "Una aplicación de estudio con preguntas, seguimiento del progreso y narración.",
+    responsibilities: ["Desarrollo de la aplicación", "Experiencia de estudio y práctica", "Progreso local y reproducción de audio"],
+    stack: ["React", "TypeScript"],
+    image: asset("/projects/scrum-estudio.png"),
+    screens: [
+      { src: asset("/projects/scrum-estudio.png"), alt: "Vista de estudio de Scrum Fundamentals con temario y progreso.", label: "Estudio" },
+      { src: asset("/projects/scrum-practica.png"), alt: "Selección de banco y modalidad de preguntas en Scrum Fundamentals.", label: "Práctica" }
+    ],
+    status: "Aplicación pública",
+    cardOnly: true,
+    featured: true,
+    links: [
+      { label: "Abrir aplicación", href: "https://scrum-fundamentals.vercel.app/", kind: "demo" },
+      { label: "Ver repositorio", href: "https://github.com/nelsonjhongp/scrum-fundamentals", kind: "repo" }
+    ]
+  },
+  {
     id: "metrion",
     name: "Metrion",
     eyebrow: "Escritorio local",

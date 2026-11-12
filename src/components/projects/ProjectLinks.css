@@ -70,6 +70,15 @@
   transform: translateY(-1px);
 }
 
+:root[data-theme="light"] .project-link-subtle {
+  color: #126b55;
+}
+
+:root[data-theme="light"] .project-link-subtle:hover,
+:root[data-theme="light"] .project-link-subtle:focus-visible {
+  color: #084b3c;
+}
+
 .project-link-release {
   color: var(--accent-cyan);
   gap: 0.38rem;

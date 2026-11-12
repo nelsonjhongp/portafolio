@@ -31,6 +31,11 @@
   object-position: center top;
 }
 
+#sai-t .project-screen img,
+#scrum-fundamentals .project-screen img {
+  object-fit: contain;
+}
+
 .project-carousel-dots {
   position: absolute;
   bottom: 0;
