@@ -13,7 +13,7 @@ import { ripnelProject as project, ripnelScreens, ripnelMobile } from "../../con
 import { asset } from "../../utils/assets";
 const sections = [{ id: "producto", label: "Recorridos" }, { id: "aporte", label: "Desarrollo" }, { id: "arquitectura", label: "Arquitectura" }, { id: "calidad", label: "Verificación" }];
 ---
-<MainLayout title={`${project.name} · Proyecto de desarrollo de software | ${profile.name}`} description={`${project.summary} Mi aporte, recorridos y decisiones técnicas en un proyecto propio.`} ogImage="og/ripnel-og.png" ogAlt="RIPNEL Platform: proyecto propio de desarrollo de software de Nelson Jhon Gil Pari, con una captura del ERP textil.">
+<MainLayout title={`${project.name} · Proyecto de desarrollo de software | ${profile.name}`} description={`${project.summary} Mi aporte, recorridos y decisiones técnicas.`}>
   <div class="page-shell case-page">
     <SiteNavigation brandHref={asset("#top")} brandImage="/brand/nj-logo.png" brandAlt="Nelson Nejigiku · Volver al inicio" links={[{ href: asset("#projects"), label: "Todos los proyectos" }, { href: asset("proyectos/ripnel/#producto"), label: "Ver recorrido" }, { href: asset("#contact"), label: "Contacto" }]} />
     <main id="main-content" tabindex="-1">
@@ -21,13 +21,13 @@ const sections = [{ id: "producto", label: "Recorridos" }, { id: "aporte", label
         <ActionLink className="case-back" appearance="text" href={asset("#ripnel-platform")} label="Volver a proyectos" kind="secondary" iconName="arrow-left" />
         <div class="case-hero-grid">
           <div class="case-hero-copy" id="contexto">
-            <p class="case-eyebrow">Proyecto propio · Desarrollo de software</p>
+            <p class="case-eyebrow">Desarrollo de software · RIPNEL</p>
             <h1>{project.name}</h1>
             <p class="case-lead">{project.summary}</p>
-            <p class="case-role"><strong>Mi aporte</strong><span>Diseño de flujos, interfaz, API y base de datos.</span></p>
+            <p class="case-role"><strong>Mi aporte</strong><span>Como principal responsable del desarrollo, trabajo en la interfaz, la API y la base de datos. También me encargo del despliegue y la operación del sistema en una VPS.</span></p>
             <p class="case-code"><span class="project-status">{project.status}</span></p>
             <ul class="case-stack case-stack-summary" aria-label="Tecnologías principales">{profile.mainStack.map(item => <li><TechChip item={item} variant="project" /></li>)}</ul>
-            <div class="case-actions"><ActionLink href="#producto" label="Ver recorrido" kind="projects" icon="trailing" iconName="arrow-down" /><ActionLink appearance="text" href={profile.contact.cvEs} label={profile.contactCvLabel} kind="cv" icon="trailing" iconName="external-link" /></div>
+            <div class="case-actions"><ActionLink href="#producto" label="Ver recorrido" kind="projects" icon="trailing" iconName="arrow-down" />{profile.contact.showCv && <ActionLink appearance="text" href={profile.contact.cvEs} label={profile.contactCvLabel} kind="cv" icon="trailing" iconName="external-link" />}</div>
           </div>
           <div id="venta-en-mostrador"><CaseScreen {...ripnelScreens[0]} placement="hero" caption="Datos sintéticos. Venta en borrador." eager /></div>
         </div>
@@ -68,7 +68,7 @@ const sections = [{ id: "producto", label: "Recorridos" }, { id: "aporte", label
           </section>
           <section id="aporte" class="case-section">
             <p class="case-eyebrow">02 / Implementación</p><h2>Desarrollo</h2>
-            <p>Definí los flujos y sus estados, desarrollé las pantallas en Next.js, la API en Express y el modelo PostgreSQL. Estas son tres decisiones de implementación.</p>
+            <p>He trabajado en la definición de flujos y estados, las pantallas en Next.js, la API en Express y el modelo PostgreSQL. A continuación se muestran tres decisiones de una versión revisada del proyecto.</p>
             <div id="decisiones" class="case-decisions">
               <article class="case-decision"><h3>Ventas, stock y caja</h3><p><strong>Requisito:</strong> una venta necesita caja abierta y existencias suficientes.</p><p><strong>Implementación:</strong> la API valida ambas condiciones y registra la operación dentro de una transacción. El cierre de caja se coordina con las ventas en curso.</p><p><strong>Comprobación:</strong> el repositorio incluye casos de conflicto de caja, stock y operaciones simultáneas.</p></article>
               <article class="case-decision"><h3>Transferencias entre ubicaciones</h3><p><strong>Requisito:</strong> distinguir lo solicitado, lo despachado y lo recibido.</p><p><strong>Implementación:</strong> cantidades separadas por etapa y validación de estados y permisos en la API.</p><p><strong>Comprobación:</strong> el repositorio incluye escenarios de solicitud, despacho y recepción con sus restricciones.</p></article>
@@ -84,14 +84,14 @@ const sections = [{ id: "producto", label: "Recorridos" }, { id: "aporte", label
           </section>
           <section id="calidad" class="case-section">
             <p class="case-eyebrow">04 / Pruebas y estado</p><h2>Verificación</h2>
-            <div class="case-evidence"><h3>Pruebas de desarrollo</h3><p>La base revisada incluye pruebas unitarias y pruebas de interfaz con APIs simuladas. Otra comprobación recorre inicio de sesión, identidad, permisos, consulta de productos y cierre de sesión con el frontend compilado, la API y PostgreSQL reales.</p><p>Estas pruebas cubren comportamientos concretos; no certifican por sí solas todos los procesos del ERP.</p></div>
-            <div class="case-evidence"><h3>Desarrollo y entrega</h3><p>Comprobaciones automáticas en GitHub y despliegues manuales.</p><ul class="case-stack" aria-label="Herramientas de desarrollo y verificación">{["GitHub Actions", "Docker"].map(item => <li><TechChip item={item} variant="project" /></li>)}</ul><p>ERP desarrollado, con repositorio privado. El acceso al ERP no es público.</p></div>
+            <div class="case-evidence"><h3>Pruebas de desarrollo</h3><p>La versión revisada incluía pruebas unitarias y de interfaz con APIs simuladas. Otra comprobación recorría inicio de sesión, identidad, permisos, consulta de productos y cierre de sesión con el frontend compilado, la API y PostgreSQL reales.</p><p>Estas pruebas cubren comportamientos concretos de esa versión; no certifican por sí solas todos los procesos del ERP ni su estado actual.</p></div>
+            <div class="case-evidence"><h3>Desarrollo y entrega</h3><p>La versión revisada incluía comprobaciones automáticas en GitHub y despliegues manuales.</p><ul class="case-stack" aria-label="Herramientas de desarrollo y verificación">{["GitHub Actions", "Docker"].map(item => <li><TechChip item={item} variant="project" /></li>)}</ul><p>El acceso al ERP no es público. La versión actual del repositorio de la organización es privada.</p></div>
             <div class="case-related"><ActionLink appearance="text" href="https://ripnel.com" label="Web pública de RIPNEL" kind="secondary" icon="trailing" iconName="external-link" /><p>Prendas, tiendas y catálogos.</p></div>
             <details class="case-provenance"><summary>Procedencia y límites de la evidencia</summary><div><p>Capturas del código de referencia <code>4019c10</code>, ejecutado localmente el 22 de octubre de 2026 con el frontend compilado, la API y PostgreSQL 17 descartable. Todos los registros son sintéticos. La venta y la solicitud de transferencia son borradores.</p><p>Las imágenes acreditan estas vistas del sistema, no datos de clientes, adopción ni impacto comercial. La capacitación existente requiere autenticación y un entorno DEMO temporal; no implica disponibilidad pública.</p></div></details>
           </section>
         </div>
       </div>
-      <nav class="case-contact case-container" id="case-contact" aria-label="Continuar desde el caso"><ActionLink href={asset("#contact")} label="Contacto" kind="contact" icon="trailing" /><ActionLink appearance="text" href={profile.contact.cvEs} label={profile.contactCvLabel} kind="cv" icon="trailing" iconName="external-link" /><ActionLink appearance="text" href={asset("#ripnel-platform")} label="Volver a proyectos" kind="secondary" icon="trailing" iconName="arrow-left" /></nav>
+      <nav class="case-contact case-container" id="case-contact" aria-label="Continuar desde el caso"><ActionLink href={asset("#contact")} label="Contacto" kind="contact" icon="trailing" />{profile.contact.showCv && <ActionLink appearance="text" href={profile.contact.cvEs} label={profile.contactCvLabel} kind="cv" icon="trailing" iconName="external-link" />}<ActionLink appearance="text" href={asset("#ripnel-platform")} label="Volver a proyectos" kind="secondary" icon="trailing" iconName="arrow-left" /></nav>
     </main>
     <Footer name={profile.name} />
     <CaseLightbox />

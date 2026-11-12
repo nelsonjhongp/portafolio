@@ -43,7 +43,7 @@ const detail = readFileSync(join(root, pages[1]), "utf8");
 for (const id of ["contexto", "aporte", "producto", "arquitectura", "decisiones", "calidad", "case-contact"]) {
   assert(detail.includes(`id="${id}"`), `Missing section ${id}`);
 }
-assert(detail.includes(`${base}og/ripnel-og.png`), "Dedicated social preview");
+assert(detail.includes(`${base}og/portfolio-og.png`), "Current social preview");
 assert(detail.includes('fetchpriority="high"'), "Hero image priority");
 assert(!readdirSync(join(root, "projects")).some(file => file.startsWith("ripnel-")), "Obsolete exported RIPNEL images");
 console.log("PASS: homepage, RIPNEL case, base, canonical, local assets and responsive images");

@@ -2,14 +2,14 @@ import type { Profile } from "../types/portfolio";
 import { asset } from "../utils/assets";
 
 const introduction =
-  "Desarrollo aplicaciones web y herramientas de escritorio.";
+  "Desarrollo aplicaciones web, desde la interfaz hasta la base de datos.";
 
 export const profile: Profile = {
   name: "Nelson Jhon Gil Pari",
   title: "Desarrollador de software",
   subtitle: introduction,
   summary:
-    "Soy bachiller en Ingeniería de Software y desarrollo proyectos propios para aplicar <strong>interfaces web</strong>, <strong>lógica de negocio</strong> y <strong>modelado de datos</strong>.",
+    "Soy egresado de Ingeniería de Software y desarrollo aplicaciones web. Trabajo con interfaces, backend y bases de datos, principalmente con TypeScript, React, Next.js, Node.js y PostgreSQL.",
   aboutText:
     "Me interesa construir software cerca del problema: entender el flujo operativo, ordenar requerimientos, modelar información y validar reglas de negocio antes de desarrollar.",
   mainStack: ["TypeScript", "React", "Next.js", "Node.js", "PostgreSQL"],
@@ -56,7 +56,7 @@ export const profile: Profile = {
       institution: "Universidad Tecnológica del Perú",
       period: "",
       kind: "degree",
-      status: "Bachiller",
+      status: "Egresado · Bachiller en trámite",
       image: asset("/logos/utp-logo.png"),
       imageDark: asset("/logos/utp-logo-dark.png")
     },
@@ -107,7 +107,8 @@ export const profile: Profile = {
     email: "mailto:nelsonjhongp@gmail.com",
     github: "https://github.com/nelsonjhongp",
     linkedin: "https://www.linkedin.com/in/nelsonjhongp/",
-    cvEs: "https://drive.google.com/file/d/1Q2oKaSmDKCyjcjZMRa8ympCTzgl6qxPr/view?usp=sharing"
+    cvEs: "https://drive.google.com/file/d/1Q2oKaSmDKCyjcjZMRa8ympCTzgl6qxPr/view?usp=sharing",
+    showCv: true
   },
   ctas: [
     { label: "Ver proyectos", href: "#projects", kind: "projects" },
@@ -118,7 +119,7 @@ export const profile: Profile = {
   sectionTexts: {
     projectsTitle: "Proyectos destacados",
     projectsCopy:
-      "Proyectos propios en los que aplico desarrollo web, bases de datos y diseño de interfaces para resolver problemas concretos.",
+      "Una selección de trabajos de desarrollo web, bases de datos y diseño de interfaces.",
     knowledgeTitle: "Habilidades y tecnologías",
     knowledgeCopy:
       "Tecnologías y herramientas que utilizo en mis proyectos de software.",
@@ -126,7 +127,7 @@ export const profile: Profile = {
     contactTitle: "Contacto",
     contactCopy: "Disponible para oportunidades en desarrollo de software.",
     educationCopy:
-      "Grado de bachiller en Ingeniería de Software y formación complementaria enfocada en JavaScript y PostgreSQL."
+      "Estudios de Ingeniería de Software y formación complementaria en JavaScript y PostgreSQL."
   },
   contactCvLabel: "Ver CV",
   workflowSteps: [

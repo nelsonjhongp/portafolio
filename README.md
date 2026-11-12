@@ -38,10 +38,12 @@ npm run preview -- --host 127.0.0.1 --port 4321
 
 ## RIPNEL
 
-El caso presenta mi aporte y decisiones en un proyecto propio.
-El ERP tiene repositorio privado y no ofrece acceso público.
+El caso presenta mi aporte y decisiones de desarrollo en RIPNEL. La versión actual
+del repositorio de la organización es privada y el ERP no ofrece acceso público.
 
-Las capturas usan datos sintéticos y conservan sus imágenes completas.
+Las capturas y la evidencia de pruebas corresponden a una versión revisada del
+proyecto; no verifican por sí solas el estado actual. Las capturas usan datos
+sintéticos y conservan sus imágenes completas.
 Ver [procedencia y límites](src/assets/projects/ripnel/README.md).
 
 ## Publicación

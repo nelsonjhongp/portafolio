@@ -32,7 +32,7 @@ export const ripnelProject: Project = {
   image: pos,
   screens: ripnelScreens,
   caseStudyHref: asset("proyectos/ripnel/"),
-  status: "Código privado",
+  status: "Acceso al ERP privado",
   featured: true,
   links: []
 };

@@ -32,13 +32,13 @@ const contactItems = [
     kind: "linkedin",
     iconSrc: asset("/icons/tech/linkedin-original.svg")
   },
-  {
+  ...(profile.contact.showCv ? [{
     href: profile.contact.cvEs,
     label: "CV",
     value: profile.contactCvLabel,
     kind: "cv",
     iconSrc: asset("/icons/cv-icon.svg")
-  }
+  }] : [])
 ];
 ---
 

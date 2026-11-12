@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { profile } = Astro.props;
-const heroPortrait = asset("/brand/nelson-linkedin-profile-hero.webp");
+const heroPortrait = asset("/brand/nejigiku-profile.webp");
 const heroBackgroundLight = asset("/brand/portafolio-njgk-hero-background.webp");
 const heroBackgroundDark = asset("/brand/portafolio-njgk-hero-background-dark.webp");
 const emailIcon = asset("/icons/lucide--mail.svg");
@@ -55,7 +55,7 @@ const emailIcon = asset("/icons/lucide--mail.svg");
       <div class="hero-actions">
         <div class="hero-actions-primary">
           <ActionLink href="#projects" label="Ver proyectos" kind="projects" hideIcon={true} />
-          <ActionLink href={profile.contact.cvEs} label="Ver CV" kind="cv" hideIcon={true} />
+          {profile.contact.showCv && <ActionLink href={profile.contact.cvEs} label="Ver CV" kind="cv" hideIcon={true} />}
         </div>
 
         <div class="hero-actions-social" aria-label="Enlaces de contacto">

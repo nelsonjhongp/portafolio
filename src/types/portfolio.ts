@@ -99,6 +99,7 @@ export interface Profile {
     github: string;
     linkedin: string;
     cvEs: string;
+    showCv: boolean;
   };
   ctas: ActionLink[];
   projectCtas: ActionLink[];
