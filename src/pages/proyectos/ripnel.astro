@@ -13,7 +13,7 @@ import { ripnelProject as project, ripnelScreens, ripnelMobile } from "../../con
 import { asset } from "../../utils/assets";
 const sections = [{ id: "producto", label: "Recorridos" }, { id: "aporte", label: "Desarrollo" }, { id: "arquitectura", label: "Arquitectura" }, { id: "calidad", label: "Verificación" }];
 ---
-<MainLayout title={`${project.name} · Proyecto de desarrollo de software | ${profile.name}`} description={`${project.summary} Mi aporte, recorridos y decisiones técnicas.`}>
+<MainLayout title={`${project.name} · Proyecto de desarrollo de software | ${profile.name}`} description={`${project.summary} Mi aporte, recorridos y decisiones técnicas.`} ogImage="og/ripnel-caso.png" ogAlt="RIPNEL Platform: caso de desarrollo de software con una vista sintética del punto de venta">
   <div class="page-shell case-page">
     <SiteNavigation brandHref={asset("#top")} brandImage="/brand/nj-logo.png" brandAlt="Nelson Nejigiku · Volver al inicio" links={[{ href: asset("#projects"), label: "Todos los proyectos" }, { href: asset("proyectos/ripnel/#producto"), label: "Ver recorrido" }, { href: asset("#contact"), label: "Contacto" }]} />
     <main id="main-content" tabindex="-1">
